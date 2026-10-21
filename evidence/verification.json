@@ -1,48 +1,74 @@
 {
   "date_utc": "2026-10-21",
+  "scope": "Corrective repository review of inherited ASB artifact; no new geological experiment",
+  "starting_commit": "a53c822d3c41bd94440b375ad14c529d7d1d15cb",
+  "baseline": {
+    "tests_passed": 27,
+    "tests_failed": 1,
+    "failure": "Stale assertion prohibited all TIFFs although parallel-session TIFF had been merged"
+  },
   "pass_1": {
-    "status": "complete for negative-result scope",
+    "status": "complete for corrective negative-result scope",
     "actions": [
-      "Inspected empty starting repository and selected pinned reference trees",
-      "Fetched unmodified shared template",
-      "Restored SHA-pinned rejection-proof inputs",
-      "Recomputed universal overlap proof",
-      "Measured historical H33 bytes for learning only",
-      "Built a fail-closed static site"
+      "Read operating brief, earlier research, cards, code and repository state",
+      "Restored hash-pinned audit inputs and verified unchanged shared tools",
+      "Reproduced STOP_UNIVERSAL_DUPLICATE before any candidate construction",
+      "Independently checked inherited TIFF with shared on-disk validators",
+      "Recomputed actual final-dot overlap against verified dense witness",
+      "Unified public decision and retained research-only one-click TIFF download"
     ]
   },
   "pass_2": {
     "status": "complete",
     "fixes": [
-      "Closed input hash file handles deterministically",
-      "Kept dense-prior exemptions out of the binding decision",
-      "Distinguished marginal truth cover from nearest-truth dot credit in DTI explanation",
-      "Added shifted-grid, corrupt-input, nonfinite-catalogue and stale-approval tests",
-      "Documented missing lane, cached features, organizer receipts and incomplete family audit"
+      "Retired both private-evaluator candidate runners",
+      "Replaced unsafe bool-coercing writer and private metric with shared import adapters",
+      "Retired unbuffered private holdout API",
+      "Rejected legacy two-draw range as confidence interval; accepted DTI/CI left null",
+      "Retracted unsupported organizer-confirmed and portal-acceptance claims",
+      "Converted duplicate legacy cards and receipt to superseded pointers",
+      "Replaced incomplete unverified fetch script with pinned audit-only restorer",
+      "Added changed-artifact, stale-approval, invalid-float, retired-runner, missing-file and idempotency tests"
     ]
   },
   "pass_3": {
     "status": "complete locally",
-    "commands": [
-      "python -m pytest -q",
-      "python scripts/audit.py",
-      "python scripts/audit_reference.py",
-      "python scripts/build_site.py",
-      "python -m compileall -q scripts tests vendor/gems57",
-      "git diff --check"
-    ],
-    "tests_passed": 24,
+    "tests_passed": 45,
     "tests_failed": 0,
-    "warnings": "10 PendingDeprecationWarnings from rasterio.transform using affine multiplication in test fixtures; no validation or arithmetic failure",
+    "warnings": "10 rasterio/affine PendingDeprecationWarnings from synthetic test fixture from_origin; no check failures",
     "preflight_exit_code": 2,
-    "preflight_exit_meaning": "Verified binding negative, not input error",
-    "historical_byte_audit_exit_code": 0,
+    "preflight_meaning": "Binding duplicate stop, not missing input",
+    "existing_tif_audit_exit_code": 0,
+    "local_format_cli_exit_code": 0,
+    "format_pass_is_slot_authorization": false,
+    "retired_build_runner_exit_code": 2,
+    "retired_finalizer_exit_code": 2,
+    "reference_byte_audit_exit_code": 0,
     "compile_exit_code": 0,
     "diff_check_exit_code": 0,
-    "site_local_links_resolve": true,
-    "candidate_tif_exists": false,
-    "original_unique_tif_requirement_satisfied": false,
-    "reason": "Generating a nonempty candidate conflicts with the binding duplicate stop; negative deliverable is explicit."
+    "site_local_links_and_fragments_resolve": true,
+    "site_build_idempotent": true,
+    "http_smoke_status": 200,
+    "http_checked": [
+      "index.html",
+      "executive-summary.html",
+      "asb-candidate.html",
+      "evidence/run-card.json",
+      "research/session-review.md",
+      "negative research TIFF"
+    ],
+    "downloaded_tif_sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
+    "existing_negative_tif_preserved_unchanged": true,
+    "new_unique_tif_generated": false,
+    "original_unique_submission_requirement_satisfied": false,
+    "reason": "Binding registry duplicate stop and absent method lane; no protocol weakening or fabricated validation"
   },
-  "deployment": "Existing Pages API reports legacy main/root, built. Switching to workflow deployment returned HTTP 403: Resource not accessible by integration. Root redirect preserves that existing configuration; audit CI and legacy Pages deploy are separate."
+  "scientific_experiments_run": 0,
+  "weekly_submission_slots_used": 0,
+  "deployment": {
+    "observed_pages_configuration": "legacy main/root; built at session inspection",
+    "root_redirect": "docs/",
+    "audit_ci": "updated to recheck inherited artifact with shared tools before site build",
+    "limitation": "Legacy Pages deployment remains separate from audit CI; no fresh leaderboard feed or organizer acceptance"
+  }
 }

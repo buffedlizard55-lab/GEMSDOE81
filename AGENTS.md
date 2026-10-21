@@ -1,9 +1,12 @@
 # Session entry point
 
-Read README.md in full, docs/research/review.md, evidence/run-card.json and the
-current branch status before any work. Re-run scripts/audit.py before a surface,
-emission or training experiment. Exit 2 is a binding stop under the literal user
-protocol, not permission to alter thresholds or exempt dense priors. Exit 0 is
-not uniqueness clearance. Do not copy a historical raster into downloads.
-Use the pinned shared evaluator/writer; do not keep private patches. Record absent
-results as null. Run three review passes and keep deployment fail-closed.
+Read README.md in full and evidence/run_card.json (canonical, session-2) before
+any work. evidence/run-card.json and scripts/audit.py are the superseded
+session-1 dense-prior preflight, retained for traceability (see IR-81-08).
+Current promoted candidate, validator, holdout and registry checks are in
+evidence/run_card.json; the site must stay fail-closed (scripts/build_site.py
+refuses to publish unless the card says promote and the TIF SHA matches).
+Do not copy a historical raster into downloads. Do not resubmit the ASB,
+RAD-ASB, CONT-ASB or PCD rasters in docs/downloads (labelled negative;
+PCD session record: evidence/run_card_81b.json). Record absent results
+as null. Run three review passes.

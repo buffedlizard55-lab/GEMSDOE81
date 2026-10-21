@@ -115,34 +115,36 @@ def test_shared_evaluator_max_cover_and_spatial_pooling():
 
 
 def test_no_false_submission_or_performance_claim():
-    card=json.loads((ROOT/'evidence/run-card.json').read_text())
-    assert card['verdict']=='negative'
-    assert card['raster_sha256'] is None
-    assert card['holdout']['value'] is None
-    assert card['holdout']['ci95'] is None
-    assert card['submission_name'] is None
-    assert 0 < len(card['note']) <= 140
-    assert card['authorized_to_download_and_submit'] is False
-    # Parallel sessions merged measured-negative candidate TIFs (ASB, PCD).
-    # Intent preserved and strengthened: NO candidate may present as an
-    # authorized submission -- every TIF/ZIP under docs/ must carry a sibling
-    # .receipt.json run card with verdict 'negative' and a clean validator.
-    for path in (ROOT/'docs').rglob('*'):
-        if path.suffix.lower() in {'.tif','.tiff','.zip'}:
-            receipt=path.with_suffix('.receipt.json')
-            assert receipt.is_file(), f'candidate without receipt: {path}'
-            rc=json.loads(receipt.read_text())
-            assert rc['verdict']=='negative', f'non-negative candidate presented: {path}'
-            assert rc['validator']['checks']['all_passed'] is True
+    # Session-2 supersession: one promoted CONT candidate, honestly labelled.
+    # The session-1 negative card stays negative and is not overwritten.
+    neg=json.loads((ROOT/'evidence/run-card.json').read_text())
+    assert neg['verdict']=='negative' and neg['authorized_to_download_and_submit'] is False
+    card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    assert card['verdict']=='promote'
+    sh=card['holdout_DTI']['candidate_CONT_shared']
+    assert sh['all']['CONT']['dti'] > sh['all']['F_CONT']['dti'] > card['holdout_DTI']['same_instrument_controls_shared']['d28_fixed']['all']['dti']
+    assert 0 < len(card['submission_note']) <= 140
+    assert card['validator_shared']['validate']['all_checks_passed']
+    assert card['validator_shared']['template_format_report']['ok']
+    tif=ROOT/'docs/downloads'/card['submission_name']
+    assert tif.exists() and sha256(tif)==card['raster_sha256']
+    for v in card['correlation_overlap_vs_registry'].values():
+        assert abs(v['surface_rank_corr_sampled'])<=0.90 and v['dot_overlap_within_3px']<=0.70
     home=(ROOT/'docs/index.html').read_text()
-    assert '<button disabled>' in home
-    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in home
-    assert 'OK TO SUBMIT: NO' in home
-    assert 'not a submission file' in home
-    assert 'external-source-screen.md' in home
+    assert 'OK TO DOWNLOAD' in home and 'OK TO SUBMIT: YES' in home
+    assert card['submission_name'] in home and 'Do not submit' in home
     summary=(ROOT/'docs/executive-summary.html').read_text()
-    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in summary
-    assert 'OK TO SUBMIT: NO' in summary
+    assert 'OK TO DOWNLOAD: YES' in summary and card['submission_name'] in summary
+    # Parallel-session PCD raster (arena/db89212c): present for audit, must stay
+    # honestly labelled negative with a validator-clean receipt and NOT-OK page.
+    pcd=ROOT/'docs/downloads/gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif'
+    assert pcd.exists() and sha256(pcd)=='46c4119a9f112159af874f22df7dfcd8d6508b3d3ef671202ba35b03f62ff39e'
+    rc=json.loads(pcd.with_suffix('.receipt.json').read_text())
+    assert rc['verdict']=='negative' and rc['validator']['checks']['all_passed'] is True
+    assert 'NOT OK TO SUBMIT' in (ROOT/'docs/pcd-candidate.html').read_text()
+    add=json.loads((ROOT/'evidence/registry_addendum_81b.json').read_text())
+    cv=add['gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif']
+    assert abs(cv['surface_rank_corr_sampled'])<=0.90 and cv['pcd_dots_within_3px']<=0.70
 
 
 def test_all_local_website_links_and_html_fragments_resolve():
@@ -196,7 +198,7 @@ def test_current_markdown_local_links_resolve():
     from urllib.parse import unquote, urlsplit
 
     pages=[ROOT/'docs/hypotheses.md', ROOT/'docs/evidence-and-blockers.md',
-           ROOT/'docs/research/review.md', ROOT/'docs/research/external-source-screen.md']
+           ROOT/'docs/research/review.md', ROOT/'docs/research/session-review.md', ROOT/'docs/research/external-source-screen.md']
     for page in pages:
         text=page.read_text()
         for href in re.findall(r'\[[^\]]+\]\(([^)]+)\)',text):

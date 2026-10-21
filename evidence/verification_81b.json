@@ -37,5 +37,10 @@
       "score_claim": "none; HOLDOUT-DTI labelled with evaluator/n/CI-range; 0.2778 and 0.4413 kept as reported/leaderboard values only",
       "experiments": "3 of 3 budget used; no submission slot spent"
     }
+  },
+  "merge_addendum": {
+    "status": "complete",
+    "note": "During PR #7, main merged PR #5/#6 (CONT-ASB promoted, canonical evidence/run_card.json, fail-closed promote publisher). Conflicts resolved by taking main's build_site/tests/pages as base and re-adding PCD as labelled negative: PCD row + do-not-submit listing on home, evidence copy step, PCD assertions in test_no_false_submission_or_performance_claim, README/AGENTS/hypotheses pointers. PCD lane-measured post-merge vs CONT (corr 0.016, 11.5% dots within 3px) in evidence/registry_addendum_81b.json. PCD verdict unchanged: negative; promoted governing file is CONT.",
+    "obvious_ok_to_submit": "Home/executive summary promote exactly one green CONT file; PCD page banner says NOT OK TO SUBMIT; home other-files section lists PCD as do-not-submit."
   }
 }

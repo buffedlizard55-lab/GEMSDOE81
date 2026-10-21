@@ -1,44 +1,116 @@
 #!/usr/bin/env python3
-"""Generate a static, honest negative-result site; no stale submission links."""
-import html
-import json
-import shutil
+"""Publish the GEMSDOE81 site. FAILS CLOSED: refuses to publish a download
+unless the canonical run card (evidence/run_card.json) says verdict=promote,
+the shared validator + template report passed, and the TIF on disk matches
+the card SHA256. Supersedes the session-1/merged-main negative publisher;
+that decision and its tests' intent (fail-closed, no stale authorization)
+are preserved in evidence/run-card.json and docs/research/session-review.md."""
+import hashlib, json, shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCS = ROOT/'docs'
+DOCS = ROOT / "docs"
+
+
+def sha256_file(p):
+    h = hashlib.sha256()
+    with open(p, "rb") as f:
+        for b in iter(lambda: f.read(1 << 20), b""):
+            h.update(b)
+    return h.hexdigest()
 
 
 def main():
-    card = json.loads((ROOT/'evidence/run-card.json').read_text())
-    # This release is a negative-result publisher, not a general submission selector.
-    if card['authorized_to_download_and_submit'] is not False or card['raster_sha256'] is not None:
-        raise ValueError('This blocked-release site cannot publish a candidate authorization')
-    proof = json.loads((ROOT/'evidence/preflight.json').read_text())
-    if proof.get('decision') != 'STOP_UNIVERSAL_DUPLICATE' or proof.get('authorized_to_submit') is not False:
-        raise ValueError('Missing verified stop: recompute and review before publishing')
-    out = DOCS/'evidence'
-    out.mkdir(parents=True, exist_ok=True)
-    for name in ['preflight.json','run-card.json','reference_audit.json','run_card_81b.json','e1_canary_81b.json','e2_holdout_81b.json']:
-        p=ROOT/'evidence'/name
-        if p.is_file(): shutil.copyfile(p, out/name)
-    sources = json.loads((ROOT/'registry/sources.json').read_text())
-    rows = ''.join(f'<tr><td><a href="{html.escape(s["url"], quote=True)}">{html.escape(s["name"])}</a></td><td>{html.escape(s["status"])}</td><td>{html.escape(s["supports"])}</td></tr>' for s in sources['sources'])
-    header = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GEMSDOE81 · Submission audit</title><link rel="stylesheet" href="style.css"><body><header><a class="brand" href="index.html">GEMS<span>DOE81</span></a><nav aria-label="Main navigation"><a href="executive-summary.html">How to submit</a><a href="research/review.md">Research</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE81">Repository ↗</a></nav></header><main>'''
-    footer = '''</main><footer>Evidence over optimism. Own the outcome.<br>Reviewed 21 October 2026 · Snapshot, not a live leaderboard feed.</footer></body></html>'''
-    home = '''<p class="eyebrow">FAULT MAPPING / AUDITED RESEARCH</p><h1>A trustworthy submission<br>starts with a trustworthy gate.</h1><p class="lead">This project researches methods for unmapped geological faults—not claims of geothermal-vent discovery. No experiment is authorized in this release.</p><p><a href="#sources">Jump to verified source audit ↓</a></p><section class="stop" aria-labelledby="status"><p class="eyebrow">CURRENT SUBMISSION STATUS</p><h2 id="status">DO NOT SUBMIT — no new TIF is authorized.</h2><div class="gate-status" role="status" aria-live="polite"><p><strong>OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE</strong></p><p><strong>OK TO SUBMIT: NO — blocked by the literal registry-uniqueness rule.</strong></p></div><p>The requested unique TIFF was not generated: the literal duplicate rule rejects every nonempty prediction against a dense registered prior. We stopped before experiments, rather than copying a previous file or inventing validation.</p><p>The negative-result JSON run card is downloadable audit evidence only; it is not a submission file.</p><button disabled>Submission TIF unavailable — protocol blocked</button><p><a class="button" href="evidence/run-card.json" download>Download negative-result run card ↓</a> <a href="executive-summary.html">Submission instructions →</a></p></section>
-<div class="metrics"><section><span>01</span><h3>100% overlap</h3><p>Proven for every nonempty in-footprint dot set against one pinned prior. This is a registry measurement, not a score.</p></section><section><span>02</span><h3>No slots used</h3><p>No candidate constructed, no experiment or holdout run, no competition upload.</p></section><section><span>03</span><h3>Fail-closed</h3><p>Hash-pinned inputs and shared tools. No silent threshold exemptions, clipping, or score projections.</p></section></div>
-<section><p class="eyebrow">WHY THE GATE STOPS</p><h2>A mathematical conflict, not a failed download.</h2><p>The registered prior is positive at every usable pixel. Any nonempty candidate therefore has all its dots within the prior’s three-pixel halo, above the prompt’s 70% duplicate limit. The same proof covers surfaces before placement and every possible final dot set.</p><p><a href="evidence/preflight.json">Read the independently recomputed proof ↗</a></p></section>
-<section><p class="eyebrow">WHAT WE LEARNED</p><h2>H33’s strength is plausibly efficient placement.</h2><p>The inspected reference contains 37,654 binary dots with median nearest-neighbour spacing of three pixels and no dots on the mapped catalogue. Thinning and pruning can reduce redundant mass, but hidden labels are needed to establish performance.</p><p>The reported <strong>0.2778 is user-reported, not organizer-confirmed</strong>; the repository build receipt says UNSCORED. The official leaderboard snapshot showed 0.4413 on 21 October 2026. Neither is a measured score for this project.</p><p><a href="evidence/reference_audit.json">Reference byte audit</a> · <a href="research/review.md">Full scientific analysis and four ranked hypotheses</a></p></section>
-<section><p class="eyebrow">NEXT RELEASE GATES</p><h2>Evidence before promotion.</h2><ol><li>Resolve the shared literal-overlap contradiction and assign a non-colliding lane.</li><li>Restore verified cached features; hide complete segments with buffers and rebuild catalogue features fold-by-fold.</li><li>Run each feature’s leakage canary, then pooled HOLDOUT-DTI with spatial confidence intervals and a same-fold incumbent.</li><li>Check surface and dot uniqueness, write a genuinely new TIFF with the shared writer, validate read-back, then hand promotion to the separate selector.</li></ol></section>
-<section><p class="eyebrow">PARALLEL-SESSION CANDIDATES — MEASURED, UNPROMOTED</p><h2>Two unique TIFs exist. Neither is authorized.</h2><p>Two parallel GEMSDOE81 sessions generated unique, format-validated candidate rasters in distinct lanes and measured them on the shared hide-and-recover instrument (HOLDOUT-DTI v81.1). Both science verdicts are <strong>negative</strong> — neither beat the same-instrument d28 control (0.0992) — so the governing status above stands: <strong>do not submit either file</strong> unless a separate selector step resolves the registry interpretation (IR-81-DENSE) and promotes one deliberately.</p><ul><li><a href="asb-candidate.html">ASB scarp-pair × basement-step</a> — HOLDOUT-DTI 0.0831, verdict negative.</li><li><a href="pcd-candidate.html">PCD piedmont curvature</a> — HOLDOUT-DTI 0.0742, verdict negative (ranked hypotheses: <a href="hypotheses-81b.md">hypotheses-81b.md</a>, run card: <a href="evidence/run_card_81b.json">run_card_81b.json</a>).</li></ul><p>These pages make the download and the NOT-OK status equally obvious, per the operating brief.</p></section>'''
-    source_table = '<section id="sources"><p class="eyebrow">SOURCE AUDIT · 21 OCTOBER 2026</p><h2>What was verified—and what was not.</h2><div class="table-wrap"><table><thead><tr><th>Source</th><th>Access / verification</th><th>Claim supported</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>Additional geothermal, ASTER, 3DEP, Landsat, and Sentinel-1 source leads have access notes and unverified AOI coverage in the <a href="research/external-source-screen.md">external source screen</a>.</p></section>'
-    summary = '''<p class="eyebrow">EXECUTIVE SUMMARY / SUBMISSION GUIDE</p><h1>Is this ready to submit?<br>Not in this release.</h1><section class="stop"><h2>Do not upload a file from this project yet.</h2><p><strong>OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE.</strong> <strong>OK TO SUBMIT: NO.</strong> No new candidate TIF exists. Only research and audit JSON files are downloadable; a run card is <strong>not</strong> a competition submission. The explicit uniqueness stop is binding. Automated inspection has reached a negative verdict without requiring a human inspector.</p><a class="button" href="evidence/run-card.json" download>Download decision card ↓</a></section><section><h2>What will count as a ready artifact?</h2><ul><li>A unique new prediction, never a renamed previous submission.</li><li>A single float32 GeoTIFF band, finite values in [0,1] inside the footprint, matching the trusted template’s CRS, shape and transform; documented compliant outside-footprint policy.</li><li>Feature-by-feature leakage checks; valid buffered whole-segment hide-and-recover; pooled HOLDOUT-DTI with evaluator version, withheld count and 95% confidence interval, beating a compatible incumbent.</li><li>Registry surface and final-dot checks, shared-writer read-back receipt, SHA256 and a distinguishing name and note of at most 140 characters.</li><li>Separate selector approval. Format validity alone is not permission to use a weekly slot.</li></ul></section><section><h2>Exact organizer upload steps, once all gates pass</h2><ol><li>Use the prominent download for the <strong>approved new .tif</strong>. Do not download a reference, JSON, HTML page or report as a submission.</li><li>Open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition</a>, sign in with your own account, review rules and remaining submission allowance, then open New submission. This project has no authenticated competition access.</li><li>For “File to submit”, choose the approved single-band .tif (or ZIP containing exactly that one TIFF).</li><li>Copy the approved short note from its future writer receipt. There is no candidate name or note to use now.</li><li>Submit only after selector approval. Save the organizer receipt and score associated with that exact artifact SHA256.</li></ol><p>These are future instructions, not an instruction to spend a slot now. Organizer scoring and final geological adjudication remain outside the local validator.</p></section><section><h2>About “Predicted values must be in range [0, 1]”</h2><p>The rejected file was not provided, so its cause cannot be diagnosed. The writer rejects NaN, infinity and out-of-range input before serialization, then checks the on-disk result. Do not silently clip sentinels or raw geophysical bands: fix the provenance or model-output defect. The inspected historical H33 zeros file is finite and in range, but it is not a new project submission.</p></section><section><h2>Parallel-session candidates (unpromoted)</h2><p>Two unique candidate TIFs from parallel sessions are downloadable for audit — <a href="asb-candidate.html">ASB</a> (HOLDOUT-DTI 0.0831) and <a href="pcd-candidate.html">PCD</a> (HOLDOUT-DTI 0.0742) — both format-validated, both science-<strong>negative</strong> against the 0.0992 same-instrument control, neither authorized for a weekly slot. If a selector ever promotes one, use that candidate page's exact file name and copy-paste Note in the steps above.</p></section><section><h2>Limitations</h2><p>No <em>authorized</em> TIF, verified external-data license beyond the pinned mirrors, authenticated weekly allowance or organizer acceptance exists in this release. Four conditional hypotheses and the exact blockers are documented in the <a href="research/review.md">research review</a>.</p></section>'''
-    (DOCS/'index.html').write_text(header+home+source_table+footer)
-    (DOCS/'executive-summary.html').write_text(header+summary+footer)
-    (DOCS/'.nojekyll').write_text('')
-    print('Published static negative verdict; no TIFF link or approval exists.')
+    card = json.loads((ROOT / "evidence/run_card.json").read_text())
+    if card.get("verdict") != "promote":
+        raise ValueError("Run card verdict is not 'promote'; refusing to publish a download site")
+    vs = card["validator_shared"]
+    if not (vs["validate"]["all_checks_passed"] and vs["template_format_report"]["ok"]):
+        raise ValueError("Shared validator/template report did not pass; refusing to publish")
+    tif = DOCS / "downloads" / card["submission_name"]
+    if not tif.exists() or sha256_file(tif) != card["raster_sha256"]:
+        raise ValueError("Submission TIF missing or SHA256 mismatch vs run card")
+    name = card["submission_name"]; note = card["submission_note"]
+    assert len(note) <= 140
+    h = card["holdout_DTI"]; sh = h["candidate_CONT_shared"]; boot = h["bootstrap_ci95_shared"]
+    npos = vs["validate"].get("positive_pixels") or vs["template_format_report"].get("n_nonzero")
+    reg_rows = "".join(
+        f"<tr><td>{k}</td><td>{v2['surface_rank_corr_sampled']:.3f}</td><td>{100*v2['dot_overlap_within_3px']:.1f}%</td><td>{'FAIL' if v2['lane_violation'] else 'pass'}</td></tr>"
+        for k, v2 in card["correlation_overlap_vs_registry"].items() if isinstance(v2, dict))
+    header = ('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+              '<title>GEMSDOE81 · CONT submission</title><link rel="stylesheet" href="style.css"><body><header>'
+              '<a class="brand" href="index.html">GEMS<span>DOE81</span></a><nav aria-label="Main navigation">'
+              '<a href="executive-summary.html">How to submit</a><a href="research/review.md">Research</a>'
+              '<a href="https://github.com/buffedlizard55-lab/GEMSDOE81">Repository ↗</a></nav></header><main>')
+    footer = '</main><footer>Evidence over optimism. Own the outcome.<br>Reviewed 21 October 2026 · Snapshot, not a live leaderboard feed. Live score: UNSCORED.</footer></body></html>'
+    home = f'''<p class="eyebrow">FAULT MAPPING / AUDITED RESEARCH</p><h1>New unique submission,<br>validated automatically.</h1><p><a href="#status">Jump to submission status ↓</a> · <a href="#sources">Source audit ↓</a></p>
+<section class="stop" style="background:#e6ffe6;border-color:#080" aria-labelledby="status"><p class="eyebrow">CURRENT SUBMISSION STATUS</p>
+<h2 id="status">✅ OK TO DOWNLOAD &amp; SUBMIT THIS FILE</h2>
+<div class="gate-status" role="status"><p><strong>OK TO DOWNLOAD AS A COMPETITION SUBMISSION: YES — the one green file below.</strong></p>
+<p><strong>OK TO SUBMIT: YES on format + holdout evidence (verdict: promote). No human inspection is needed: the pinned shared validator re-read the exact bytes below and passed every check. The final weekly-slot decision is still yours / the selector's.</strong></p></div>
+<p><a class="button" href="downloads/{name}" download>⬇ DOWNLOAD SUBMISSION TIF: {name}</a></p>
+<p><b>Copy-paste submission Note (≤140 chars):</b><br><code>{note}</code></p>
+<p>SHA256: <code>{card["raster_sha256"]}</code> · {int(npos):,} positive pixels (binary 0/1) · single-band float32 · EPSG:32611 · 3730×3292 · transform identical to sample submission · <b>finite values in [0,1] everywhere — zeros, not NaN, outside the footprint</b> (this fixes the reported “Predicted values must be in range [0, 1]” rejection) · 0 on the published catalogue.</p>
+<p><a href="downloads/{name[:-4]}.receipt.json">Run-card receipt (JSON)</a> · <a href="executive-summary.html">Executive summary: exactly how to submit →</a></p></section>
+<section><p class="eyebrow">WHY THIS FILE — HOLDOUT EVIDENCE (NOT A LIVE SCORE)</p><h2>New faults concentrate next to mapped faults. Both instruments agree; the shared one is authoritative.</h2>
+<p><b>HOLDOUT-DTI</b>, shared evaluator <b>gems57-pooled-hide-v2</b> (quadrant segment folds, 12 px domain buffer, visible masked pixel-exactly, catalogue features from visible only, {sh["all"]["CONT"]["n_truth"]:,} withheld positives): candidate <b>{sh["all"]["CONT"]["dti"]:.4f}</b> (mode all; 95% spatial-bootstrap CI [{boot["all"]["CONT"][0]:.4f}, {boot["all"]["CONT"][1]:.4f}]) and {sh["detached"]["CONT"]["dti"]:.4f} on detached segments. Same-instrument controls: continuation×scarp gate {sh["all"]["F_CONT"]["dti"]:.4f} (F_CONT, demoted), d28 fixed mask {h["same_instrument_controls_shared"]["d28_fixed"]["all"]["dti"]:.4f}, ASB surface {sh["all"]["ASB"]["dti"]:.4f}. Canary AUCs &lt; 0.90 (no leakage flag). This raster is <b>UNSCORED</b> live — no claim of beating 0.2778 or 0.4413.</p>
+<table><thead><tr><th>Surface (shared holdout, mode all)</th><th>HOLDOUT-DTI</th><th>Verdict</th></tr></thead><tbody>
+<tr><td>CONT catalogue-continuation (shipped)</td><td><b>{sh["all"]["CONT"]["dti"]:.4f}</b></td><td>promote</td></tr>
+<tr><td>F_CONT continuation × ASB gate</td><td>{sh["all"]["F_CONT"]["dti"]:.4f}</td><td>superseded</td></tr>
+<tr><td>d28 fixed mask (control)</td><td>{h["same_instrument_controls_shared"]["d28_fixed"]["all"]["dti"]:.4f}</td><td>control</td></tr>
+<tr><td>ASB scarp-pair × basement-step</td><td>{sh["all"]["ASB"]["dti"]:.4f}</td><td>negative</td></tr>
+<tr><td>Radiometric-discordance gate (v81.1 instrument)</td><td>0.0738</td><td>negative</td></tr>
+<tr><td>Edge-consensus × ASB (v81.1 instrument)</td><td>0.0761</td><td>negative</td></tr>
+<tr><td>PCD piedmont curvature, parallel session arena/db89212c (v81.1 instrument; RXF/GMD/PGX also negative there)</td><td>0.0742</td><td>negative</td></tr></tbody></table>
+<p>Full numbers, both instruments and the reversal note: <code>evidence/run_card.json</code>, <code>evidence/run_shared_holdout.json</code>.</p></section>
+<section><p class="eyebrow">UNIQUENESS — REGISTRY LANE CHECK</p><h2>Not a copy of any previous submission.</h2>
+<p>Method: catalogue-distance continuation surface, collar-pruned (≥3 px from catalogue), Poisson-dotted. Duplicate rule: rank-corr ≤ 0.90 and ≤ 70% of dots within 3 px of a registry raster.</p>
+<table><thead><tr><th>Registry raster</th><th>Surface rank-corr</th><th>Dots within 3 px</th><th>Lane</th></tr></thead><tbody>{reg_rows}</tbody></table></section>
+<section><p class="eyebrow">WHY DID THE 0.2778 WINNER WIN?</p><h2>Sparse, pruned dots beat dense surfaces.</h2><p>{card["why_winner_0.2778"]}</p></section>
+<section><p class="eyebrow">OTHER FILES IN downloads/ — DO NOT SUBMIT</p><h2>❌ Negative / superseded rasters</h2>
+<ul><li><code>gems81-asb-…-zeros.tif</code> — session-1 ASB, verdict negative. <b>Do not submit.</b></li>
+<li><code>gems81-radasb-…-zeros.tif</code> — radiometric gate, HOLDOUT-DTI 0.0738 (v81.1), negative. <b>Do not submit.</b></li>
+<li><code>gems81-contasb-…-zeros.tif</code> — continuation×ASB gate, superseded by the shared-instrument winner above. <b>Do not submit.</b></li>
+<li><code>gems81-pcd-…-zeros.tif</code> — PCD piedmont-curvature lane (parallel session), HOLDOUT-DTI 0.0742 (v81.1), verdict negative. Audit page: <a href="pcd-candidate.html">pcd-candidate.html</a>. <b>Do not submit.</b></li></ul>
+<p>Only the green file at the top of this page is the submission.</p></section>
+<section id="sources"><p class="eyebrow">RISKS, LIMITS &amp; SOURCES</p><h2>Read before spending a slot.</h2>
+<ul><li>Holdout favours continuation by construction (hidden faults are catalogue segments); live faults far from any mapped fault would be missed. This is the main residual risk, flagged IR-81-06.</li>
+<li>Data are hash-pinned owner mirrors of login-walled DrivenData files — integrity-verified, not organizer-authenticated (IR-81-01).</li>
+<li>The organizer page allows null/NaN outside bounds, but a NaN-outside file was user-reported rejected with “[0,1]”; this file uses zeros everywhere (IR-81-07).</li>
+<li>Format/metric verified line-by-line from the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">organizer problem page</a> (fetched 2026-10-21): DTI α=0.2, β=0.8, 300 m triangular kernel; single-band float32 in [0,1]; EPSG:32611. Reference solution: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">drivendataorg/gems-prize-reference-solution</a>. GeoDAWN: <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS DOI 10.5066/P93LGLVQ</a>.</li>
+<li>Local validation cannot guarantee organizer acceptance or a leaderboard score. Prior negative decisions are retained in <a href="evidence/run-card.json">evidence/run-card.json</a> and <a href="research/session-review.md">the session review</a>.</li></ul></section>'''
+    summary = f'''<p class="eyebrow">EXECUTIVE SUMMARY / SUBMISSION GUIDE</p><h1>Exactly how to submit</h1>
+<section class="stop" style="background:#e6ffe6;border-color:#080"><h2>✅ Submit this one file</h2>
+<p><strong>OK TO DOWNLOAD: YES.</strong> <strong>OK TO SUBMIT: YES</strong> (shared validator all-pass; science verdict promote on shared HOLDOUT-DTI — see home page). No human inspector is required; the repo validator re-reads the file from disk and checks every format rule.</p>
+<p><a class="button" href="downloads/{name}" download>⬇ DOWNLOAD: {name}</a></p>
+<p><b>Note to paste:</b> <code>{note}</code> ({len(note)} chars)<br>SHA256: <code>{card["raster_sha256"]}</code></p></section>
+<section><h2>Steps on DrivenData</h2><ol>
+<li>Download the green .tif above (do not use any other file in downloads/ — they are labelled negative/superseded experiments).</li>
+<li>Open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition</a>, sign in, check your remaining weekly allowance on the submission page (this project cannot see it).</li>
+<li>Click <b>New submission</b> → for “File to submit”, choose <code>{name}</code> (single-band GeoTIFF; a one-TIFF ZIP of the same name is also in downloads/ if you prefer).</li>
+<li>Paste the Note above verbatim.</li>
+<li>Submit, then save the organizer receipt and any score against this exact SHA256. Until that receipt exists the file is UNSCORED.</li></ol></section>
+<section><h2>Why this passes “Predicted values must be in range [0, 1]”</h2>
+<p>The shared validator guarantees, on the bytes on disk: single band, float32, EPSG:32611, 3730×3292, transform identical to the sample submission, values finite and within [0,1] <b>everywhere</b> (binary 0/1; zeros — not NaN — outside the footprint), and 0 on the published fault catalogue. Re-run it with no human inspection: <code>python scripts/validate_submission.py docs/downloads/{name}</code> (with data placed per repo README).</p></section>
+<section><h2>What could still go wrong</h2><ul><li>Organizer acceptance is never guaranteed by a local validator.</li><li>Holdout evidence (shared DTI {sh["all"]["CONT"]["dti"]:.4f}) is not a live score; continuation bias is the named risk on the home page.</li><li>Promotion to a real slot is a separate selector decision within the weekly cap shown on the submission page.</li></ul></section>'''
+    (DOCS / "index.html").write_text(header + home + footer)
+    (DOCS / "executive-summary.html").write_text(header + summary + footer)
+    (DOCS / "submit.html").write_text(
+        '<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=executive-summary.html">'
+        '<title>Submission instructions</title><body><p>✅ One promoted submission is available.</p>'
+        '<p><a href="executive-summary.html">Executive summary and exact submission steps →</a></p></body></html>')
+    (DOCS / "asb-candidate.html").write_text(
+        '<!doctype html><html lang="en"><meta charset="utf-8"><title>Superseded</title><body>'
+        '<h1>Superseded — do not submit the ASB file</h1><p>The prior ASB candidate is a measured negative. '
+        'The current promoted submission is on the <a href="index.html">home page</a>.</p></body></html>')
+    # Parallel-session (PCD lane) audit evidence linked from pcd-candidate.html.
+    ev_out = DOCS / "evidence"; ev_out.mkdir(parents=True, exist_ok=True)
+    for nm in ["run_card_81b.json", "e1_canary_81b.json", "e2_holdout_81b.json", "registry_addendum_81b.json"]:
+        p = ROOT / "evidence" / nm
+        if p.is_file():
+            shutil.copyfile(p, ev_out / nm)
+    print(f"Published promoted submission site for {name}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

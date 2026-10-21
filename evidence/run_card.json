@@ -1,85 +1,359 @@
 {
-  "hypothesis": "Antithetic LiDAR scarp-pair (lapneg x lappos geometric mean) coincides with a basement/conductivity step (grad depth_to_basement x grad conductivity geometric mean); final surface = geometric mean of the two rank surfaces.",
-  "mechanism": "Label-free rank surfaces -> Poisson-disk priority thinning (min_dist 2.8px) at 44,090-dot target, catalogue exclusion buffer 2px, binary {0,1}, zeros outside footprint.",
-  "named_nonfault_mimic": "Paired terrace riser / paleo-shoreline over a sedimentary pinch-out (antithetic steps + basement gradient with no fault).",
+  "hypothesis": "Faults missing from the USGS/INGENIOUS catalogue are predominantly along-strike continuations, splays and stepovers of mapped faults: dot density should follow exp(-d_catalogue/4px), pruned to >=3px from the catalogue (the winner's collar lesson), with no other gate.",
+  "mechanism": "Catalogue-distance surface exp(-d/4px) -> Poisson-disk priority thinning (min_dist 2.8px), 44090-dot target, catalogue exclusion buffer 2px, binary {0,1}, zeros outside footprint (never NaN). Written with pinned shared writer vendor/gems57/submission_writer.py.",
+  "named_nonfault_mimic": "Not a geological detector: the bet is spatial (new faults cluster near mapped fault systems). It will waste dots ringing geologically dead catalogue segments; alluvial channels/roads near faults are irrelevant because placement ignores imagery entirely.",
   "holdout_DTI": {
     "label": "HOLDOUT-DTI",
-    "evaluator": "v81.1 pooled alpha=0.2 beta=0.8 300m triangular kernel, whole-component hide-and-recover, 2 draws, visible masked pixel-exactly",
-    "candidate_S_poisson44090_buf2": 0.08312651477439477,
-    "per_draw": [
-      0.08945094605656231,
-      0.07675218725378645
-    ],
-    "ci95_draw_range": [
-      0.07675218725378645,
-      0.08945094605656231
-    ],
-    "n_hidden_positives_total": 25038,
-    "same_instrument_controls": {
-      "d28_base_HOLDOUT-DTI": 0.09922256956705666,
-      "winner_h33-2-b2_HOLDOUT-DTI": 0.004309322934951101,
-      "winner_note": "Winner deletes dots <=2px from FULL catalogue incl. hidden components, so hide-and-recover mechanically zeroes its kernel credit; this instrument cannot rank catalogue-flank strategies. Its 0.2778 is ORGANIZER-CONFIRMED, not comparable to HOLDOUT-DTI."
+    "authoritative_evaluator": "gems57-pooled-hide-v2 (shared, buffered quadrant segment folds, DOMAIN_ERODE=12, visible masked pixel-exactly, catalogue features visible-only)",
+    "candidate_CONT_shared": {
+      "all": {
+        "ASB": {
+          "dti": 0.06324559697275906,
+          "n_truth": 22641
+        },
+        "CONT": {
+          "dti": 0.21700550158632165,
+          "n_truth": 22641
+        },
+        "F_CONT": {
+          "dti": 0.15580542270131126,
+          "n_truth": 22641
+        }
+      },
+      "detached": {
+        "ASB": {
+          "dti": 0.05996019203120841,
+          "n_truth": 22619
+        },
+        "CONT": {
+          "dti": 0.20845786789657308,
+          "n_truth": 22619
+        },
+        "F_CONT": {
+          "dti": 0.14784384161006484,
+          "n_truth": 22619
+        }
+      }
     },
-    "canary_AUCs_all_below_0.90": {
-      "A_pair_scarp": 0.5724,
-      "B_basement_step": 0.5468,
-      "lapneg_only": 0.5714,
-      "depthbase_grad_only": 0.5354,
-      "S_combined": 0.5892
-    }
+    "bootstrap_ci95_shared": {
+      "all": {
+        "ASB": [
+          0.05509797347498495,
+          0.07152076207740082
+        ],
+        "CONT": [
+          0.2086307496321321,
+          0.22475544713500673
+        ],
+        "F_CONT": [
+          0.14189317786914218,
+          0.1689277481723564
+        ]
+      },
+      "detached": {
+        "ASB": [
+          0.051172975826336925,
+          0.06805916704753995
+        ],
+        "CONT": [
+          0.19962214001784392,
+          0.21748987549091348
+        ],
+        "F_CONT": [
+          0.13248455037278117,
+          0.16263702758334125
+        ]
+      }
+    },
+    "withheld_positive_pixels_shared": 22641,
+    "same_instrument_controls_shared": {
+      "d28_fixed": {
+        "all": {
+          "dti": 0.10106964730554067,
+          "n_truth": 22641
+        },
+        "detached": {
+          "dti": 0.10346446550153576,
+          "n_truth": 22619
+        }
+      },
+      "winner_fixed": {
+        "all": {
+          "dti": 0.004384809306270315,
+          "n_truth": 22641
+        },
+        "detached": {
+          "dti": 0.005073444615101334,
+          "n_truth": 22619
+        }
+      }
+    },
+    "superseded_private_v81.1": {
+      "note": "Private v81.1 instrument (retired on main for lacking a segment buffer) ranked F_CONT 0.1270 > CONT 0.1087 > d28 0.0992 > ASB 0.0831. The shared instrument reverses CONT vs F_CONT (0.2170 vs 0.1558, CIs non-overlapping); the shared instrument is authoritative per protocol, so CONT-alone is shipped and F_CONT is demoted to a negative/superseded experiment file.",
+      "F_CONT_v81.1": 0.1270400419094968,
+      "CONT_v81.1": 0.10868960269247419
+    },
+    "canary": "CONT AUC vs hidden per draw (v81.1 draws) 0.763/0.752 < 0.90; no leakage flag. Continuation is catalogue-derived by design, hence visible-only derivation per fold in both instruments."
   },
   "correlation_overlap_vs_registry": {
-    "winner_h33-2-b2_ORGANIZER-CONFIRMED_0.2778": {
-      "surface_rank_corr_sampled": 0.030981221622686104,
-      "dot_overlap_within_3px": 0.3100022680880018,
+    "winner_h33-2-b2": {
+      "surface_rank_corr_sampled": 0.0036364126029005623,
+      "dot_overlap_within_3px": 0.19367203447493764,
       "lane_violation": false
     },
-    "d28_base_0.2600": {
-      "surface_rank_corr_sampled": 0.03599294635435985,
-      "dot_overlap_within_3px": 0.32792016330233614,
+    "d28_base": {
+      "surface_rank_corr_sampled": 0.025090890289721522,
+      "dot_overlap_within_3px": 0.31363120889090496,
+      "lane_violation": false
+    },
+    "shipped_gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif": {
+      "surface_rank_corr_sampled": 0.015507539868561886,
+      "dot_overlap_within_3px": 0.180721251984577,
+      "lane_violation": false
+    },
+    "shipped_gems81-contasb-poisson44090-buf2-20261021T232312Z-04866ff3-zeros.tif": {
+      "surface_rank_corr_sampled": 0.1128113634487774,
+      "dot_overlap_within_3px": 0.4787026536629621,
+      "lane_violation": false
+    },
+    "shipped_gems81-radasb-poisson44090-buf2-20261021T231647Z-0ab9803e-zeros.tif": {
+      "surface_rank_corr_sampled": 0.015572256640114192,
+      "dot_overlap_within_3px": 0.20403719664322975,
       "lane_violation": false
     }
   },
-  "raster_sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
-  "validator": {
-    "shape": [
-      3730,
-      3292
-    ],
-    "crs": "EPSG:32611",
-    "transform": [
-      100.0,
-      0.0,
-      243350.0,
-      0.0,
-      -100.0,
-      4508550.0,
-      0.0,
-      0.0,
-      1.0
-    ],
-    "dtype": "float32",
-    "positive_pixels": 44090,
-    "min": 0.0,
-    "max": 1.0,
-    "checks": {
-      "single_band": true,
-      "dtype_float32": true,
-      "shape_match": true,
-      "crs_match": true,
-      "transform_match": true,
-      "no_nan_anywhere": true,
-      "no_inf_anywhere": true,
-      "values_in_0_1_everywhere": true,
-      "binary_values": true,
-      "zero_on_catalogue": true,
-      "zero_outside_footprint": true,
-      "all_passed": true
+  "raster_sha256": "9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508",
+  "validator_shared": {
+    "validate": {
+      "file": "/home/user/GEMSDOE81/docs/downloads/gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif",
+      "bytes": 155982,
+      "sha256": "9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "emitted_positive_pixels": 44090,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 44090,
+      "footprint_fraction": 0.00853238192791579
     },
-    "sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402"
+    "template_format_report": {
+      "path": "/home/user/GEMSDOE81/docs/downloads/gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif",
+      "bytes": 155982,
+      "sha256": "9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    "writer_receipt": {
+      "file": "gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif",
+      "sha256": "9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508",
+      "bytes": 155982,
+      "submission_name": "gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros",
+      "note": "GEMSDOE81 CONT catalogue-continuation rings poisson44090 buf2 44090 dots zeros",
+      "note_chars": 78,
+      "validator": {
+        "file": "/home/user/GEMSDOE81/docs/downloads/gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif",
+        "bytes": 155982,
+        "sha256": "9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.003590636420994997,
+        "emitted_positive_pixels": 44090,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 44090,
+        "footprint_fraction": 0.00853238192791579
+      },
+      "template_report": {
+        "path": "/home/user/GEMSDOE81/docs/downloads/gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif",
+        "bytes": 155982,
+        "sha256": "9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508",
+        "bands": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "width": 3292,
+        "height": 3730,
+        "bounds": [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ],
+        "ref_bounds": [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ],
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "blocksize": [
+          256,
+          256
+        ],
+        "fixture_grid": false,
+        "has_validity_mask": false,
+        "nan_pixels": 0,
+        "infinity_pixels": 0,
+        "n_nan": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.003590636420994997,
+        "n_nonzero": 44090,
+        "mass": 44090.0,
+        "mass_outside_footprint": 0,
+        "problems": [],
+        "ok": true,
+        "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+      },
+      "zip_file": "gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.zip",
+      "zip_sha256": "bdebf8669fbad97a71ec5eddb027fc235d7518afc3b1722b6729ab2f72b54f5f",
+      "approved_for_weekly_slot": false,
+      "promoted": false,
+      "submission_slots_used": 0,
+      "status": "locally validated within separately recorded inventory scope; not organizer acceptance or slot approval",
+      "metadata": {}
+    }
   },
-  "submission_name": "gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
-  "submission_note": "GEMSDOE81 ASB scarp-pair x basement-step poisson44090 buf2 44090 dots zeros",
-  "verdict": "negative",
-  "verdict_reason": "FORMAT promote (validator all-pass, safe to submit) but SCIENCE negative: HOLDOUT-DTI 0.0831 does not beat same-instrument d28 control 0.0992; do not spend a scarce weekly slot on it if maximising P(win) unless testing the off-catalogue hypothesis deliberately. No score >0.2778 is claimed; live score is UNSCORED."
+  "submission_name": "gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif",
+  "submission_note": "GEMSDOE81 CONT catalogue-continuation rings poisson44090 buf2 44090 dots zeros",
+  "verdict": "promote",
+  "verdict_reason": "Shared authoritative holdout: CONT 0.2170 (all) / 0.2085 (detached), 95% spatial-bootstrap CI [0.2086,0.2248], beats F_CONT 0.1558, d28 fixed-mask 0.1011 and ASB 0.0632 on the same instrument; registry lane clear; shared validator/template checks pass. Live score UNSCORED: no claim of beating 0.2778/0.4413. Residual risk: holdout hidden faults are catalogue segments, so continuation is favoured by construction; live detached discoveries far from any mapped fault would not be covered. Selector owns the weekly slot.",
+  "why_winner_0.2778": "GEMSDOE32 audit: winner = d28 dotted base (0.2600) with every dot <=2px from the published catalogue deleted (44,090->37,654 dots, +0.0178; organizer-reported in the user prompt). Under pooled DTI (alpha=0.2 FP-cheap, beta=0.8 FN-expensive, 300m triangular kernel) dots on/near known faults earn no credit for undiscovered test faults but pay FP mass, and one dot covers a 3px kernel neighbourhood, so sparse collar-pruned dotted emission beats dense continuous surfaces. CONT adopts the collar + dotted lessons and concentrates the whole budget in the near-catalogue band where both holdout instruments say new faults concentrate.",
+  "experiments_budget": "3 hypotheses on v81.1 (RAD, EDGE, CONT-family) + 1 shared-instrument reconciliation revalidation (mandated by the merged main's retirement of the private evaluator) that reversed CONT vs F_CONT; no further tuning was done after that (no budget/decay sweep)."
 }

@@ -1,9 +1,13 @@
 # Evidence and blockers — current status
 
-Read [the current review](research/review.md) and [the recomputed preflight](evidence/preflight.json).
-Unlike the previous snapshot, shared tools and the three audit inputs are now
-restored. The literal overlap rule is now independently proven to reject all
-nonempty candidates. No candidate was generated or submitted.
+Read [the corrective review](research/session-review.md),
+[the independently recomputed preflight](evidence/preflight.json), and
+[the authoritative negative run card](evidence/run-card.json).
 
-[Historical first review](archive/first-review/evidence-and-blockers.md) is retained
-for traceability, not represented as current repository state.
+The inherited ASB TIFF exists and passes shared local format checks. It is
+**research-only, DO NOT SUBMIT**, because of the binding duplicate rule and absent
+accepted scientific validation. No new candidate or weekly slot was used here.
+
+[The original review](research/review.md) and
+[historical first review](archive/first-review/evidence-and-blockers.md)
+remain available as dated history, not current authorization.

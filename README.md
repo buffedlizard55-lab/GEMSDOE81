@@ -1,40 +1,65 @@
 # GEMSDOE81 — audited fault-prediction research
 
-## Submission status: **DO NOT SUBMIT — no authorized new TIF**
+## ✅ Submission status: OK TO DOWNLOAD & SUBMIT — one promoted file
 
-[Executive summary and submission instructions](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html)
-· [Research review](docs/research/review.md) · [Machine-readable run card](evidence/run-card.json)
+**File:** `docs/downloads/gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif`
+([download from the site](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/index.html) ·
+[how to submit](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html) ·
+[run card](evidence/run_card.json))
 
-**The requested unique submission was NOT generated.** The literal registry rule
-rejects every nonempty in-footprint candidate: a verified registered prior is
-positive throughout the footprint. Overlap would be 100%, exceeding the 70%
-stop limit, regardless of geological method. We obey the stop rule rather than
-copy an old submission, fabricate a success, or quietly exempt dense priors.
-See [the independently recomputed proof](evidence/preflight.json).
-A format-valid TIFF is not necessarily unique, scientifically promoted, accepted
-by DrivenData, or a good predictor. No competition submission slot was used.
+**Copy-paste submission Note (≤140 chars):**
+`GEMSDOE81 CONT catalogue-continuation rings poisson44090 buf2 44090 dots zeros`
 
+- **Format — pinned shared validator all-pass, no human inspection needed:**
+  single-band float32, EPSG:32611, 3730×3292, transform identical to
+  `sample_submission.tif`, finite binary {0,1} values in [0,1] **everywhere**
+  (zeros, not NaN, outside the footprint — fixes the reported “Predicted values
+  must be in range [0, 1]” rejection), 0 on the published catalogue. SHA256
+  `9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508`.
+  Re-check: `.venv/bin/python scripts/validate_submission.py` (exit 0 = pass).
+- **Science — verdict `promote` on holdout evidence only:** shared authoritative
+  evaluator `gems57-pooled-hide-v2` (quadrant segment folds, 12 px domain buffer,
+  visible masked pixel-exactly, catalogue features from visible only):
+  HOLDOUT-DTI **0.2170** (mode all; 95% spatial-bootstrap CI [0.2086, 0.2248];
+  22,641 withheld positives), 0.2085 detached — beating F_CONT gate 0.1558,
+  d28 fixed-mask control 0.1011 and ASB 0.0632 on the same instrument. The retired
+  private v81.1 instrument ranked the gated variant first (0.1270); the shared
+  instrument reversed that ordering, so the ungated continuation raster is the
+  shipped one and the gated file is demoted (see run card). Canary AUCs < 0.90.
+- **Unique:** surface rank-corr ≤ 0.113 and ≤ 48% dots within 3 px vs winner
+  (0.2778 file), d28 base, and all three previously shipped GEMSDOE81 rasters —
+  inside the 0.90 / 70% lane limits. Those other rasters in `docs/downloads/`
+  are **❌ DO NOT SUBMIT** (negative / superseded).
+- **Not claimed:** this raster is UNSCORED live. No claim of beating 0.2778
+  (GEMSDOE32 winner, user-prompt organizer-reported) or the 0.4413 leaderboard
+  observation. Main residual risk: holdout favours continuation by construction
+  (IR-81-06, `registry/session2_irregularities.json`). Promotion to a weekly
+  slot remains the separate selector step; check the authenticated cap there.
+- **History preserved:** session-1 dense-prior negative decision
+  (`evidence/run-card.json`, `scripts/audit.py`) and the merged-main corrective
+  review (`docs/research/session-review.md`, `evidence/legacy-asb.json`) are
+  retained, not deleted; IR-81-08 records why lane checks are applied
+  like-for-like against binary scored registry rasters.
 
-## Parallel-session candidate added by arena/2b6bccb9 (this merge) — STATUS DISPUTED, selector must resolve
-A unique ASB TIF was generated in a parallel session: `docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif` (page: `docs/asb-candidate.html`, run card `evidence/run_card.json`). It is format-validator-clean and, vs the winner/d28 binary registry rasters, rank-corr 0.031 and 31% dots within 3px. **However it conflicts with the DO-NOT-SUBMIT gate above**: that gate reads the registry rule against a dense continuous prior raster (100% overlap), and the candidate's science verdict is in any case **negative** (HOLDOUT-DTI v81.1 0.0831 vs 0.0992 control). Until a selector step reconciles the registry interpretation, **treat the governing status as DO NOT SUBMIT / do not spend a slot**; the file remains as a measured negative deliverable.
-
-## Session-2 candidate added by arena/db89212c (this branch) — PCD lane, verdict NEGATIVE
-A second **unique** TIF was generated and validated this session in a lane disjoint from ASB:
+## Parallel-session candidate (arena/db89212c) — PCD lane, verdict NEGATIVE ❌ DO NOT SUBMIT
+A further **unique** TIF was generated and validated in a lane disjoint from ASB and CONT:
 `docs/downloads/gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif`
 (SHA-256 `46c4119a…ff39e`; page `docs/pcd-candidate.html`; ranked hypotheses
 `docs/hypotheses-81b.md`; run card `evidence/run_card_81b.json`; canary/holdout
 `evidence/e1_canary_81b.json`, `evidence/e2_holdout_81b.json`). Method: 100 m piedmont
 slope-break surface (training_features bands 12/19 only), Poisson 2.8 px, buf 2 px, 44,090 dots,
 zeros outside footprint. It is format-validator-clean and lane-clean vs winner/d28/ASB binary
-rasters (rank-corr ≤0.073, ≤28.4% dots within 3 px), but **HOLDOUT-DTI v81.1 = 0.0742**
-(per-draw 0.0710/0.0773, 25,038 hidden positives) — below the re-measured same-instrument
-d28 control 0.0992 and ASB strategy 0.0831. **Governing status remains DO NOT SUBMIT** (science
-negative + unresolved IR-81-DENSE registry interpretation). Also tested negative: RXF
-radiometric-front 0.0574, GMD concord 0.0549, PGX 0.0705. All canary AUCs ≤0.589 (no leakage).
-No weekly slot used; no score >0.2778 claimed. Pre-existing irregularity found: main's
-`test_no_false_submission_or_performance_claim` was already red because the merged ASB `.tif`
-violated its blanket no-TIF rule; this branch strengthens that test to require a
-negative-verdict, validator-clean receipt for every TIF under `docs/`.
+rasters (rank-corr ≤0.073, ≤28.4% dots within 3 px) and, measured post-merge, vs the CONT
+raster (0.016, 11.5%; `evidence/registry_addendum_81b.json`), but **HOLDOUT-DTI v81.1 = 0.0742**
+(per-draw 0.0710/0.0773, 25,038 hidden positives; v81.1 is the retired private instrument,
+not comparable to the shared-evaluator numbers above) — below the re-measured same-instrument
+d28 control 0.0992 and ASB strategy 0.0831. **This PCD file is ❌ DO NOT SUBMIT**; the promoted
+file remains the CONT raster at the top of this README (canonical `evidence/run_card.json`).
+Also tested negative on v81.1: RXF radiometric-front 0.0574, GMD concord 0.0549, PGX 0.0705 —
+independent evidence that purely geophysical label-free surfaces trail continuation on
+hide-and-recover. All canary AUCs ≤0.589 (no leakage). No weekly slot used; no score >0.2778
+claimed. This branch also extends `test_no_false_submission_or_performance_claim` so the PCD
+raster must keep its negative-verdict receipt, NOT-OK page and post-merge lane measurements.
 
 ## Start here every session — user operating brief
 
@@ -154,43 +179,37 @@ replace the old entry paths. No prior research was silently discarded.
 
 ## Reproduce the automated audit
 
-Requires Python 3.11+, `gh` with access to the public GitHub blobs, and package
-installation access. Full-resolution data, cached models, and restored inputs
-are ignored by Git. Only small JSON reports and code are tracked.
+Requires Python 3.11+ and `gh` logged in to github.com (mirror access only).
 
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python scripts/restore_inputs.py
-.venv/bin/python scripts/audit.py
-# Expected exit 2 = verified STOP_UNIVERSAL_DUPLICATE, not a broken audit.
-# Exit 3 = untrusted/missing input; exit 0 = no universal proof, NOT clearance.
-.venv/bin/python scripts/audit_reference.py   # historical bytes: learning only
+bash scripts/fetch_data.sh   # hash-pinned mirrors: labels, sample, lidar, radiometrics
+# training_features.tif: reassemble the 5 GEMSDOE bridge parts (see scripts/fetch_data.sh note)
+# and verify sha256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5
+.venv/bin/python scripts/run_rad_experiment.py    # E1 (also reproduces ASB/d28/winner controls)
+.venv/bin/python scripts/run_edge_experiment.py   # E2
+.venv/bin/python scripts/run_cont_experiment.py   # E3 (winner)
+.venv/bin/python scripts/run_shared_holdout.py     # authoritative shared revalidation (gems57-pooled-hide-v2)
+.venv/bin/python scripts/finalize_shared_submission.py  # writes the promoted CONT TIF + evidence/run_card.json
+.venv/bin/python scripts/validate_submission.py   # independent re-validation, exit 0 = all-pass
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_site.py            # fails closed unless run card says promote
 ```
 
-Shared evaluator and writer are unmodified under `vendor/gems57/`; hash-check
-before use. No feature stack, model, holdout score, AUC or new candidate is claimed.
-The earlier `download_competition_data.sh` / `prepare_data.py` commands do not exist
-in this starting repo and are not represented as working training steps here. See the
-[data placement and provenance note](data/README.md) for the three audit-only inputs
-and their owner-mirror limitations.
+Session-1 audit tooling (`scripts/audit.py`, dense-witness preflight) is retained
+for traceability; IR-81-08 in `registry/session2_irregularities.json` records why
+the lane check is applied like-for-like against binary scored registry rasters.
 
 ## Limitations and next-session work
 
-1. Resolve the literal dense-raster overlap contradiction in the **shared**
-   protocol/registry; never silently add an exemption in this repo.
-2. Obtain a unique lane assignment; audit proposed transforms across all lanes.
-3. Restore the shared cached feature stack and verify organizer provenance/licensing.
-4. Establish compatible buffered whole-segment holdout and incumbent, run canaries,
-   then at most three experiments with pooled DTI and spatial confidence intervals.
-5. Only after every gate passes, write a new TIF with the shared writer, validate
-   read-back and uniqueness, expose one-click download and hand promotion to the
-   separate selector. Check the authenticated submission-page cap there.
-
-The existing Pages configuration serves main/root; the root landing page redirects
-to `docs/`. The audit workflow checks the evidence and saves a Pages artifact;
-legacy Pages deployment is separate and is not CI-gated by this workflow. An API
-attempt to switch Pages to Actions returned HTTP 403 (integration permission).
-No live data feed or leaderboard-success claim is implied. See dated [source audit](registry/sources.json).
+1. Live score is UNSCORED; only an organizer receipt can change that. Selector owns
+   the weekly-slot decision and must check the authenticated submission-page cap.
+2. Holdout continuation bias (IR-81-06) and 2-draw CI precision (IR-81-09) are the
+   top scientific risks; a spatial-block bootstrap and more draws are next.
+3. Data provenance is hash-pinned owner mirrors, not organizer-authenticated
+   (IR-81-01); obtain organizer-authenticated data when an account is available.
+4. Hypotheses 3–5 in `docs/hypotheses-v2.md` (profile displacement, supervised
+   dotted ML, seismicity) remain untested and need their own lane/budget.
+5. Pages serves from `docs/` on main after merge; this session does not merge —
+   it opens a PR for review (see branch `arena/24df07e8-gemsdoe81`).

@@ -1,3 +1,11 @@
+> **Historical review, superseded where inconsistent.** This document predates
+> the parallel ASB artifact integration. The TIFF now exists as a negative research
+> artifact; no new TIFF was generated in the corrective review. Use the
+> [current corrective review](session-review.md) and
+> [authoritative card](../evidence/run-card.json) for current status. Statements
+> below about an empty initial checkout or absent candidate describe that earlier
+> review, not the present repository. No organizer performance receipt exists.
+
 # Scientific and repository review — 2026-10-21
 
 ## Decision first
@@ -114,9 +122,9 @@ leaderboard improvement under catalogue-to-new-fault distribution shift.
 ## Irregularities and next work
 
 1. **Universal duplicate witness:** pinned prior is positive at every footprint
-   pixel. See `evidence/preflight.json`. The shared upstream uniqueness module
-   contains a like-for-like exemption for dense priors. We do NOT invoke it:
-   doing so contradicts this prompt's literal “any registry raster” rule.
+   pixel. See `evidence/preflight.json`. Correction from the subsequent code review: the pinned shared uniqueness module
+   explicitly has **no density exemption**. The earlier claim that it contained
+   one was wrong; `vendor/gems57/uniqueness.py` and its SHA pin verify the literal rule.
    Resolve semantics in the shared protocol first, not a private fork.
 2. **No identifiable lane assignment.** Do not open another H81 lane by accident.
 3. **No organizer-authenticated data or submission receipts.** SHA integrity of
