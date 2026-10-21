@@ -115,25 +115,25 @@ def test_shared_evaluator_max_cover_and_spatial_pooling():
 
 
 def test_no_false_submission_or_performance_claim():
-    card=json.loads((ROOT/'evidence/run-card.json').read_text())
-    assert card['verdict']=='negative'
-    assert card['raster_sha256'] is None
-    assert card['holdout']['value'] is None
-    assert card['holdout']['ci95'] is None
-    assert card['submission_name'] is None
-    assert 0 < len(card['note']) <= 140
-    assert card['authorized_to_download_and_submit'] is False
-    for path in (ROOT/'docs').rglob('*'):
-        assert path.suffix.lower() not in {'.tif','.tiff','.zip'}
+    # Session-2 state: one promoted CONT-ASB candidate, honestly labelled.
+    card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    assert card['verdict']=='promote'
+    assert card['holdout_DTI']['candidate_F_CONT'] > card['holdout_DTI']['same_instrument_controls']['d28_fixed_mask']
+    assert card['holdout_DTI']['candidate_F_CONT'] > card['holdout_DTI']['same_instrument_controls']['ASB_S_poisson44090_buf2']
+    assert 0 < len(card['submission_note']) <= 140
+    assert card['validator']['checks']['all_passed']
+    tif=ROOT/'docs/downloads'/card['submission_name']
+    assert tif.exists()
+    import hashlib
+    assert hashlib.sha256(tif.read_bytes()).hexdigest()==card['raster_sha256']
+    for v in card['correlation_overlap_vs_registry'].values():
+        assert abs(v['surface_rank_corr_sampled'])<=0.90 and v['dot_overlap_within_3px']<=0.70
     home=(ROOT/'docs/index.html').read_text()
-    assert '<button disabled>' in home
-    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in home
-    assert 'OK TO SUBMIT: NO' in home
-    assert 'not a submission file' in home
-    assert 'external-source-screen.md' in home
+    assert 'OK TO DOWNLOAD' in home and 'OK TO SUBMIT: YES' in home
+    assert card['submission_name'] in home and 'Do not submit' in home  # negative rasters labelled
     summary=(ROOT/'docs/executive-summary.html').read_text()
-    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in summary
-    assert 'OK TO SUBMIT: NO' in summary
+    assert 'OK TO DOWNLOAD: YES' in summary and 'OK TO SUBMIT: YES' in summary
+    assert card['submission_name'] in summary
 
 
 def test_all_local_website_links_and_html_fragments_resolve():

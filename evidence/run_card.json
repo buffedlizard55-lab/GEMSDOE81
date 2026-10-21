@@ -1,46 +1,68 @@
 {
-  "hypothesis": "Antithetic LiDAR scarp-pair (lapneg x lappos geometric mean) coincides with a basement/conductivity step (grad depth_to_basement x grad conductivity geometric mean); final surface = geometric mean of the two rank surfaces.",
-  "mechanism": "Label-free rank surfaces -> Poisson-disk priority thinning (min_dist 2.8px) at 44,090-dot target, catalogue exclusion buffer 2px, binary {0,1}, zeros outside footprint.",
-  "named_nonfault_mimic": "Paired terrace riser / paleo-shoreline over a sedimentary pinch-out (antithetic steps + basement gradient with no fault).",
+  "hypothesis": "A fault missing from the catalogue is most often the along-strike continuation / stepover of a mapped fault where an antithetic LiDAR scarp-pair and basement step persist: F = sqrt(rank(ASB) * rank(exp(-d_catalogue/4px))).",
+  "mechanism": "Label-free ASB surface gated by catalogue-continuation distance (full catalogue for final; visible-only per draw in holdout) -> Poisson-disk priority thinning (min_dist 2.8px), 44090-dot target, catalogue exclusion buffer 2px, binary {0,1}, zeros outside footprint (never NaN).",
+  "named_nonfault_mimic": "Alluvial-fan channels, roads or terrace risers continuing a mapped lineament trend past a scarp-like step, with no fault.",
   "holdout_DTI": {
     "label": "HOLDOUT-DTI",
-    "evaluator": "v81.1 pooled alpha=0.2 beta=0.8 300m triangular kernel, whole-component hide-and-recover, 2 draws, visible masked pixel-exactly",
-    "candidate_S_poisson44090_buf2": 0.08312651477439477,
+    "evaluator": "v81.1 pooled alpha=0.2 beta=0.8 300m triangular kernel, whole-component hide-and-recover, 2 draws (seeds 81,82), visible masked pixel-exactly, catalogue features from visible only",
+    "candidate_F_CONT": 0.1270400419094968,
     "per_draw": [
-      0.08945094605656231,
-      0.07675218725378645
+      0.1323477487435179,
+      0.1216928230514046
     ],
     "ci95_draw_range": [
-      0.07675218725378645,
-      0.08945094605656231
+      0.1216928230514046,
+      0.1323477487435179
     ],
+    "ci95_note": "2 draws only, so CI is the per-draw range, not a component bootstrap; treat as low-precision.",
     "n_hidden_positives_total": 25038,
     "same_instrument_controls": {
-      "d28_base_HOLDOUT-DTI": 0.09922256956705666,
-      "winner_h33-2-b2_HOLDOUT-DTI": 0.004309322934951101,
-      "winner_note": "Winner deletes dots <=2px from FULL catalogue incl. hidden components, so hide-and-recover mechanically zeroes its kernel credit; this instrument cannot rank catalogue-flank strategies. Its 0.2778 is ORGANIZER-CONFIRMED, not comparable to HOLDOUT-DTI."
+      "ASB_S_poisson44090_buf2": 0.08312651477439477,
+      "d28_fixed_mask": 0.09922256956705666,
+      "winner_h33-2-b2_fixed_mask": 0.004309322934951101,
+      "control_note": "Fixed-mask controls are catalogue-derived masks; hide-and-recover penalises flank pruning (winner live 0.2778 vs holdout 0.0043 proves the instrument cannot rank that family). F_CONT still beats the strongest control (d28 0.0992) on this instrument."
     },
-    "canary_AUCs_all_below_0.90": {
-      "A_pair_scarp": 0.5724,
-      "B_basement_step": 0.5468,
-      "lapneg_only": 0.5714,
-      "depthbase_grad_only": 0.5354,
-      "S_combined": 0.5892
+    "all_experiments_this_session": {
+      "E1_RAD_gate_F": 0.07378305427940411,
+      "E1_RAD_alone": 0.05420461881133924,
+      "E2_EDGE_alone": 0.06703853143309954,
+      "E2_EDGExASB": 0.07607195682973843,
+      "E3_CONT_alone": 0.10868960269247419,
+      "E3_F_CONT3": 0.119494206737673
+    },
+    "canary_AUCs_below_0.90": {
+      "F_CONT_vs_hidden_per_draw": [
+        0.7218911997468298,
+        0.7037947211874855
+      ],
+      "ASB_vs_catalogue": 0.5891518065592141,
+      "RAD_vs_catalogue": 0.5106183984465401,
+      "EDGE_vs_catalogue": 0.5816102338619141
     }
   },
   "correlation_overlap_vs_registry": {
-    "winner_h33-2-b2_ORGANIZER-CONFIRMED_0.2778": {
-      "surface_rank_corr_sampled": 0.030981221622686104,
-      "dot_overlap_within_3px": 0.3100022680880018,
+    "winner_h33-2-b2": {
+      "surface_rank_corr_sampled": 0.018456679884894266,
+      "dot_overlap_within_3px": 0.27058289861646634,
       "lane_violation": false
     },
-    "d28_base_0.2600": {
-      "surface_rank_corr_sampled": 0.03599294635435985,
-      "dot_overlap_within_3px": 0.32792016330233614,
+    "d28_base": {
+      "surface_rank_corr_sampled": 0.032530072025475275,
+      "dot_overlap_within_3px": 0.3255386709004309,
+      "lane_violation": false
+    },
+    "shipped_gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif": {
+      "surface_rank_corr_sampled": 0.08734906519551894,
+      "dot_overlap_within_3px": 0.5495123610796099,
+      "lane_violation": false
+    },
+    "shipped_gems81-radasb-poisson44090-buf2-20261021T231647Z-0ab9803e-zeros.tif": {
+      "surface_rank_corr_sampled": 0.08283013208946202,
+      "dot_overlap_within_3px": 0.5789748242231798,
       "lane_violation": false
     }
   },
-  "raster_sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
+  "raster_sha256": "5d8cd25771a95cd652b99bc13f4cd6c9c0435ce9763f0159609aa7b5033e33d4",
   "validator": {
     "shape": [
       3730,
@@ -76,10 +98,11 @@
       "zero_outside_footprint": true,
       "all_passed": true
     },
-    "sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402"
+    "sha256": "5d8cd25771a95cd652b99bc13f4cd6c9c0435ce9763f0159609aa7b5033e33d4"
   },
-  "submission_name": "gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
-  "submission_note": "GEMSDOE81 ASB scarp-pair x basement-step poisson44090 buf2 44090 dots zeros",
-  "verdict": "negative",
-  "verdict_reason": "FORMAT promote (validator all-pass, safe to submit) but SCIENCE negative: HOLDOUT-DTI 0.0831 does not beat same-instrument d28 control 0.0992; do not spend a scarce weekly slot on it if maximising P(win) unless testing the off-catalogue hypothesis deliberately. No score >0.2778 is claimed; live score is UNSCORED."
+  "submission_name": "gems81-contasb-poisson44090-buf2-20261021T232312Z-04866ff3-zeros.tif",
+  "submission_note": "GEMSDOE81 CONT-ASB continuation-gated scarp poisson44090 buf2 44090 dots zeros",
+  "verdict": "promote",
+  "verdict_reason": "HOLDOUT-DTI 0.1270 (per-draw 0.132/0.122) beats same-instrument ASB 0.0831 and d28 control 0.0992; validator all-pass; registry lane clear (all rank-corr <0.90, dot-overlap <70%). FORMAT: safe to submit (fixes the [0,1] rejection: finite binary {0,1} everywhere, zeros not NaN outside). SCIENCE: promote on holdout evidence only -- live score is UNSCORED, no claim of beating 0.2778/0.4413; holdout favours continuation by construction (hidden segments cluster near visible), which is the main residual risk. Selector still owns the weekly-slot decision.",
+  "why_winner_0.2778": "GEMSDOE32 audit: winner = d28 dotted base (0.2600, user-prompt ORGANIZER-CONFIRMED) with every dot <=2px from the published catalogue deleted (44,090->37,654 dots, +0.0178). Under pooled DTI (alpha=0.2 FP-cheap, beta=0.8 FN-expensive, 300m triangular kernel) a dot on/near a known fault earns no credit for undiscovered test faults but pays FP mass, and one dot covers a 3px kernel neighbourhood, so sparse pruned dotted emission beats dense continuous surfaces. F_CONT adopts both lessons (dotted, buf2-pruned) but places dots by continuation-gated ASB instead of copying the d28 surface (rank-corr and overlap in this card)."
 }

@@ -13,3 +13,5 @@ data/*.tiff
 data/*.zip
 data/*.npz
 *.partial
+
+data/parts/

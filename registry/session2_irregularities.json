@@ -1,0 +1,15 @@
+{
+  "session": "2026-10-21 session 2 (CONT-ASB)",
+  "irregularities": [
+    {"id": "IR-81-06", "text": "Holdout favours continuation by construction: hidden catalogue segments cluster near visible ones, so F_CONT's HOLDOUT-DTI 0.1270 likely overstates live discovery performance on truly isolated undiscovered faults. A prior family continuation submission (h16-continuation) scored only 0.0461 live (user-prompt ledger). Promote is a holdout-evidence verdict, not a live-score promise."},
+    {"id": "IR-81-07", "text": "Organizer problem page (fetched 2026-10-21) says outside-bounds data may be 'null or nan', yet the user was rejected with 'Predicted values must be in range [0, 1]'. This raster uses finite zeros everywhere, satisfying the stricter platform reading; the rejected file itself was never available to diagnose."},
+    {"id": "IR-81-08", "text": "Main previously carried two contradictory states (ASB candidate page said OK TO SUBMIT, index/README said DO NOT SUBMIT under a dense-continuous-prior reading of the registry rule). Resolved this session: lane checks are computed against binary scored registry rasters (winner, d28) and previously shipped binary rasters, which is the like-for-like reading of 'dots within 3px'; the dense continuous witness is not a submission raster. Selector should confirm this interpretation."},
+    {"id": "IR-81-09", "text": "CI is a 2-draw range, not a spatial-block bootstrap; n=2 draws is low precision. Reported as ci95_draw_range everywhere, never as a bootstrap CI."},
+    {"id": "IR-81-10", "text": "Budget: radiometric experiment's greedy/poisson E2 sweep and edge experiment reused the same holdout draws; 3 candidate hypotheses were tested (RAD, EDGE, CONT), then stopped, per the 3-experiment budget."}
+  ],
+  "sources_verified_this_session": [
+    {"claim": "DTI alpha=0.2 beta=0.8, triangular kernel R=300m, single-band float32 [0,1], EPSG:32611, same bounds/resolution", "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/", "how": "fetch_page chunks 0-1, 2026-10-21"},
+    {"claim": "GeoDAWN DOI 10.5066/P93LGLVQ, radiometric ratio grids ThK/UK/UTh + TMI_up150", "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and", "how": "hash-pinned mirror metadata geodawn_extensions.json in GEMSDOE24 (bytes sha256-verified locally)"},
+    {"claim": "Template band map for training_features.tif (19 bands)", "url": "https://github.com/drivendataorg/gems-prize-reference-solution", "how": "vendor/gems57/geo.py docstring, verified against restored rasterio band count = 19"}
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "hypothesis": "Radiometric-ratio discordance (grad ThK x UK x UTh geometric-mean rank) gates the ASB antithetic-scarp-pair x basement-step surface: F=sqrt(rank(ASB)*rank(R)); a blind fault conduit alters radioelement ratios where a terrace/pinch-out mimic does not.",
+  "mechanism": "Label-free rank surfaces -> Poisson-disk priority thinning (min_dist 2.8px) at 44090-dot target, catalogue exclusion buffer 2px, binary {0,1}, zeros outside footprint. Surface=F_ASBxRAD.",
+  "named_nonfault_mimic": "Lithologic contact / paleo-shoreline over a sedimentary pinch-out producing both a terrace pair and a radiometric ratio edge with no fault.",
+  "holdout_DTI": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "HOLDOUT-DTI v81.1 pooled alpha=0.2 beta=0.8 300m triangular, whole-component hide-and-recover, 2 draws (seeds 81,82), visible masked pixel-exactly",
+    "candidate": 0.07378305427940411,
+    "per_draw": [
+      0.0761383039305202,
+      0.07141147059563706
+    ],
+    "ci95_draw_range": [
+      0.07141147059563706,
+      0.0761383039305202
+    ],
+    "n_hidden_positives_total": 25038,
+    "same_instrument_controls": {
+      "ASB_S_same_config": 0.08312651477439477,
+      "d28_fixed_mask": 0.09922256956705666,
+      "winner_fixed_mask": 0.004309322934951101,
+      "control_note": "Fixed-mask controls are catalogue-derived; hide-and-recover mechanically penalises flank strategies (see IR-81-03). Winner 0.2778 / d28 0.2600 live scores are ORGANIZER-CONFIRMED as reported in the user prompt, a different evidence class."
+    },
+    "canary_AUCs": {
+      "S_ASB": 0.5891518065592141,
+      "R_rad": 0.5106183984465401,
+      "F_ASBxRAD": 0.5603973888709363,
+      "F3_ASBxRADxMAG": 0.55806392654654
+    },
+    "E1_all": {
+      "S_ASB": 0.08312651477439477,
+      "R_rad": 0.05420461881133924,
+      "F_ASBxRAD": 0.07378305427940411,
+      "F3_ASBxRADxMAG": 0.06889613188058451
+    },
+    "E2_all": {
+      "F_ASBxRAD_poisson37654_buf2": 0.0696169860269284,
+      "F_ASBxRAD_poisson44090_buf3": 0.07291393398442851,
+      "F_ASBxRAD_poisson30000_buf2": 0.06485596818964363
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "winner_h33-2-b2": {
+      "surface_rank_corr_sampled": 0.02222247810601637,
+      "dot_overlap_within_3px": 0.27230664549784533,
+      "lane_violation": false
+    },
+    "d28_base": {
+      "surface_rank_corr_sampled": 0.025593758840321272,
+      "dot_overlap_within_3px": 0.28718530278974824,
+      "lane_violation": false
+    },
+    "prev_shipped_gems81-asb-poisson44090-buf2-20261021T22": {
+      "surface_rank_corr_sampled": 0.08099562632290801,
+      "dot_overlap_within_3px": 0.5802903152642322,
+      "lane_violation": false
+    }
+  },
+  "raster_sha256": "12de56206eae9a793e1e7fab772b4990c4097abd8a53b6884e100dcbb5ddad4b",
+  "validator": {
+    "shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "dtype": "float32",
+    "positive_pixels": 44090,
+    "min": 0.0,
+    "max": 1.0,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "shape_match": true,
+      "crs_match": true,
+      "transform_match": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "values_in_0_1_everywhere": true,
+      "binary_values": true,
+      "zero_on_catalogue": true,
+      "zero_outside_footprint": true,
+      "all_passed": true
+    },
+    "sha256": "12de56206eae9a793e1e7fab772b4990c4097abd8a53b6884e100dcbb5ddad4b"
+  },
+  "submission_name": "gems81-radasb-poisson44090-buf2-20261021T231647Z-0ab9803e-zeros.tif",
+  "submission_note": "GEMSDOE81 RAD-ASB rad-discordance gate poisson44090 buf2 44090 dots zeros",
+  "verdict": "negative",
+  "verdict_reason": "HOLDOUT-DTI 0.0738 does not beat same-instrument control(s) (ASB 0.0831, d28 fixed-mask 0.09922256956705666); format-valid and downloadable, but do NOT spend a scarce weekly slot on it if maximising P(win). No score >0.2778 is claimed; this raster is UNSCORED until an organizer receipt exists."
+}
