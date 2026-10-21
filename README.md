@@ -1,22 +1,36 @@
 # GEMSDOE81 — audited fault-prediction research
 
-## Submission status: **DO NOT SUBMIT — no authorized new TIF**
+## Submission status: **DO NOT SUBMIT — duplicate / negative artifact**
 
-[Executive summary and submission instructions](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html)
-· [Research review](docs/research/review.md) · [Machine-readable run card](evidence/run-card.json)
+[Executive summary and exact submission steps](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html)
+· [Corrective review](docs/research/session-review.md)
+· [Authoritative run card](evidence/run-card.json)
 
-**The requested unique submission was NOT generated.** The literal registry rule
-rejects every nonempty in-footprint candidate: a verified registered prior is
-positive throughout the footprint. Overlap would be 100%, exceeding the 70%
-stop limit, regardless of geological method. We obey the stop rule rather than
-copy an old submission, fabricate a success, or quietly exempt dense priors.
-See [the independently recomputed proof](evidence/preflight.json).
-A format-valid TIFF is not necessarily unique, scientifically promoted, accepted
-by DrivenData, or a good predictor. No competition submission slot was used.
+**An existing TIFF is available to download for research; it is NOT approved for competition submission.**
+[Download the inherited negative research TIFF](docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif).
+No new TIFF was generated during this review. Do not rename this file as a new submission.
+The new review revalidated its actual bytes with the pinned shared validator:
+one float32 band, matching grid, finite [0,1] everywhere, zero on catalogue and
+outside footprint. **Format PASS is not uniqueness, science or organizer approval.**
 
+The literal registry gate rejects it: **100% of its dots** are within 3 px of a
+verified dense registered prior (limit: >70%). This is a registry measurement,
+not a performance score. The same universal witness rejects nonempty
+in-footprint surface support before placement. No threshold exemption was added.
+No geological experiment, new candidate, or weekly submission slot was used here.
 
-## Parallel-session candidate added by arena/2b6bccb9 (this merge) — STATUS DISPUTED, selector must resolve
-A unique ASB TIF was generated in a parallel session: `docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif` (page: `docs/asb-candidate.html`, run card `evidence/run_card.json`). It is format-validator-clean and, vs the winner/d28 binary registry rasters, rank-corr 0.031 and 31% dots within 3px. **However it conflicts with the DO-NOT-SUBMIT gate above**: that gate reads the registry rule against a dense continuous prior raster (100% overlap), and the candidate's science verdict is in any case **negative** (HOLDOUT-DTI v81.1 0.0831 vs 0.0992 control). Until a selector step reconciles the registry interpretation, **treat the governing status as DO NOT SUBMIT / do not spend a slot**; the file remains as a measured negative deliverable.
+### Parallel-session conflict resolved
+
+The inherited ASB subpage claimed “OK to download & submit” while the main page
+said no candidate existed. Both were misleading. All current pages now expose
+the same authoritative **DO NOT SUBMIT** decision, with a clearly research-only
+one-click TIFF download. The legacy private-evaluator results are preserved in
+[evidence/legacy-asb.json](evidence/legacy-asb.json), not accepted as HOLDOUT-DTI.
+The two-draw range was not a 95% CI; the canary used the full catalogue; controls
+were not recomputed from fold-visible faults; the prescribed buffer was absent.
+No organizer receipt supports the historical score labels.
+The retired generation entry points stop before constructing surfaces/dots.
+The former unsafe writer is now only an import adapter to the shared writer.
 
 ## Start here every session — user operating brief
 
@@ -130,7 +144,7 @@ no comprehensive source-site verification is claimed.
 
 ## Concurrent-session integration
 
-PR #1 merged a research-only site during this review. Its superseded source and
+In an earlier session, PR #1 merged a research-only site. Its superseded source and
 shortlist are preserved under `docs/archive/first-review/`; current-state pointers
 replace the old entry paths. No prior research was silently discarded.
 
@@ -138,7 +152,7 @@ replace the old entry paths. No prior research was silently discarded.
 
 Requires Python 3.11+, `gh` with access to the public GitHub blobs, and package
 installation access. Full-resolution data, cached models, and restored inputs
-are ignored by Git. Only small JSON reports and code are tracked.
+are ignored by Git. Code, small reports, the site and the inherited compressed negative TIFF are tracked; full inputs remain ignored.
 
 ```sh
 python -m venv .venv
@@ -149,11 +163,13 @@ python -m venv .venv
 # Exit 3 = untrusted/missing input; exit 0 = no universal proof, NOT clearance.
 .venv/bin/python scripts/audit_reference.py   # historical bytes: learning only
 .venv/bin/python -m pytest -q
+.venv/bin/python scripts/audit_existing.py   # shared-validator check of inherited negative TIFF
+.venv/bin/python scripts/validate_submission.py   # exit 0 means local format ONLY
 .venv/bin/python scripts/build_site.py
 ```
 
 Shared evaluator and writer are unmodified under `vendor/gems57/`; hash-check
-before use. No feature stack, model, holdout score, AUC or new candidate is claimed.
+before use. No feature stack, trained model, accepted holdout score, fold canary or newly generated candidate is claimed. The inherited negative TIFF exists.
 The earlier `download_competition_data.sh` / `prepare_data.py` commands do not exist
 in this starting repo and are not represented as working training steps here. See the
 [data placement and provenance note](data/README.md) for the three audit-only inputs
@@ -173,6 +189,6 @@ and their owner-mirror limitations.
 
 The existing Pages configuration serves main/root; the root landing page redirects
 to `docs/`. The audit workflow checks the evidence and saves a Pages artifact;
-legacy Pages deployment is separate and is not CI-gated by this workflow. An API
+legacy Pages deployment is separate and is not CI-gated by this workflow. An earlier-session API
 attempt to switch Pages to Actions returned HTTP 403 (integration permission).
 No live data feed or leaderboard-success claim is implied. See dated [source audit](registry/sources.json).

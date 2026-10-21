@@ -7,7 +7,7 @@ import numpy as np
 from scipy.ndimage import distance_transform_edt
 from scipy.spatial import cKDTree
 
-from audit import ROOT, read_verified
+from audit import ROOT, read_verified, sha256
 from restore_inputs import restore
 
 SOURCE = {
@@ -22,6 +22,14 @@ def main():
     path = Path('.cache/reference/h33.tif')
     restore(SOURCE['repo'], SOURCE['ref'], SOURCE['path'], SOURCE['sha256'], path)
     pred, grid = read_verified(ROOT/path, SOURCE['sha256'])
+    receipt_path = Path('.cache/reference/h33-build-receipt.json')
+    receipt_source = SOURCE['path'].replace('-zeros.tif', '-audit.json')
+    receipt_hash = 'e4db14f2e369b1db37870d8d1a31035f730512309a88810d99ff705782e28212'
+    restore(SOURCE['repo'], SOURCE['ref'], receipt_source, receipt_hash, receipt_path)
+    build = json.loads((ROOT/receipt_path).read_text())
+    if (build['zeros_tif']['sha256'] != SOURCE['sha256']
+            or 'UNSCORED' not in build['submission_note_zeros']):
+        raise ValueError('reference build receipt does not match reviewed artifact/status')
     man = {e['id']: e for e in json.loads((ROOT/'registry/data_manifest.json').read_text())['files']}
     sample, sg = read_verified(ROOT/'data/bridge/sample_submission.tif',man['sample_submission']['sha256'])
     cat, cg = read_verified(ROOT/'data/bridge/existing_faults.tif',man['existing_faults']['sha256'])
@@ -35,6 +43,14 @@ def main():
     result = {
       'evidence_class': 'REFERENCE-BYTE-MEASUREMENT, NOT A SCORE', 'source': SOURCE,
       'purpose': 'Learning only. Never a candidate, ranking feature or submission download.',
+      'build_receipt_review': {
+          'url': f"https://github.com/{SOURCE['repo']}/blob/{SOURCE['ref']}/{receipt_source}",
+          'sha256': sha256(ROOT/receipt_path),
+          'source_class': 'Owner build artifact; NOT an organizer submission-page receipt',
+          'status': 'UNSCORED in source note',
+          'description': build['description'],
+          'contains_projection_not_a_score': 'predicted_leaderboard_dti' in build['holdout_metrics'],
+      },
       'grid_matches': True, 'all_values_finite': bool(np.isfinite(pred).all()),
       'values_in_0_1': bool(np.isfinite(pred).all() and (pred>=0).all() and (pred<=1).all()),
       'unique_values': np.unique(pred).tolist(), 'positive_pixels': int(dots.sum()),

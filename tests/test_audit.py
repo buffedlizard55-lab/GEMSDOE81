@@ -115,25 +115,29 @@ def test_shared_evaluator_max_cover_and_spatial_pooling():
 
 
 def test_no_false_submission_or_performance_claim():
+    from audit_existing import NAME, SHA256
     card=json.loads((ROOT/'evidence/run-card.json').read_text())
     assert card['verdict']=='negative'
-    assert card['raster_sha256'] is None
+    assert card['raster_sha256'] == SHA256
     assert card['holdout']['value'] is None
     assert card['holdout']['ci95'] is None
-    assert card['submission_name'] is None
+    assert card['submission_name'] == NAME
     assert 0 < len(card['note']) <= 140
     assert card['authorized_to_download_and_submit'] is False
-    for path in (ROOT/'docs').rglob('*'):
-        assert path.suffix.lower() not in {'.tif','.tiff','.zip'}
-    home=(ROOT/'docs/index.html').read_text()
-    assert '<button disabled>' in home
-    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in home
-    assert 'OK TO SUBMIT: NO' in home
-    assert 'not a submission file' in home
-    assert 'external-source-screen.md' in home
-    summary=(ROOT/'docs/executive-summary.html').read_text()
-    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in summary
-    assert 'OK TO SUBMIT: NO' in summary
+    assert card['registry']['final_dot_overlap_within_3px'] > .70
+    artifacts=[p for p in (ROOT/'docs').rglob('*') if p.suffix.lower() in {'.tif','.tiff','.zip'}]
+    assert artifacts == [ROOT/'docs/downloads'/NAME]
+    assert sha256(artifacts[0]) == SHA256
+    for page in ('index.html','executive-summary.html','asb-candidate.html'):
+        text=(ROOT/'docs'/page).read_text()
+        assert '<button disabled>' in text
+        assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO APPROVED FILE' in text
+        assert 'OK TO SUBMIT: NO' in text
+        assert 'DO NOT SUBMIT' in text
+        assert f'href="downloads/{NAME}" download' in text
+        assert 'not a submission file' in text
+        assert 'OK TO DOWNLOAD &amp; SUBMIT' not in text
+    assert 'external-source-screen.md' in (ROOT/'docs/index.html').read_text()
 
 
 def test_all_local_website_links_and_html_fragments_resolve():
@@ -187,7 +191,7 @@ def test_current_markdown_local_links_resolve():
     from urllib.parse import unquote, urlsplit
 
     pages=[ROOT/'docs/hypotheses.md', ROOT/'docs/evidence-and-blockers.md',
-           ROOT/'docs/research/review.md', ROOT/'docs/research/external-source-screen.md']
+           ROOT/'docs/research/review.md', ROOT/'docs/research/session-review.md', ROOT/'docs/research/external-source-screen.md']
     for page in pages:
         text=page.read_text()
         for href in re.findall(r'\[[^\]]+\]\(([^)]+)\)',text):
