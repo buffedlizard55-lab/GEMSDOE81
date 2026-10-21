@@ -1,0 +1,8 @@
+<!doctype html><meta charset="utf-8"><title>Executive summary — how to submit</title>
+<style>body{font-family:system-ui;max-width:900px;margin:2em auto;padding:0 1em}</style>
+<h1>Executive summary — make a submission in 4 steps</h1>
+<ol><li>On the <a href="index.html">home page</a>, click the green <b>⬇ DOWNLOAD SUBMISSION TIF</b> button. ✅ It is OK to submit: the in-repo validator already checked CRS/shape/transform, single band float32, and finite values in [0,1] everywhere (zeros outside footprint — no NaN, so no “values must be in range [0,1]” error). No human inspection is needed or used.</li>
+<li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS → Submit</a>, choose the downloaded <code>.tif</code> as “File to submit”.</li>
+<li>Paste the Note shown on the home page (≤140 chars) so the team can tell submissions apart.</li>
+<li>Click Create. Record the score returned as ORGANIZER-CONFIRMED (never mix it with HOLDOUT-DTI numbers).</li></ol>
+<p>⚠️ Science verdict is <b>negative</b> (see home page): format-safe, but holdout did not beat the control, so only spend a weekly slot deliberately.</p>
