@@ -151,7 +151,9 @@ python -m venv .venv
 Shared evaluator and writer are unmodified under `vendor/gems57/`; hash-check
 before use. No feature stack, model, holdout score, AUC or new candidate is claimed.
 The earlier `download_competition_data.sh` / `prepare_data.py` commands do not exist
-in this starting repo and are not represented as working training steps here.
+in this starting repo and are not represented as working training steps here. See the
+[data placement and provenance note](data/README.md) for the three audit-only inputs
+and their owner-mirror limitations.
 
 ## Limitations and next-session work
 

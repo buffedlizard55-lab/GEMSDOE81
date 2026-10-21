@@ -78,6 +78,12 @@
       "url": "https://asf.alaska.edu/data-sets/sar-data-sets/sentinel-1/sentinel-1-data-and-imagery/",
       "status": "Official access page retrieved 2026-10-21; free archive requires Earthdata Login and EULA; no AOI query or scene download performed",
       "supports": "Potential InSAR source only; account/access and target-area scene coverage remain unverified"
+    },
+    {
+      "name": "USGS 3D Elevation Program (3DEP)",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "status": "Official source nominated from the owner-supplied manifest; page, tile catalog, AOI coverage, and source bytes were not independently queried this session",
+      "supports": "Potential DEM source for the catchment hypothesis only; the manifest's cited derived proxy covers 706 of 716 listed tiles and is not a complete verified input"
     }
   ]
 }
