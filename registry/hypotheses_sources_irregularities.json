@@ -1,0 +1,112 @@
+{
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "ASB (SHIPPED, verdict negative)",
+      "layers": "USGS 3DEP 1m LiDAR lapneg/lappos/step (lidar_scarp_features_u8 bands 4/5/3) x training_features depth_to_base_surf(15)+cond_surf(17) gradients",
+      "signature": "geometric mean of antithetic scarp-pair rank and basement-step rank",
+      "why_off_catalogue": "catalogue faults with subdued scarps or buried steps are missed by mappers; a coincident pair+step is unlikely from either process alone",
+      "differs": "not H33 orientation consensus, not catalogue-flank prune of a prior raster, not lidar-only; rank-corr 0.031 vs winner, 31% dots within 3px",
+      "cost": "low (done)",
+      "holdout": "HOLDOUT-DTI 0.0831 < d28 control 0.0992 same instrument -> negative"
+    },
+    {
+      "rank": 2,
+      "id": "Radiometric Th/K discordance lineament",
+      "layers": "GeoDAWN ThK/UK/UTh (DOI 10.5066/P93LGLVQ)",
+      "signature": "ratio-gradient ridge gated by ASB",
+      "why_off_catalogue": "hydrothermal alteration along blind faults changes Th/K without a mapped trace",
+      "differs": "ratios unused by ASB shipped surface",
+      "cost": "low; NOT TESTED (3-experiment budget exhausted)"
+    },
+    {
+      "rank": 3,
+      "id": "Geodetic strain-rate tensor eigen-alignment",
+      "layers": "geod_2ndinv/shear/dilatation bands 4/7/8",
+      "signature": "principal-strain axis alignment over 9px",
+      "why_off_catalogue": "actively straining blind faults need no scarp",
+      "differs": "bands are smooth (100km-scale risk, cf H33-E seismic warning)",
+      "cost": "low; NOT TESTED"
+    },
+    {
+      "rank": 4,
+      "id": "MT conductivity straight-boundary (cond_surf alone, long-window coherence)",
+      "layers": "cond_surf band 17",
+      "signature": "long straight gradient ridge",
+      "why_off_catalogue": "clay-cap breach over blind conduit",
+      "differs": "partially in ASB component B",
+      "cost": "low; NOT TESTED"
+    },
+    {
+      "rank": 5,
+      "id": "Sub-km seismicity lineaments",
+      "layers": "USGS ComCat/FDSN raw catalogue (free, official: https://earthquake.usgs.gov/fdsnws/event/1/)",
+      "signature": "epicentre collinearity + nodal-plane strikes",
+      "why_off_catalogue": "supplied ieq band is 100km-smoothed; raw events add sub-km structure",
+      "differs": "no repo surface uses raw events",
+      "cost": "medium; source obtainable via USGS FDSN (not fetched this session); NOT TESTED"
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Competition, DTI alpha0.2/beta0.8, submission must match CRS/shape/transform, values in [0,1]",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/"
+    },
+    {
+      "claim": "Reference U-Net solution + data placement",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution"
+    },
+    {
+      "claim": "GeoDAWN magnetic/radiometric surveys, DOI 10.5066/P93LGLVQ",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and"
+    },
+    {
+      "claim": "INGENIOUS / GDR 1391",
+      "url": "https://gdr.openei.org/submissions/1391"
+    },
+    {
+      "claim": "EPSG:32611 WGS84 UTM 11N",
+      "url": "https://epsg.io/32611"
+    },
+    {
+      "claim": "Tversky index",
+      "url": "https://en.wikipedia.org/wiki/Tversky_index"
+    },
+    {
+      "claim": "Winner raster + its audit (0.2778 ORGANIZER-CONFIRMED in prompt)",
+      "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html"
+    },
+    {
+      "claim": "Competition design report NLR 96647",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf"
+    }
+  ],
+  "data_manifest_sha256": {
+    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "note": "owner-supplied GitHub mirrors of login-walled DrivenData files; hash-pinned, NOT organizer-authenticated (IRREGULARITY IR-81-01)"
+  },
+  "irregularities": [
+    {
+      "id": "IR-81-01",
+      "text": "Data obtained via owner GitHub mirrors (GEMSDOE/GEMSDOE24 bridges), sha256-verified vs GEMSDOE32 registry/data_manifest.json; not organizer-authenticated."
+    },
+    {
+      "id": "IR-81-02",
+      "text": "Prompt states both leaderboard high 0.4413 and 0.3195 at different points, and winner 0.2778; none re-verified live this session (drivendata leaderboard not fetched). Treat all as ORGANIZER-CONFIRMED-as-reported-by-user, UNSCORED for this raster."
+    },
+    {
+      "id": "IR-81-03",
+      "text": "Hide-and-recover holdout mechanically penalises catalogue-flank strategies (winner HOLDOUT-DTI 0.0043 on v81.1); it ranks off-catalogue discovery surfaces, not flank pruning. Do not compare HOLDOUT-DTI to ORGANIZER-CONFIRMED live scores."
+    },
+    {
+      "id": "IR-81-04",
+      "text": "Exact lazy-greedy emitter timed out (>1700s); replaced by disclosed batch-greedy in E3 (worse) - shipped emitter is Poisson priority thinning, the E2 winner."
+    },
+    {
+      "id": "IR-81-05",
+      "text": "'Predicted values must be in range [0,1]' rejection reported by user is fixed by construction: zeros (not NaN) outside footprint, finite [0,1] everywhere, validator fails closed."
+    }
+  ]
+}
