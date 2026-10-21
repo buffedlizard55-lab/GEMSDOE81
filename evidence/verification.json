@@ -1,0 +1,48 @@
+{
+  "date_utc": "2026-10-21",
+  "pass_1": {
+    "status": "complete for negative-result scope",
+    "actions": [
+      "Inspected empty starting repository and selected pinned reference trees",
+      "Fetched unmodified shared template",
+      "Restored SHA-pinned rejection-proof inputs",
+      "Recomputed universal overlap proof",
+      "Measured historical H33 bytes for learning only",
+      "Built a fail-closed static site"
+    ]
+  },
+  "pass_2": {
+    "status": "complete",
+    "fixes": [
+      "Closed input hash file handles deterministically",
+      "Kept dense-prior exemptions out of the binding decision",
+      "Distinguished marginal truth cover from nearest-truth dot credit in DTI explanation",
+      "Added shifted-grid, corrupt-input, nonfinite-catalogue and stale-approval tests",
+      "Documented missing lane, cached features, organizer receipts and incomplete family audit"
+    ]
+  },
+  "pass_3": {
+    "status": "complete locally",
+    "commands": [
+      "python -m pytest -q",
+      "python scripts/audit.py",
+      "python scripts/audit_reference.py",
+      "python scripts/build_site.py",
+      "python -m compileall -q scripts tests vendor/gems57",
+      "git diff --check"
+    ],
+    "tests_passed": 24,
+    "tests_failed": 0,
+    "warnings": "10 PendingDeprecationWarnings from rasterio.transform using affine multiplication in test fixtures; no validation or arithmetic failure",
+    "preflight_exit_code": 2,
+    "preflight_exit_meaning": "Verified binding negative, not input error",
+    "historical_byte_audit_exit_code": 0,
+    "compile_exit_code": 0,
+    "diff_check_exit_code": 0,
+    "site_local_links_resolve": true,
+    "candidate_tif_exists": false,
+    "original_unique_tif_requirement_satisfied": false,
+    "reason": "Generating a nonempty candidate conflicts with the binding duplicate stop; negative deliverable is explicit."
+  },
+  "deployment": "Existing Pages API reports legacy main/root, built. Switching to workflow deployment returned HTTP 403: Resource not accessible by integration. Root redirect preserves that existing configuration; audit CI and legacy Pages deploy are separate."
+}
