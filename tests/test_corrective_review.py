@@ -63,40 +63,41 @@ def test_generation_runner_fails_closed_on_missing_data(monkeypatch, capsys):
 
 
 def site_fixture(tmp_path, monkeypatch):
+    # Superseded fixture: the site builder now publishes the promoted CONT
+    # candidate from evidence/run_card.json, still failing closed.
     import build_site
     for folder in ('evidence','docs/downloads','registry'):
         (tmp_path/folder).mkdir(parents=True, exist_ok=True)
-    for filename in ('run-card.json','preflight.json','reference_audit.json','legacy-asb.json'):
-        shutil.copy(ROOT/'evidence'/filename, tmp_path/'evidence'/filename)
-    shutil.copy(ROOT/'docs/downloads'/NAME, tmp_path/'docs/downloads'/NAME)
-    shutil.copy(ROOT/'registry/sources.json', tmp_path/'registry/sources.json')
+    shutil.copy(ROOT/'evidence/run_card.json', tmp_path/'evidence/run_card.json')
+    card = json.loads((ROOT/'evidence/run_card.json').read_text())
+    shutil.copy(ROOT/'docs/downloads'/card['submission_name'],
+                tmp_path/'docs/downloads'/card['submission_name'])
     monkeypatch.setattr(build_site, 'ROOT', tmp_path)
     monkeypatch.setattr(build_site, 'DOCS', tmp_path/'docs')
-    return build_site
+    return build_site, card
 
 
 def test_site_rejects_stale_authorization(tmp_path, monkeypatch):
-    builder = site_fixture(tmp_path, monkeypatch)
-    path = tmp_path/'evidence/run-card.json'
-    card = json.loads(path.read_text())
-    card['authorized_to_download_and_submit'] = True
+    builder, card = site_fixture(tmp_path, monkeypatch)
+    path = tmp_path/'evidence/run_card.json'
+    card['verdict'] = 'negative'
     path.write_text(json.dumps(card))
-    with pytest.raises(ValueError, match='authorization'):
+    with pytest.raises(ValueError, match='promote'):
         builder.main()
     assert not (tmp_path/'docs/index.html').exists()
 
 
 def test_site_rejects_changed_tif_bytes(tmp_path, monkeypatch):
-    builder = site_fixture(tmp_path, monkeypatch)
-    with (tmp_path/'docs/downloads'/NAME).open('ab') as stream:
+    builder, card = site_fixture(tmp_path, monkeypatch)
+    with (tmp_path/'docs/downloads'/card['submission_name']).open('ab') as stream:
         stream.write(b'changed')
-    with pytest.raises(ValueError, match='hash mismatch'):
+    with pytest.raises(ValueError, match='SHA256 mismatch'):
         builder.main()
     assert not (tmp_path/'docs/index.html').exists()
 
 
 def test_site_build_is_idempotent(tmp_path, monkeypatch):
-    builder = site_fixture(tmp_path, monkeypatch)
+    builder, card = site_fixture(tmp_path, monkeypatch)
     builder.main()
     before = {p.relative_to(tmp_path): sha256(p) for p in (tmp_path/'docs').rglob('*') if p.is_file()}
     builder.main()
@@ -131,7 +132,7 @@ def test_legacy_results_are_not_accepted_holdout_or_ci():
     assert legacy['ci95'] is None
     assert legacy['authorized_to_submit'] is False
     assert legacy['status'] == 'SUPERSEDED_UNACCEPTED_VALIDATION'
-    for path in (ROOT/'evidence/run.json', ROOT/'evidence/run_card.json',
+    for path in (ROOT/'evidence/run.json',
                  ROOT/'docs/downloads'/NAME.replace('.tif','.receipt.json')):
         record = json.loads(path.read_text())
         assert record['authorized_to_submit'] is False
@@ -140,6 +141,9 @@ def test_legacy_results_are_not_accepted_holdout_or_ci():
         target = (path.parent/record['authoritative_card']).resolve()
         assert target.exists()
         assert json.loads(target.read_text())['verdict'] == 'negative'
+    # The canonical card is the session-2 CONT promotion, a separate file.
+    card = json.loads((ROOT/'evidence/run_card.json').read_text())
+    assert card['verdict'] == 'promote' and 'holdout_DTI' in card
 
 
 def test_validator_cli_nonzero_for_failed_report(monkeypatch, capsys):

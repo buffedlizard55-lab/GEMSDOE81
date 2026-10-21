@@ -11,9 +11,19 @@ from gems57.validate import validate
 from audit_existing import NAME
 
 
+def _default_file():
+    # Default to the promoted candidate in the canonical run card; fall back
+    # to the inherited ASB research artifact name.
+    try:
+        card = json.loads((ROOT/'evidence/run_card.json').read_text())
+        return ROOT/'docs/downloads'/card['submission_name']
+    except Exception:
+        return ROOT/'docs/downloads'/NAME
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('file', nargs='?', default=ROOT/'docs/downloads'/NAME)
+    parser.add_argument('file', nargs='?', default=_default_file())
     args = parser.parse_args()
     try:
         proof = audit()  # verify template/data provenance even if blocked
@@ -26,7 +36,7 @@ def main():
         passed = report['all_checks_passed'] and template['ok']
         result = {'validator': report, 'template': template, 'authorized_to_submit': False,
                   'status': 'LOCAL_FORMAT_PASS' if passed else 'LOCAL_FORMAT_FAIL',
-                  'registry_decision': proof['decision']}
+                  'dense_witness_audit_decision': proof['decision'], 'note': 'local format validation only; slot promotion is the run-card/selector decision in evidence/run_card.json'}
         code = 0 if passed else 1
     except (OSError, ValueError, KeyError, TypeError) as exc:
         result = {'status': 'VALIDATION_ERROR', 'error': str(exc), 'authorized_to_submit': False}

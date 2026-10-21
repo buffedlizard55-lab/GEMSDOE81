@@ -1,0 +1,63 @@
+{
+  "evaluator": "HOLDOUT-DTI v81.1 pooled alpha=0.2 beta=0.8 300m triangular, 2 draws, visible masked",
+  "surfaces": {
+    "CONT": {
+      "auc_vs_hidden_per_draw": [
+        0.7625795779250388,
+        0.75161142264158
+      ],
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.10868960269247419,
+      "per_draw": [
+        0.11272159701173796,
+        0.10462842042552581
+      ],
+      "ci95_draw_range": [
+        0.10462842042552581,
+        0.11272159701173796
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2
+    },
+    "F_CONT": {
+      "auc_vs_hidden_per_draw": [
+        0.7218911997468298,
+        0.7037947211874855
+      ],
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.1270400419094968,
+      "per_draw": [
+        0.1323477487435179,
+        0.1216928230514046
+      ],
+      "ci95_draw_range": [
+        0.1216928230514046,
+        0.1323477487435179
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2
+    },
+    "F_CONT3": {
+      "auc_vs_hidden_per_draw": [
+        0.6920881150053534,
+        0.6723581367221301
+      ],
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.119494206737673,
+      "per_draw": [
+        0.11744977811126896,
+        0.12155051827362522
+      ],
+      "ci95_draw_range": [
+        0.11744977811126896,
+        0.12155051827362522
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2
+    }
+  },
+  "elapsed_s": 27.7
+}

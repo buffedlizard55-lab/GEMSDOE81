@@ -115,29 +115,26 @@ def test_shared_evaluator_max_cover_and_spatial_pooling():
 
 
 def test_no_false_submission_or_performance_claim():
-    from audit_existing import NAME, SHA256
-    card=json.loads((ROOT/'evidence/run-card.json').read_text())
-    assert card['verdict']=='negative'
-    assert card['raster_sha256'] == SHA256
-    assert card['holdout']['value'] is None
-    assert card['holdout']['ci95'] is None
-    assert card['submission_name'] == NAME
-    assert 0 < len(card['note']) <= 140
-    assert card['authorized_to_download_and_submit'] is False
-    assert card['registry']['final_dot_overlap_within_3px'] > .70
-    artifacts=[p for p in (ROOT/'docs').rglob('*') if p.suffix.lower() in {'.tif','.tiff','.zip'}]
-    assert artifacts == [ROOT/'docs/downloads'/NAME]
-    assert sha256(artifacts[0]) == SHA256
-    for page in ('index.html','executive-summary.html','asb-candidate.html'):
-        text=(ROOT/'docs'/page).read_text()
-        assert '<button disabled>' in text
-        assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO APPROVED FILE' in text
-        assert 'OK TO SUBMIT: NO' in text
-        assert 'DO NOT SUBMIT' in text
-        assert f'href="downloads/{NAME}" download' in text
-        assert 'not a submission file' in text
-        assert 'OK TO DOWNLOAD &amp; SUBMIT' not in text
-    assert 'external-source-screen.md' in (ROOT/'docs/index.html').read_text()
+    # Session-2 supersession: one promoted CONT candidate, honestly labelled.
+    # The session-1 negative card stays negative and is not overwritten.
+    neg=json.loads((ROOT/'evidence/run-card.json').read_text())
+    assert neg['verdict']=='negative' and neg['authorized_to_download_and_submit'] is False
+    card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    assert card['verdict']=='promote'
+    sh=card['holdout_DTI']['candidate_CONT_shared']
+    assert sh['all']['CONT']['dti'] > sh['all']['F_CONT']['dti'] > card['holdout_DTI']['same_instrument_controls_shared']['d28_fixed']['all']['dti']
+    assert 0 < len(card['submission_note']) <= 140
+    assert card['validator_shared']['validate']['all_checks_passed']
+    assert card['validator_shared']['template_format_report']['ok']
+    tif=ROOT/'docs/downloads'/card['submission_name']
+    assert tif.exists() and sha256(tif)==card['raster_sha256']
+    for v in card['correlation_overlap_vs_registry'].values():
+        assert abs(v['surface_rank_corr_sampled'])<=0.90 and v['dot_overlap_within_3px']<=0.70
+    home=(ROOT/'docs/index.html').read_text()
+    assert 'OK TO DOWNLOAD' in home and 'OK TO SUBMIT: YES' in home
+    assert card['submission_name'] in home and 'Do not submit' in home
+    summary=(ROOT/'docs/executive-summary.html').read_text()
+    assert 'OK TO DOWNLOAD: YES' in summary and card['submission_name'] in summary
 
 
 def test_all_local_website_links_and_html_fragments_resolve():

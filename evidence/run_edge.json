@@ -1,0 +1,52 @@
+{
+  "evaluator": "HOLDOUT-DTI v81.1 pooled alpha=0.2 beta=0.8 300m triangular, 2 draws, visible masked",
+  "edge_planes": [
+    "lidar_b1",
+    "lidar_b3",
+    "lidar_b4",
+    "lidar_b5",
+    "lidar_b6",
+    "lidar_b7",
+    "g_tmi_hg",
+    "g_tc",
+    "g_slope",
+    "g_grav_hg",
+    "g_curv",
+    "g_base_edge"
+  ],
+  "surfaces": {
+    "EDGE": {
+      "auc_vs_full_catalogue": 0.5816102338619141,
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.06703853143309954,
+      "per_draw": [
+        0.06164190580981908,
+        0.07246352443768832
+      ],
+      "ci95_draw_range": [
+        0.06164190580981908,
+        0.07246352443768832
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2
+    },
+    "F_EDGExASB": {
+      "auc_vs_full_catalogue": 0.5940092186786221,
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.07607195682973843,
+      "per_draw": [
+        0.07540914501019164,
+        0.07673889296686444
+      ],
+      "ci95_draw_range": [
+        0.07540914501019164,
+        0.07673889296686444
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2
+    }
+  },
+  "elapsed_s": 56.8
+}

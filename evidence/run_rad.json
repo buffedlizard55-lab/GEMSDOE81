@@ -1,0 +1,214 @@
+{
+  "evaluator": "HOLDOUT-DTI v81.1 pooled alpha=0.2 beta=0.8 300m triangular, whole-component hide-and-recover, 2 draws (seeds 81,82), visible masked pixel-exactly",
+  "label_note": "All performance numbers below are HOLDOUT-DTI unless explicitly ORGANIZER-CONFIRMED (organizer scores exist only for registry rasters, from the user prompt).",
+  "footprint_pixels": 5167373,
+  "label_pixels": 60988,
+  "rad_valid_pixels": 5166085,
+  "n_hidden_per_draw": [
+    12592,
+    12446
+  ],
+  "E1": {
+    "S_ASB": {
+      "auc_vs_full_catalogue": 0.5891518065592141,
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.08312651477439477,
+      "per_draw": [
+        0.08945094605656231,
+        0.07675218725378645
+      ],
+      "ci95_draw_range": [
+        0.07675218725378645,
+        0.08945094605656231
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2,
+      "emitter": "poisson_thin_priority(min_dist=2.8)"
+    },
+    "R_rad": {
+      "auc_vs_full_catalogue": 0.5106183984465401,
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.05420461881133924,
+      "per_draw": [
+        0.05552497078835259,
+        0.05287548281590219
+      ],
+      "ci95_draw_range": [
+        0.05287548281590219,
+        0.05552497078835259
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2,
+      "emitter": "poisson_thin_priority(min_dist=2.8)"
+    },
+    "F_ASBxRAD": {
+      "auc_vs_full_catalogue": 0.5603973888709363,
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.07378305427940411,
+      "per_draw": [
+        0.0761383039305202,
+        0.07141147059563706
+      ],
+      "ci95_draw_range": [
+        0.07141147059563706,
+        0.0761383039305202
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2,
+      "emitter": "poisson_thin_priority(min_dist=2.8)"
+    },
+    "F3_ASBxRADxMAG": {
+      "auc_vs_full_catalogue": 0.55806392654654,
+      "auc_flag": "ok",
+      "holdout_dti_pooled": 0.06889613188058451,
+      "per_draw": [
+        0.06566684409127944,
+        0.07214376791279886
+      ],
+      "ci95_draw_range": [
+        0.06566684409127944,
+        0.07214376791279886
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 2,
+      "emitter": "poisson_thin_priority(min_dist=2.8)"
+    }
+  },
+  "E1_controls_fixed_mask": {
+    "winner_h33-2-b2": {
+      "holdout_dti_pooled": 0.004309322934951101,
+      "per_draw": [
+        0.004728057465491251,
+        0.0038877697434084933
+      ],
+      "instrument_note": "Fixed catalogue-derived mask: hide-and-recover zeroes kernel credit near hidden components it was pruned against; ranks discovery surfaces, not flank-pruning. Live score (user prompt) is a separate evidence class."
+    },
+    "d28_base": {
+      "holdout_dti_pooled": 0.09922256956705666,
+      "per_draw": [
+        0.09862069383733608,
+        0.09982812055442723
+      ],
+      "instrument_note": "Fixed catalogue-derived mask: hide-and-recover zeroes kernel credit near hidden components it was pruned against; ranks discovery surfaces, not flank-pruning. Live score (user prompt) is a separate evidence class."
+    }
+  },
+  "E1_best_fusion": "F_ASBxRAD",
+  "E2": {
+    "F_ASBxRAD_poisson37654_buf2": {
+      "holdout_dti_pooled": 0.0696169860269284,
+      "per_draw": [
+        0.0723609035683667,
+        0.06685232152898078
+      ],
+      "ci95_draw_range": [
+        0.06685232152898078,
+        0.0723609035683667
+      ],
+      "n_hidden_total": 25038,
+      "budget": 37654,
+      "buffer_px": 2,
+      "emitter": "poisson_thin_priority(min_dist=2.8)"
+    },
+    "F_ASBxRAD_poisson44090_buf3": {
+      "holdout_dti_pooled": 0.07291393398442851,
+      "per_draw": [
+        0.07446656443296724,
+        0.07135071503720151
+      ],
+      "ci95_draw_range": [
+        0.07135071503720151,
+        0.07446656443296724
+      ],
+      "n_hidden_total": 25038,
+      "budget": 44090,
+      "buffer_px": 3,
+      "emitter": "poisson_thin_priority(min_dist=2.8)"
+    },
+    "F_ASBxRAD_poisson30000_buf2": {
+      "holdout_dti_pooled": 0.06485596818964363,
+      "per_draw": [
+        0.0673263116691953,
+        0.06236555284833708
+      ],
+      "ci95_draw_range": [
+        0.06236555284833708,
+        0.0673263116691953
+      ],
+      "n_hidden_total": 25038,
+      "budget": 30000,
+      "buffer_px": 2,
+      "emitter": "poisson_thin_priority(min_dist=2.8)"
+    }
+  },
+  "E2_best": "F_ASBxRAD_poisson44090_buf3",
+  "final_config": "F_ASBxRAD_poisson44090_buf2 (E1)",
+  "registry_check": {
+    "winner_h33-2-b2": {
+      "surface_rank_corr_sampled": 0.02222247810601637,
+      "dot_overlap_within_3px": 0.27230664549784533,
+      "lane_violation": false
+    },
+    "d28_base": {
+      "surface_rank_corr_sampled": 0.025593758840321272,
+      "dot_overlap_within_3px": 0.28718530278974824,
+      "lane_violation": false
+    },
+    "prev_shipped_gems81-asb-poisson44090-buf2-20261021T22": {
+      "surface_rank_corr_sampled": 0.08099562632290801,
+      "dot_overlap_within_3px": 0.5802903152642322,
+      "lane_violation": false
+    }
+  },
+  "final": {
+    "file": "gems81-radasb-poisson44090-buf2-20261021T231647Z-0ab9803e-zeros.tif",
+    "submission_note": "GEMSDOE81 RAD-ASB rad-discordance gate poisson44090 buf2 44090 dots zeros",
+    "note_len": 73,
+    "dots": 44090,
+    "buffer_px": 2,
+    "budget": 44090,
+    "surface": "F_ASBxRAD",
+    "validator": {
+      "shape": [
+        3730,
+        3292
+      ],
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dtype": "float32",
+      "positive_pixels": 44090,
+      "min": 0.0,
+      "max": 1.0,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "shape_match": true,
+        "crs_match": true,
+        "transform_match": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "values_in_0_1_everywhere": true,
+        "binary_values": true,
+        "zero_on_catalogue": true,
+        "zero_outside_footprint": true,
+        "all_passed": true
+      },
+      "sha256": "12de56206eae9a793e1e7fab772b4990c4097abd8a53b6884e100dcbb5ddad4b"
+    },
+    "elapsed_s": 88.2
+  },
+  "verdict": "negative"
+}

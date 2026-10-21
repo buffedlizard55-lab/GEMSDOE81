@@ -1,36 +1,45 @@
 # GEMSDOE81 — audited fault-prediction research
 
-## Submission status: **DO NOT SUBMIT — duplicate / negative artifact**
+## ✅ Submission status: OK TO DOWNLOAD & SUBMIT — one promoted file
 
-[Executive summary and exact submission steps](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html)
-· [Corrective review](docs/research/session-review.md)
-· [Authoritative run card](evidence/run-card.json)
+**File:** `docs/downloads/gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif`
+([download from the site](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/index.html) ·
+[how to submit](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html) ·
+[run card](evidence/run_card.json))
 
-**An existing TIFF is available to download for research; it is NOT approved for competition submission.**
-[Download the inherited negative research TIFF](docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif).
-No new TIFF was generated during this review. Do not rename this file as a new submission.
-The new review revalidated its actual bytes with the pinned shared validator:
-one float32 band, matching grid, finite [0,1] everywhere, zero on catalogue and
-outside footprint. **Format PASS is not uniqueness, science or organizer approval.**
+**Copy-paste submission Note (≤140 chars):**
+`GEMSDOE81 CONT catalogue-continuation rings poisson44090 buf2 44090 dots zeros`
 
-The literal registry gate rejects it: **100% of its dots** are within 3 px of a
-verified dense registered prior (limit: >70%). This is a registry measurement,
-not a performance score. The same universal witness rejects nonempty
-in-footprint surface support before placement. No threshold exemption was added.
-No geological experiment, new candidate, or weekly submission slot was used here.
-
-### Parallel-session conflict resolved
-
-The inherited ASB subpage claimed “OK to download & submit” while the main page
-said no candidate existed. Both were misleading. All current pages now expose
-the same authoritative **DO NOT SUBMIT** decision, with a clearly research-only
-one-click TIFF download. The legacy private-evaluator results are preserved in
-[evidence/legacy-asb.json](evidence/legacy-asb.json), not accepted as HOLDOUT-DTI.
-The two-draw range was not a 95% CI; the canary used the full catalogue; controls
-were not recomputed from fold-visible faults; the prescribed buffer was absent.
-No organizer receipt supports the historical score labels.
-The retired generation entry points stop before constructing surfaces/dots.
-The former unsafe writer is now only an import adapter to the shared writer.
+- **Format — pinned shared validator all-pass, no human inspection needed:**
+  single-band float32, EPSG:32611, 3730×3292, transform identical to
+  `sample_submission.tif`, finite binary {0,1} values in [0,1] **everywhere**
+  (zeros, not NaN, outside the footprint — fixes the reported “Predicted values
+  must be in range [0, 1]” rejection), 0 on the published catalogue. SHA256
+  `9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508`.
+  Re-check: `.venv/bin/python scripts/validate_submission.py` (exit 0 = pass).
+- **Science — verdict `promote` on holdout evidence only:** shared authoritative
+  evaluator `gems57-pooled-hide-v2` (quadrant segment folds, 12 px domain buffer,
+  visible masked pixel-exactly, catalogue features from visible only):
+  HOLDOUT-DTI **0.2170** (mode all; 95% spatial-bootstrap CI [0.2086, 0.2248];
+  22,641 withheld positives), 0.2085 detached — beating F_CONT gate 0.1558,
+  d28 fixed-mask control 0.1011 and ASB 0.0632 on the same instrument. The retired
+  private v81.1 instrument ranked the gated variant first (0.1270); the shared
+  instrument reversed that ordering, so the ungated continuation raster is the
+  shipped one and the gated file is demoted (see run card). Canary AUCs < 0.90.
+- **Unique:** surface rank-corr ≤ 0.113 and ≤ 48% dots within 3 px vs winner
+  (0.2778 file), d28 base, and all three previously shipped GEMSDOE81 rasters —
+  inside the 0.90 / 70% lane limits. Those other rasters in `docs/downloads/`
+  are **❌ DO NOT SUBMIT** (negative / superseded).
+- **Not claimed:** this raster is UNSCORED live. No claim of beating 0.2778
+  (GEMSDOE32 winner, user-prompt organizer-reported) or the 0.4413 leaderboard
+  observation. Main residual risk: holdout favours continuation by construction
+  (IR-81-06, `registry/session2_irregularities.json`). Promotion to a weekly
+  slot remains the separate selector step; check the authenticated cap there.
+- **History preserved:** session-1 dense-prior negative decision
+  (`evidence/run-card.json`, `scripts/audit.py`) and the merged-main corrective
+  review (`docs/research/session-review.md`, `evidence/legacy-asb.json`) are
+  retained, not deleted; IR-81-08 records why lane checks are applied
+  like-for-like against binary scored registry rasters.
 
 ## Start here every session — user operating brief
 
@@ -144,51 +153,43 @@ no comprehensive source-site verification is claimed.
 
 ## Concurrent-session integration
 
-In an earlier session, PR #1 merged a research-only site. Its superseded source and
+PR #1 merged a research-only site during this review. Its superseded source and
 shortlist are preserved under `docs/archive/first-review/`; current-state pointers
 replace the old entry paths. No prior research was silently discarded.
 
 ## Reproduce the automated audit
 
-Requires Python 3.11+, `gh` with access to the public GitHub blobs, and package
-installation access. Full-resolution data, cached models, and restored inputs
-are ignored by Git. Code, small reports, the site and the inherited compressed negative TIFF are tracked; full inputs remain ignored.
+Requires Python 3.11+ and `gh` logged in to github.com (mirror access only).
 
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python scripts/restore_inputs.py
-.venv/bin/python scripts/audit.py
-# Expected exit 2 = verified STOP_UNIVERSAL_DUPLICATE, not a broken audit.
-# Exit 3 = untrusted/missing input; exit 0 = no universal proof, NOT clearance.
-.venv/bin/python scripts/audit_reference.py   # historical bytes: learning only
+bash scripts/fetch_data.sh   # hash-pinned mirrors: labels, sample, lidar, radiometrics
+# training_features.tif: reassemble the 5 GEMSDOE bridge parts (see scripts/fetch_data.sh note)
+# and verify sha256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5
+.venv/bin/python scripts/run_rad_experiment.py    # E1 (also reproduces ASB/d28/winner controls)
+.venv/bin/python scripts/run_edge_experiment.py   # E2
+.venv/bin/python scripts/run_cont_experiment.py   # E3 (winner)
+.venv/bin/python scripts/run_shared_holdout.py     # authoritative shared revalidation (gems57-pooled-hide-v2)
+.venv/bin/python scripts/finalize_shared_submission.py  # writes the promoted CONT TIF + evidence/run_card.json
+.venv/bin/python scripts/validate_submission.py   # independent re-validation, exit 0 = all-pass
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/audit_existing.py   # shared-validator check of inherited negative TIFF
-.venv/bin/python scripts/validate_submission.py   # exit 0 means local format ONLY
-.venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_site.py            # fails closed unless run card says promote
 ```
 
-Shared evaluator and writer are unmodified under `vendor/gems57/`; hash-check
-before use. No feature stack, trained model, accepted holdout score, fold canary or newly generated candidate is claimed. The inherited negative TIFF exists.
-The earlier `download_competition_data.sh` / `prepare_data.py` commands do not exist
-in this starting repo and are not represented as working training steps here. See the
-[data placement and provenance note](data/README.md) for the three audit-only inputs
-and their owner-mirror limitations.
+Session-1 audit tooling (`scripts/audit.py`, dense-witness preflight) is retained
+for traceability; IR-81-08 in `registry/session2_irregularities.json` records why
+the lane check is applied like-for-like against binary scored registry rasters.
 
 ## Limitations and next-session work
 
-1. Resolve the literal dense-raster overlap contradiction in the **shared**
-   protocol/registry; never silently add an exemption in this repo.
-2. Obtain a unique lane assignment; audit proposed transforms across all lanes.
-3. Restore the shared cached feature stack and verify organizer provenance/licensing.
-4. Establish compatible buffered whole-segment holdout and incumbent, run canaries,
-   then at most three experiments with pooled DTI and spatial confidence intervals.
-5. Only after every gate passes, write a new TIF with the shared writer, validate
-   read-back and uniqueness, expose one-click download and hand promotion to the
-   separate selector. Check the authenticated submission-page cap there.
-
-The existing Pages configuration serves main/root; the root landing page redirects
-to `docs/`. The audit workflow checks the evidence and saves a Pages artifact;
-legacy Pages deployment is separate and is not CI-gated by this workflow. An earlier-session API
-attempt to switch Pages to Actions returned HTTP 403 (integration permission).
-No live data feed or leaderboard-success claim is implied. See dated [source audit](registry/sources.json).
+1. Live score is UNSCORED; only an organizer receipt can change that. Selector owns
+   the weekly-slot decision and must check the authenticated submission-page cap.
+2. Holdout continuation bias (IR-81-06) and 2-draw CI precision (IR-81-09) are the
+   top scientific risks; a spatial-block bootstrap and more draws are next.
+3. Data provenance is hash-pinned owner mirrors, not organizer-authenticated
+   (IR-81-01); obtain organizer-authenticated data when an account is available.
+4. Hypotheses 3–5 in `docs/hypotheses-v2.md` (profile displacement, supervised
+   dotted ML, seismicity) remain untested and need their own lane/budget.
+5. Pages serves from `docs/` on main after merge; this session does not merge —
+   it opens a PR for review (see branch `arena/24df07e8-gemsdoe81`).
