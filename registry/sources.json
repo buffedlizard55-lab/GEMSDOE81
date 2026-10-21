@@ -1,0 +1,89 @@
+{
+  "observed_utc_date": "2026-10-21",
+  "sources": [
+    {
+      "name": "Organizer problem and metric",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "status": "Retrieved both chunks with page-fetch tool this session",
+      "supports": "Task, round distinction, input layers, exact max-cover metric, format requirements"
+    },
+    {
+      "name": "Public leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "status": "Retrieved leading rows with page-fetch tool this session",
+      "supports": "OFFICIAL-LEADERBOARD-OBSERVATION: xiaofanhu 0.4413; not an artifact submission receipt"
+    },
+    {
+      "name": "Official rules PDF",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "status": "First chunk retrieved; full PDF not audited",
+      "supports": "Identity of official rules only; no authenticated remaining weekly cap claimed"
+    },
+    {
+      "name": "Official reference code",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "status": "Linked by retrieved organizer problem page; not executed here",
+      "supports": "Official starting-point location"
+    },
+    {
+      "name": "USGS GeoDAWN",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "status": "Linked by retrieved organizer page; availability of raw data not tested",
+      "supports": "Provenance lead, not a new-data viability claim"
+    },
+    {
+      "name": "INGENIOUS",
+      "url": "https://gbcge.org/current-projects/ingenious/",
+      "status": "Linked by retrieved organizer page; not independently fetched",
+      "supports": "Provenance lead"
+    },
+    {
+      "name": "Authenticated data page",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "status": "No authenticated access used or tested this session",
+      "supports": "Future official provenance verification"
+    },
+    {
+      "name": "DOE GDR INGENIOUS submission 1391",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "status": "Landing page retrieved 2026-10-21; listing reports CC BY 4.0 and temperature, wells/springs, chemistry, and geophysics; archive bytes and competition-AOI coverage not checked",
+      "supports": "Potential future ancillary geothermal covariates only; not fault labels, model evidence, or confirmed AOI availability"
+    },
+    {
+      "name": "USGS ASTER alteration OFR 2013-1139",
+      "url": "https://pubs.usgs.gov/publication/ofr20131139",
+      "status": "Official publication page retrieved 2026-10-21; MRData spatial page also reviewed; exact AOI overlap and raster bytes not checked",
+      "supports": "Source lead for mapped alteration contrasts; not a validated fault predictor"
+    },
+    {
+      "name": "USGS MRData ASTER alteration catalogue",
+      "url": "https://mrdata.usgs.gov/surficial-mineralogy/ofr-2013-1139/",
+      "status": "Official spatial catalogue page retrieved 2026-10-21; download availability reviewed at page level only; AOI overlap and bytes not checked",
+      "supports": "Potential access route for OFR 2013-1139 spatial layers"
+    },
+    {
+      "name": "USGS Landsat Collection 2 Surface Temperature",
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-temperature",
+      "status": "Official product page retrieved 2026-10-21; no-cost product route reviewed; no AOI scene inventory or data bytes checked",
+      "supports": "Potential multi-date thermal residual source; no target-area coverage claimed"
+    },
+    {
+      "name": "USGS Landsat Collection 2 Surface Reflectance",
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-reflectance",
+      "status": "Official product page retrieved 2026-10-21; no-cost product route reviewed; no AOI scene inventory or data bytes checked",
+      "supports": "Potential reflectance/emissivity covariate for Landsat thermal analysis; no target-area coverage claimed"
+    },
+    {
+      "name": "Alaska Satellite Facility Sentinel-1 archive",
+      "url": "https://asf.alaska.edu/data-sets/sar-data-sets/sentinel-1/sentinel-1-data-and-imagery/",
+      "status": "Official access page retrieved 2026-10-21; free archive requires Earthdata Login and EULA; no AOI query or scene download performed",
+      "supports": "Potential InSAR source only; account/access and target-area scene coverage remain unverified"
+    },
+    {
+      "name": "USGS 3D Elevation Program (3DEP)",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "status": "Official source nominated from the owner-supplied manifest; page, tile catalog, AOI coverage, and source bytes were not independently queried this session",
+      "supports": "Potential DEM source for the catchment hypothesis only; the manifest's cited derived proxy covers 706 of 716 listed tiles and is not a complete verified input"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }} — GEMSDOE81</title>
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ '/' | relative_url }}">GEMS<span>DOE81</span></a>
+    <nav aria-label="Main navigation">
+      <a href="{{ '/' | relative_url }}">Executive summary</a>
+      <a href="{{ '/hypotheses.html' | relative_url }}">Hypotheses</a>
+      <a href="{{ '/evidence-and-blockers.html' | relative_url }}">Evidence &amp; blockers</a>
+      <a href="{{ '/submit.html' | relative_url }}">How to submit</a>
+    </nav>
+  </header>
+  <main class="narrow md-content">
+    <p class="eyebrow">GEMSDOE81 · Research record</p>
+    <h1>{{ page.title }}</h1>
+    {{ content }}
+  </main>
+  <footer>
+    <span>GEMSDOE81 · evidence before emission</span>
+    <span><a href="{{ '/' | relative_url }}">Executive summary</a> · <a href="{{ '/submit.html' | relative_url }}">Submission guide</a></span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+title: GEMSDOE81
+baseurl: /GEMSDOE81
+markdown: kramdown
+exclude:
+  - README.md
+  - _layouts
