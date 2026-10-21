@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Submission readiness and step-by-step DrivenData GeoTIFF submission instructions for GEMSDOE81.">
+  <title>How to submit — GEMSDOE81</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">GEMS<span>DOE81</span></a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Executive summary</a>
+      <a href="hypotheses.html">Hypotheses</a>
+      <a href="evidence-and-blockers.html">Evidence &amp; blockers</a>
+      <a href="submit.html" aria-current="page">How to submit</a>
+    </nav>
+  </header>
+  <main class="narrow">
+    <p class="eyebrow">Executive summary · submission instructions</p>
+    <h1>How to submit a GEMS prediction</h1>
+    <section class="status-card compact" aria-labelledby="readiness">
+      <div class="status-mark" aria-hidden="true">!</div>
+      <div>
+        <p class="eyebrow">Current state</p>
+        <h2 id="readiness">NOT READY — no download file</h2>
+        <p>There is no GEMSDOE81 TIFF to download. A file is publishable only after the local candidate has passed holdout, duplicate, and byte-level format checks. Do not submit an older project's file as a replacement.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Once this page marks a candidate READY</h2>
+      <ol class="steps">
+        <li><strong>Download the clearly labeled candidate GeoTIFF</strong> from the Executive summary page. Confirm the displayed candidate name, short note, SHA-256, validation receipt, and status before using it.</li>
+        <li>Open the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DOE GEMS competition</a> and sign in to the account/team that is authorized to submit.</li>
+        <li>Open the competition submission form and choose the downloaded single-band <code>.tif</code> file in “File to submit.” The official format is one GeoTIFF, or a ZIP containing one GeoTIFF; use the offered TIFF directly.</li>
+        <li>Enter the published unique submission name/comment in the optional Note field. The project must keep this note at or under 140 characters. Do not use a projected or holdout result as a claimed score.</li>
+        <li>Review the filename and note, then submit in DrivenData. Save the submission-page receipt. Only that receipt can establish an organizer-confirmed score for that submission.</li>
+      </ol>
+    </section>
+
+    <section class="panel caution">
+      <h2>Why there is no download button yet</h2>
+      <p>The data page is login-gated, and this checkout currently has no competition data, shared evaluator/writer, or registry rasters. Without the official grid metadata and a validated holdout result, any TIFF made here could be format-invalid, scientifically untested, or a duplicate. A blank/zero raster or an older team's raster would not satisfy the project's discovery and uniqueness goals.</p>
+      <p>Official submission format: projected CRS EPSG:32611, 100 m resolution, same bounds/grid as training, a single float32 layer, confidence values between 0 and 1, and null/NaN outside the data bounds. Always verify against the actual official sample/training raster rather than copying dimensions from another project page.</p>
+      <a class="text-link" href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Check official format and scoring description ↗</a>
+    </section>
+  </main>
+  <footer>
+    <span>GEMSDOE81 · evidence before emission</span>
+    <span><a href="index.html">Executive summary</a> · <a href="evidence-and-blockers.html">Evidence register</a></span>
+  </footer>
+</body>
+</html>
