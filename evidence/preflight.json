@@ -1,0 +1,67 @@
+{
+  "schema": "gems81-preflight-v1",
+  "evidence_class": "REGISTRY-MEASUREMENT, not a performance score",
+  "decision": "STOP_UNIVERSAL_DUPLICATE",
+  "scope": "One verified witness suffices to reject; this is not a complete registry scan.",
+  "input_sha256": {
+    "sample": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "catalogue": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "witness": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be"
+  },
+  "witness_source": {
+    "repo": "buffedlizard55-lab/17GEMSDOE",
+    "ref": "6fc71d19d49dca4960d5434bd81b6dd06fcc030a",
+    "path": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+    "sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be"
+  },
+  "template_commit": "b99591eede63c6d45c8a896255b8cd34824fa00b",
+  "template_hashes_verified": true,
+  "grid": {
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "footprint_pixels": 5167373,
+  "catalogue_pixels": 60988,
+  "proof": {
+    "allowed_pixels": 5106385,
+    "witness_positive_pixels": 5167373,
+    "exact_positive_allowed_pixels": 5106385,
+    "covered_allowed_pixels": 5106385,
+    "uncovered_allowed_pixels": 0,
+    "universal_overlap_blocker": true,
+    "forward_overlap_for_every_nonempty_candidate": 1.0,
+    "stop_threshold_strictly_greater_than": 0.7
+  },
+  "including_catalogue_proof": {
+    "allowed_pixels": 5167373,
+    "witness_positive_pixels": 5167373,
+    "exact_positive_allowed_pixels": 5167373,
+    "covered_allowed_pixels": 5167373,
+    "uncovered_allowed_pixels": 0,
+    "universal_overlap_blocker": true,
+    "forward_overlap_for_every_nonempty_candidate": 1.0,
+    "stop_threshold_strictly_greater_than": 0.7
+  },
+  "argument": "For A contained in the 3px halo W of a prior, every nonempty C subset A has |C intersect W|/|C|=1 > 0.70. This rejects positive surface support before placement and every possible final dot set.",
+  "rank_correlation": null,
+  "rank_correlation_reason": "No candidate exists; overlap alone is sufficient to stop.",
+  "candidate_raster_generated": false,
+  "experiments_run": 0,
+  "weekly_slots_used": 0,
+  "authorized_to_submit": false,
+  "verdict": "negative"
+}

@@ -1,7 +1,9 @@
-# Data placement
+# Data placement and provenance
 
-No competition data are present in this checkout. Download the authorized competition files only through the official [DrivenData data page](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) after signing in and enrolling. Do not bypass authentication, commit credentials, or place private data in the repository.
+This checkout does **not** contain an organizer-authenticated training stack or the full cached feature set. The competition data page is login-gated; use it only through an authorized account and do not bypass authentication, commit credentials, or place private data in Git.
 
-The official problem page names `training_features.tif` and the competition data page provides labels and the sample submission. This repository currently has no download/prepare/train/inference scripts, no template pin, and no cached feature stack; data placement alone will **not** make this checkout's training pipeline ready. Use the shared template and its documented data manifest/evaluator/writer in a future authorized lane.
+For the documented duplicate preflight only, `scripts/restore_inputs.py` restores three SHA-pinned audit inputs from owner-supplied GitHub mirrors: the sample grid, the existing-fault catalogue, and one dense registry witness. They are placed under ignored `data/bridge/` and `.cache/registry/` paths. Matching hashes establish mirror integrity—not organizer origin, licensing, permission to train, or competition acceptance. The restored witness is sufficient for the recorded negative decision; it is not a full feature stack.
 
-Recommended local-only locations for eventual raw/processed data are `data/raw/` and `data/processed/`; these paths are ignored by Git. Before using any additional source, record its official URL, licence, geographic coverage, file hash, and sponsor-sharing permission.
+The shared `gems57` evaluator, writer, and related code are pinned by `registry/template_pin.json` and live under `vendor/gems57/`. Do not create a private fork or interpret their presence as authorization to generate a candidate. The earlier `scripts/download_competition_data.sh` and `scripts/prepare_data.py` commands do not exist in this checkout; data placement alone does not make a training pipeline ready.
+
+Before any future use of external data, verify the official source, license, geographic coverage, bytes and hash, temporal coverage, and permission to use or redistribute it. Keep raw and processed data out of Git under ignored paths.

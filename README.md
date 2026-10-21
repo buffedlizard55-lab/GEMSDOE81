@@ -1,65 +1,172 @@
-# GEMSDOE81 — evidence-gated research for the DOE GEMS Prize
+# GEMSDOE81 — audited fault-prediction research
 
-> **Current state (2026-10-21): NO submission TIFF exists in this repository.**
-> **OK to download? NO — there is no candidate file.** **OK to submit? NO.**
-> Do not submit this repository's sample, an older GEMSDOE artifact, or an unvalidated substitute.
+## Submission status: **DO NOT SUBMIT — no authorized new TIF**
 
-This repository is an auditable workspace for studying previously unmapped geologic faults in the DOE GEMS Prize region. A submission will only be offered after the assigned method is identified, the shared-template workflow and data are available, a spatially blocked hide-and-recover evaluation beats the frozen local baseline, the leakage and registry-uniqueness gates pass, and an independent GeoTIFF read-back validates the competition contract. No weekly submission slot is selected here.
+[Executive summary and submission instructions](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html)
+· [Research review](docs/research/review.md) · [Machine-readable run card](evidence/run-card.json)
 
-## Start here every session
+**The requested unique submission was NOT generated.** The literal registry rule
+rejects every nonempty in-footprint candidate: a verified registered prior is
+positive throughout the footprint. Overlap would be 100%, exceeding the 70%
+stop limit, regardless of geological method. We obey the stop rule rather than
+copy an old submission, fabricate a success, or quietly exempt dense priors.
+See [the independently recomputed proof](evidence/preflight.json).
+A format-valid TIFF is not necessarily unique, scientifically promoted, accepted
+by DrivenData, or a good predictor. No competition submission slot was used.
 
-Read this README and then [`PROMPT.md`](PROMPT.md), [`docs/irregularities.md`](docs/irregularities.md), and the current [`evidence/run_card.json`](evidence/run_card.json) before changing the project. They preserve the standing brief, protocol, blockers, and current verdict. The project site is [`index.html`](index.html); the exact submission walkthrough is [`executive-summary.html`](executive-summary.html).
+## Start here every session — user operating brief
 
-## Standing project brief
+This is an **operational transcription with duplicate paragraphs consolidated**,
+not a claim to preserve the chat byte-for-byte. Read this section and the research
+review at the beginning of every project session. `AGENTS.md` enforces that entry
+point. The original request arrived on 2026-10-21.
 
-- **Goal:** build a scientifically defensible system for predicting faults missing from the public USGS/INGENIOUS catalogue, with a straightforward, clearly gated GeoTIFF download path when — and only when — a candidate is promoted.
-- **Maximize P(Win):** spend effort on evidence that can change the decision; do not spend a competition slot on an unvalidated idea.
-- **Own the Outcome:** report negative results and defects; do not hide an error, overstate a source, or call a projection a score.
-- **Research:** develop 3–5 genuinely distinct geological hypotheses, name the layers and physical signature, explain why a hidden fault could produce that signature, identify a plausible non-fault mimic, and check any external source and its access/licence before treating it as usable.
-- **Reuse, do not rebuild:** use the shared template's cached feature stack, `evaluate_holdout.py`, and `submission_writer.py`. Withhold whole fault segments plus a buffer; derive catalogue features only from visible faults; mask visible faults pixel-exactly; score pooled DTI with α=0.2, β=0.8, and the 300 m triangular kernel. Fix shared-tool defects in the template, not in a private fork.
-- **Gate every candidate:** run each feature alone as a leakage canary (AUC > 0.90 is leakage until proven otherwise); check rank correlation and 3-pixel dot overlap against every registry raster before placement and again on final dots; stop on a duplicate. Report HOLDOUT-DTI with evaluator version, withheld-positive count, and 95% CI, or identify an organizer score only from a submission-page receipt. Projections are not scores.
-- **Run card:** include hypothesis, mechanism, named non-fault mimic, holdout DTI and CI, registry correlation/overlap, raster SHA-256, validator output, submission name and ≤140-character note, and `promote`/`negative` verdict. Budget: at most three experiments or two hours. Promotion is a separate selector decision.
-- **Submission format:** one-band float32 GeoTIFF on the competition grid (EPSG:32611, 100 m, matching CRS, bounds, shape, and geotransform), probabilities/confidence in [0,1], and null/NaN outside the study bounds, as specified by the official problem page.
+### Highest urgency
 
-## Verified status and important caveats
+> MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION. DO NOT COPY A PREVIOUS
+> SUBMISSION UNLESS IT'S FOR LEARNING AND EDUCATION. BUT WE MUST GENERATE A UNIQUE
+> TIF SUBMISSION. IT MUST BE OBVIOUS WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE
+> GENERATED TIF SUBMISSION.
 
-- At session start, the local checkout contained only this README. This review added documentation/site files and `data/README.md`, but no competition data, cached stack, shared-template pin, registry, evaluator, writer, scripts, tests, or generated TIF. Therefore no holdout, leakage test, correlation/overlap check, or TIFF validation can be run here. Details: [`docs/review.md`](docs/review.md).
-- The method paragraph that should assign this parallel run's lane is absent from the supplied brief. Under the parallel-run protocol, a method cannot be chosen or implemented speculatively. This is a hard stop, not permission to change lanes.
-- The user-provided H33 value **0.2778** is not accompanied here by an organizer submission-page receipt. The original [GEMSDOE32 page](https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html) explicitly described its 0.2747 figure as a model projection and stated that no organizer score existed for its artifacts at that time. See [`docs/research/why-h33-0.2778.md`](docs/research/why-h33-0.2778.md).
-- The supplied 0.3195 leaderboard figure is historical. The official public leaderboard page was read on 2026-10-21 and displayed xiaofanhu at 0.4413 in first place. This is a dated public-board observation, not a receipt for any file in this project and not private-test performance. Always follow the live [official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) rather than a stale copied number.
-- The competition error “Predicted values must be in range [0, 1]” does not identify its cause by itself. No rejected TIFF is present here, so this repository cannot claim a fix or diagnose that file.
+- Review the entire repo and prior-session next steps first. Build an autonomous,
+  auditable train → inference → validate → downloadable single-band GeoTIFF workflow
+  for DOE GEMS competition 306. Aim for top leaderboard performance without claiming
+  an unmeasured score. Put submission eligibility and the download at the top of
+  the site; create a clean GitHub Pages site and executive-summary subpage with
+  exact submission instructions. No manual inspector should be needed for local
+  validation. Local checks cannot replace organizer acceptance or final expert
+  scientific review.
+- **Lane:** stay in the single assigned method paragraph. No identifiable lane
+  paragraph was supplied here; do not invent permission to reopen a prior lane.
+  Rank correlation >0.90 against any registry raster OR >70% of candidate dots
+  within 3 px of any prior means duplicate: log and stop. Check the surface before
+  placement AND final dots. Do not silently weaken this rule.
+- **Reuse:** use shared template cached features, `evaluate_holdout.py`, and
+  `submission_writer.py`. Hide-and-recover: withhold whole fault segments with a
+  buffer; derive catalogue features from visible faults only; mask visible faults
+  pixel-exactly; score pooled DTI, alpha 0.2, beta 0.8, 300 m triangular kernel.
+  Fix shared-tool defects once upstream and report, never keep a private fork.
+- **Evidence:** label performance as HOLDOUT-DTI (evaluator version, withheld
+  positives, 95% CI) or ORGANIZER-CONFIRMED (submission-page receipt). A projection
+  is never a score. User-reported historical values stay explicitly unverified;
+  measurement counts, AUC and registry overlaps are not performance scores.
+- **Leakage canary:** test every feature alone before trusting results; AUC above
+  0.90 means leakage until proven otherwise.
+- **Budget:** stop after three experiments or two hours. Promotion to a real slot
+  is a separate selector step and must respect the submission-page weekly cap.
+  Do not select or upload submissions as part of this session.
+- **Run card:** end with one JSON card: hypothesis, mechanism, named non-fault
+  mimic, holdout DTI + CI, registry correlation/overlap, raster SHA256, validator
+  checks (finite inside footprint, [0,1], matching CRS/shape/transform), submission
+  name and <=140-character note, verdict promote/negative. Negative results count
+  as deliverables; absent results must be null, never invented.
+- Before implementing, propose and rank 3–5 distinct geological hypotheses with
+  exact layers, transform/physical signature, missing-fault rationale, difference
+  from existing code, expected qualitative improvement and cost. Validate the best
+  on a spatially blocked hide-and-recover set against the same-fold incumbent
+  before spending a slot. If new external data is needed, name the free official
+  source and verify obtainability before treating the idea as viable.
+- Study GEMSDOE32 H33-2-B2 and its user-reported 0.2778, not merely copy or rename
+  it. Investigate why sparse/pruned outputs may outperform dense ones. The user-provided
+  0.3195 is USER-REPORTED historical context, not ORGANIZER-CONFIRMED for this project;
+  the 0.4413 value is an OFFICIAL-LEADERBOARD-OBSERVATION from a dated public-board
+  snapshot, not this project's result. Review family results as evidence, not guarantees.
+- GeoTIFF: one float32 band, values [0,1], matching template CRS, shape and
+  geotransform. Investigate reported “Predicted values must be in range [0, 1]”.
+  No silent clipping of model failures. Give every real artifact a unique name,
+  SHA256 and a short distinguishing note. ZIP, if offered, contains one TIFF only.
+- Research geothermal resources scientifically but distinguish fault prediction
+  from geothermal vent discovery. Store knowledge and an auditable source table
+  with official links, dates and limitations. Do not claim every linked source
+  was read or every site audited. No hallucinations or invented verification.
+- Work autonomously without asking for credentials or manual inputs. Use official
+  free public sources; report auth, network, data, license and compute limits.
+  The supplied assertion that only data placement blocks a GPU pipeline must be
+  verified against actual repo contents, not assumed true.
+- Three passes: implement and verify; review bugs/edge cases/assumptions and fix;
+  re-check against original requirements and improve accuracy/reliability.
+- Create a pull request and merge it to main after verification; keep all session
+  work on the assigned Arena branch. Report incomplete work for the next session.
 
-## What is ready now
+### Core values provided by the user
 
-1. [`index.html`](index.html) presents the download/submit status before any research detail.
-2. [`executive-summary.html`](executive-summary.html) explains how to submit a *promoted* file and how to diagnose format rejection without pretending a submission is ready.
-3. [`docs/research/why-h33-0.2778.md`](docs/research/why-h33-0.2778.md) separates metric mechanics, artifact provenance, and unverified score attribution.
-4. [`docs/research/hypotheses.md`](docs/research/hypotheses.md) records a ranked, explicitly provisional hypothesis shortlist and official source availability checks.
-5. [`docs/sources.md`](docs/sources.md) links official competition, DOE, USGS, NASA/ASF, and reference-solution sources.
-6. [`evidence/run_card.json`](evidence/run_card.json) records why this session is negative/blocked and why there is no submission artifact.
+**Maximize P(Win):** “Maximize the Probability of Winning”: weigh tradeoffs, assess
+risk, choose the path that maximizes the probability of success; set aside emotions
+and make tough decisions.
 
-## Official starting points
+**Own the Outcome:** own results end to end, act on problems when able, treat
+failure/success as signals, stay accountable to the final outcome. Here that means
+publishing a rigorous negative rather than claiming a safe submission that fails
+the explicit protocol.
 
-- [Competition problem description and metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
-- [Official rules (NLR/DOE PDF)](https://docs.nlr.gov/docs/fy26osti/96647.pdf)
-- [Competition data page (login required)](https://www.drivendata.org/competitions/306/competition-doe-gems/data/)
-- [Official public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/)
-- [DrivenData reference solution](https://github.com/drivendataorg/gems-prize-reference-solution)
-- [USGS GeoDAWN data release](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and)
-- [DOE Geothermal Data Repository: INGENIOUS regional dataset](https://gdr.openei.org/submissions/1391)
+### User-provided research and data starting points
 
-## Local preview
+- [Organizer overview](https://www.drivendata.org/competitions/306/competition-doe-gems/)
+- [Problem and format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
+- [About/resources](https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/)
+- [Data](https://www.drivendata.org/competitions/306/competition-doe-gems/data/)
+- [Leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/)
+- [Official reference solution](https://github.com/drivendataorg/gems-prize-reference-solution)
+- [Official rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf)
+- [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and)
+- [INGENIOUS](https://gbcge.org/current-projects/ingenious/)
+- [DOE GDR submission 1391](https://gdr.openei.org/submissions/1391)
+- [EPSG 32611](https://epsg.io/32611) · [Tversky background](https://en.wikipedia.org/wiki/Tversky_index)
+- User Dropbox links (not accessed/authenticated this session):
+  [Rules](https://www.dropbox.com/scl/fi/aemhtutjgcp6tr3tint94/GEMS_96647.pdf?rlkey=rek210cj2smnmzb8n0sla1vmd&dl=0),
+  [example](https://www.dropbox.com/scl/fi/6rgvnuady818ol8yqgis4/example_submission.tif?rlkey=kbykilvau066xuogoosbf4cq8&dl=0),
+  [faults](https://www.dropbox.com/scl/fi/t7fyt03qdh9egyme0itwo/existing_faults.tif?rlkey=yiao96uluqdkipf0h5vju71jf&dl=0),
+  [features](https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif?rlkey=je8d8fepqfbst9lnwsq9rkplu&dl=0),
+  [DEM links](https://www.dropbox.com/scl/fi/ig0mban712ns1atphgphe/Digital-elevation-model-links-JSON.pdf?rlkey=zm77f1vbtt2if8hlruymptnu3&dl=0).
 
-The site is plain HTML/CSS with no build step. From the repository root, validate its local links and fail-closed release card with:
+The family results supplied in the prompt are retained as **user reports**, not
+new verified scores, in [the imported family ledger](registry/user-reported-family-results.csv).
+Its provenance is the reviewed GEMSDOE77 ledger plus the original request;
+no comprehensive source-site verification is claimed.
 
-```bash
-python3 scripts/check_site.py
+## Concurrent-session integration
+
+PR #1 merged a research-only site during this review. Its superseded source and
+shortlist are preserved under `docs/archive/first-review/`; current-state pointers
+replace the old entry paths. No prior research was silently discarded.
+
+## Reproduce the automated audit
+
+Requires Python 3.11+, `gh` with access to the public GitHub blobs, and package
+installation access. Full-resolution data, cached models, and restored inputs
+are ignored by Git. Only small JSON reports and code are tracked.
+
+```sh
+python -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/python scripts/restore_inputs.py
+.venv/bin/python scripts/audit.py
+# Expected exit 2 = verified STOP_UNIVERSAL_DUPLICATE, not a broken audit.
+# Exit 3 = untrusted/missing input; exit 0 = no universal proof, NOT clearance.
+.venv/bin/python scripts/audit_reference.py   # historical bytes: learning only
+.venv/bin/python -m pytest -q
+.venv/bin/python scripts/build_site.py
 ```
 
-Preview it with:
+Shared evaluator and writer are unmodified under `vendor/gems57/`; hash-check
+before use. No feature stack, model, holdout score, AUC or new candidate is claimed.
+The earlier `download_competition_data.sh` / `prepare_data.py` commands do not exist
+in this starting repo and are not represented as working training steps here.
 
-```bash
-python3 -m http.server 8000 --bind 0.0.0.0
-```
+## Limitations and next-session work
 
-No competition data, public leaderboard scraping, or submission upload is performed by the site.
+1. Resolve the literal dense-raster overlap contradiction in the **shared**
+   protocol/registry; never silently add an exemption in this repo.
+2. Obtain a unique lane assignment; audit proposed transforms across all lanes.
+3. Restore the shared cached feature stack and verify organizer provenance/licensing.
+4. Establish compatible buffered whole-segment holdout and incumbent, run canaries,
+   then at most three experiments with pooled DTI and spatial confidence intervals.
+5. Only after every gate passes, write a new TIF with the shared writer, validate
+   read-back and uniqueness, expose one-click download and hand promotion to the
+   separate selector. Check the authenticated submission-page cap there.
+
+The existing Pages configuration serves main/root; the root landing page redirects
+to `docs/`. The audit workflow checks the evidence and saves a Pages artifact;
+legacy Pages deployment is separate and is not CI-gated by this workflow. An API
+attempt to switch Pages to Actions returned HTTP 403 (integration permission).
+No live data feed or leaderboard-success claim is implied. See dated [source audit](registry/sources.json).

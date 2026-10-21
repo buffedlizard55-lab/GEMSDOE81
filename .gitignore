@@ -1,7 +1,15 @@
-# Keep authorized source datasets and derived caches out of Git.
-/data/raw/
-/data/processed/
-/data/cache/
-/.cache/
+.venv/
+.cache/
 __pycache__/
-*.py[cod]
+.pytest_cache/
+data/bridge/
+data/raw/
+data/processed/
+data/external/
+data/official/
+data/scored/
+data/*.tif
+data/*.tiff
+data/*.zip
+data/*.npz
+*.partial

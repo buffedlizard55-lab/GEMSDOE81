@@ -1,0 +1,38 @@
+name: Audit evidence (Pages uses existing legacy main/root deployment)
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python scripts/restore_inputs.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Verify the documented negative decision
+        shell: bash
+        run: |
+          set +e
+          python scripts/audit.py
+          code=$?
+          set -e
+          test "$code" -eq 2
+      - run: python scripts/audit_reference.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: python scripts/build_site.py
+      - run: python -m pytest -q
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: docs

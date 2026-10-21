@@ -1,0 +1,46 @@
+{
+  "hypothesis": "Protocol preflight: no nonempty candidate can satisfy the literal registry overlap rule.",
+  "mechanism": "A hash-verified registered prior is positive across the complete footprint; every candidate dot lies in its 3px halo.",
+  "named_non_fault_mimic": "Dense background probability support (not a geological fault or new discovery).",
+  "lane": "No assigned method paragraph; no geological lane opened.",
+  "holdout": {
+    "evidence_class": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "status": "NOT RUN: stopped before candidate construction"
+  },
+  "leakage_canary": {
+    "auc": null,
+    "status": "NOT RUN: no features tested"
+  },
+  "registry": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "rank_correlation": null,
+    "candidate_overlap": null,
+    "universal_overlap_for_every_nonempty_in_footprint_dot_set": 1.0,
+    "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+    "scope": "One sufficient rejection witness; not a complete scan. Applies before placement and to all possible final dots."
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "status": "NOT RUN: no candidate TIF exists",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null,
+    "audit_inputs_grid_match": true
+  },
+  "submission_name": null,
+  "note": "NEGATIVE: literal registry overlap rule rejects every nonempty candidate. No TIF generated; no competition slot used.",
+  "verdict": "negative",
+  "decision": "STOP_UNIVERSAL_DUPLICATE",
+  "authorized_to_download_and_submit": false,
+  "experiments_run": 0,
+  "weekly_slots_used": 0,
+  "incomplete_requirements": [
+    "Unique submission TIF not generated because binding stop rule fires.",
+    "New geological candidate not validated.",
+    "No claim of higher leaderboard score."
+  ]
+}
