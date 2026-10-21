@@ -1,0 +1,36 @@
+{
+  "status": "SUPERSEDED_UNACCEPTED_VALIDATION",
+  "source_commit": "a53c822d3c41bd94440b375ad14c529d7d1d15cb",
+  "warning": "Prior-session reported values only. Not rerun, not compliant HOLDOUT-DTI, not organizer-confirmed, not promotion evidence.",
+  "reported_evaluator": "private gems81 v81.1 (retired)",
+  "reported_candidate_value": 0.08312651477439477,
+  "reported_control_value": 0.09922256956705666,
+  "reported_positive_draw_occurrences": 25038,
+  "reported_per_draw_values": [
+    0.08945094605656231,
+    0.07675218725378645
+  ],
+  "ci95": null,
+  "reported_draw_range_not_a_ci": [
+    0.07675218725378645,
+    0.08945094605656231
+  ],
+  "reported_canary_auc_full_catalogue": {
+    "A_pair_scarp": 0.5724,
+    "B_basement_step": 0.5468,
+    "lapneg_only": 0.5714,
+    "depthbase_grad_only": 0.5354,
+    "S_combined": 0.5892
+  },
+  "defects": [
+    "Two-draw min/max is not a 95% CI.",
+    "Private evaluator and whole-component random draws are not the prescribed buffered spatial-block instrument.",
+    "Canary AUC uses full catalogue, not withheld positives; raw lappos and conductivity-gradient canaries missing.",
+    "Frozen historical control pruned using full catalogue is invalid for fair hide-and-recover comparison.",
+    "Registry scan checked only two rasters after placement, omitted dense rejection witness and final-dot rank test.",
+    "No submission-page receipt supports ORGANIZER-CONFIRMED historical claims.",
+    "Writer coerced arbitrary float values to booleans and masked output, concealing invalid model values."
+  ],
+  "authoritative_card": "run-card.json",
+  "authorized_to_submit": false
+}

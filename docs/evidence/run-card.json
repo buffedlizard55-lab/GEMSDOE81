@@ -1,46 +1,157 @@
 {
-  "hypothesis": "Protocol preflight: no nonempty candidate can satisfy the literal registry overlap rule.",
-  "mechanism": "A hash-verified registered prior is positive across the complete footprint; every candidate dot lies in its 3px halo.",
-  "named_non_fault_mimic": "Dense background probability support (not a geological fault or new discovery).",
-  "lane": "No assigned method paragraph; no geological lane opened.",
+  "schema": "gems81-reviewed-negative-v2",
+  "hypothesis": "Inherited ASB: antithetic scarp-pair ranks combined with basement/conductivity gradient ranks.",
+  "mechanism": "Prior-session rank-surface Poisson thinning; this review only rechecks existing raster bytes and gates.",
+  "named_non_fault_mimic": "Paired terrace risers or paleo-shorelines over sedimentary pinch-outs.",
+  "lane": "No identifiable assigned method paragraph; no new geological lane opened.",
   "holdout": {
     "evidence_class": "HOLDOUT-DTI",
     "value": null,
     "ci95": null,
     "withheld_positives": null,
     "evaluator_version": "gems57-pooled-hide-v2",
-    "status": "NOT RUN: stopped before candidate construction"
+    "status": "NOT RUN: binding uniqueness stop; legacy private-evaluator results are not accepted validation.",
+    "legacy_record": "evidence/legacy-asb.json"
   },
   "leakage_canary": {
     "auc": null,
-    "status": "NOT RUN: no features tested"
+    "status": "NOT RUN: legacy AUC used full catalogue, not fold-withheld positives."
   },
   "registry": {
-    "evidence_class": "REGISTRY-MEASUREMENT",
+    "evidence_class": "REGISTRY-MEASUREMENT, not a performance score",
+    "final_dot_overlap_within_3px": 1.0,
     "rank_correlation": null,
-    "candidate_overlap": null,
-    "universal_overlap_for_every_nonempty_in_footprint_dot_set": 1.0,
+    "rank_correlation_reason": "Not needed for rejection: overlap alone exceeds the binding limit.",
     "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
-    "scope": "One sufficient rejection witness; not a complete scan. Applies before placement and to all possible final dots."
+    "surface_check": "Original continuous surface not preserved; universal proof rejects all nonempty in-footprint support.",
+    "scope": "One sufficient rejection witness; no full inventory clearance claimed.",
+    "decision": "duplicate"
   },
-  "raster_sha256": null,
+  "raster_sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
   "validator_output": {
-    "status": "NOT RUN: no candidate TIF exists",
-    "no_nan_inside_footprint": null,
-    "values_in_0_1": null,
-    "crs_shape_transform_match": null,
-    "audit_inputs_grid_match": true
+    "status": "LOCAL_FORMAT_PASS",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_shape_transform_match": true,
+    "shared_validator": {
+      "file": "/home/user/GEMSDOE81/docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
+      "bytes": 305125,
+      "sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "emitted_positive_pixels": 44090,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 44090,
+      "footprint_fraction": 0.00853238192791579
+    },
+    "shared_template_report": {
+      "path": "/home/user/GEMSDOE81/docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
+      "bytes": 305125,
+      "sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    "warning": "Local validation is not organizer acceptance or slot authorization."
   },
-  "submission_name": null,
-  "note": "NEGATIVE: literal registry overlap rule rejects every nonempty candidate. No TIF generated; no competition slot used.",
+  "submission_name": "gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
+  "note": "NEGATIVE ASB archive: local format pass, duplicate registry overlap; not approved for competition submission.",
   "verdict": "negative",
-  "decision": "STOP_UNIVERSAL_DUPLICATE",
+  "decision": "STOP_DUPLICATE",
   "authorized_to_download_and_submit": false,
+  "research_download_only": true,
+  "new_tif_generated_this_session": false,
   "experiments_run": 0,
   "weekly_slots_used": 0,
   "incomplete_requirements": [
-    "Unique submission TIF not generated because binding stop rule fires.",
-    "New geological candidate not validated.",
-    "No claim of higher leaderboard score."
+    "No new unique competition-ready TIFF; binding duplicate stop remains active.",
+    "No valid buffered shared-evaluator holdout or spatial confidence interval.",
+    "No organizer receipt or measured improvement over reported historical scores."
   ]
 }
