@@ -123,6 +123,12 @@ new verified scores, in [the imported family ledger](registry/user-reported-fami
 Its provenance is the reviewed GEMSDOE77 ledger plus the original request;
 no comprehensive source-site verification is claimed.
 
+## Concurrent-session integration
+
+PR #1 merged a research-only site during this review. Its superseded source and
+shortlist are preserved under `docs/archive/first-review/`; current-state pointers
+replace the old entry paths. No prior research was silently discarded.
+
 ## Reproduce the automated audit
 
 Requires Python 3.11+, `gh` with access to the public GitHub blobs, and package

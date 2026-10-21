@@ -15,7 +15,12 @@ witness; we do not claim such a scan was performed.
 
 The starting commit contains only `README.md` (11 bytes). The user's statement
 that training is blocked *only* by data placement does not describe this checkout.
-There is no previous-session pipeline here to resume. Read-only review sources:
+There was no previous-session pipeline at the starting commit. During this run,
+concurrent PR #1 merged a research-only site into main. It was integrated without
+discarding its notes: superseded material is retained under
+`docs/archive/first-review/`, with current-status pointers at its old entry paths.
+It added no model or data pipeline and does not change the measured stop.
+Read-only review sources:
 
 - [GEMSDOE32 pinned tree](https://github.com/buffedlizard55-lab/GEMSDOE32/tree/f62038b54dcb7767d4d997f80b033cdc3d42bef9): H33 code, build receipts, research and artifact.
 - [GEMSDOE77 pinned tree](https://github.com/buffedlizard55-lab/GEMSDOE77/tree/6c363745d864f01d47b9d2cba5da8857953e93d0): extensive family lane registry, prior saturation reports and data manifest. Its previous conclusions were treated as leads, not new measurements.
