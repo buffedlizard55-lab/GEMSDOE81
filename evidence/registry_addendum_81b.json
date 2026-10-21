@@ -1,0 +1,22 @@
+{
+  "scope": "Post-merge addendum 2026-10-21: PCD lane check vs CONT-session rasters merged in PR #5/#6 after E3 ran. Same sampled protocol as evidence/run_card_81b.json (seed 81, 300k footprint px).",
+  "pcd_file": "gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif",
+  "gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif": {
+    "surface_rank_corr_sampled": 0.015740826533012828,
+    "pcd_dots_within_3px": 0.11499206169199365,
+    "their_dots_within_3px_of_pcd": 0.1695622590156498,
+    "lane_violation": false
+  },
+  "gems81-contasb-poisson44090-buf2-20261021T232312Z-04866ff3-zeros.tif": {
+    "surface_rank_corr_sampled": 0.02788069031070101,
+    "pcd_dots_within_3px": 0.14143796779315038,
+    "their_dots_within_3px_of_pcd": 0.2427761397142209,
+    "lane_violation": false
+  },
+  "gems81-radasb-poisson44090-buf2-20261021T231647Z-0ab9803e-zeros.tif": {
+    "surface_rank_corr_sampled": 0.031772090910813226,
+    "pcd_dots_within_3px": 0.23955545475164436,
+    "their_dots_within_3px_of_pcd": 0.28085733726468587,
+    "lane_violation": false
+  }
+}

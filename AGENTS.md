@@ -6,6 +6,7 @@ session-1 dense-prior preflight, retained for traceability (see IR-81-08).
 Current promoted candidate, validator, holdout and registry checks are in
 evidence/run_card.json; the site must stay fail-closed (scripts/build_site.py
 refuses to publish unless the card says promote and the TIF SHA matches).
-Do not copy a historical raster into downloads. Do not resubmit the ASB or
-RAD-ASB rasters in docs/downloads (labelled negative). Record absent results
+Do not copy a historical raster into downloads. Do not resubmit the ASB,
+RAD-ASB, CONT-ASB or PCD rasters in docs/downloads (labelled negative;
+PCD session record: evidence/run_card_81b.json). Record absent results
 as null. Run three review passes.

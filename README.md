@@ -41,6 +41,26 @@
   retained, not deleted; IR-81-08 records why lane checks are applied
   like-for-like against binary scored registry rasters.
 
+## Parallel-session candidate (arena/db89212c) — PCD lane, verdict NEGATIVE ❌ DO NOT SUBMIT
+A further **unique** TIF was generated and validated in a lane disjoint from ASB and CONT:
+`docs/downloads/gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif`
+(SHA-256 `46c4119a…ff39e`; page `docs/pcd-candidate.html`; ranked hypotheses
+`docs/hypotheses-81b.md`; run card `evidence/run_card_81b.json`; canary/holdout
+`evidence/e1_canary_81b.json`, `evidence/e2_holdout_81b.json`). Method: 100 m piedmont
+slope-break surface (training_features bands 12/19 only), Poisson 2.8 px, buf 2 px, 44,090 dots,
+zeros outside footprint. It is format-validator-clean and lane-clean vs winner/d28/ASB binary
+rasters (rank-corr ≤0.073, ≤28.4% dots within 3 px) and, measured post-merge, vs the CONT
+raster (0.016, 11.5%; `evidence/registry_addendum_81b.json`), but **HOLDOUT-DTI v81.1 = 0.0742**
+(per-draw 0.0710/0.0773, 25,038 hidden positives; v81.1 is the retired private instrument,
+not comparable to the shared-evaluator numbers above) — below the re-measured same-instrument
+d28 control 0.0992 and ASB strategy 0.0831. **This PCD file is ❌ DO NOT SUBMIT**; the promoted
+file remains the CONT raster at the top of this README (canonical `evidence/run_card.json`).
+Also tested negative on v81.1: RXF radiometric-front 0.0574, GMD concord 0.0549, PGX 0.0705 —
+independent evidence that purely geophysical label-free surfaces trail continuation on
+hide-and-recover. All canary AUCs ≤0.589 (no leakage). No weekly slot used; no score >0.2778
+claimed. This branch also extends `test_no_false_submission_or_performance_claim` so the PCD
+raster must keep its negative-verdict receipt, NOT-OK page and post-merge lane measurements.
+
 ## Start here every session — user operating brief
 
 This is an **operational transcription with duplicate paragraphs consolidated**,

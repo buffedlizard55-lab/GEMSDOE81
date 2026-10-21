@@ -1,0 +1,66 @@
+{
+  "RXF_ratio_front": {
+    "auc": 0.5293565233324075,
+    "flag": "ok"
+  },
+  "ratio_grad_only": {
+    "auc": 0.5112344003458983,
+    "flag": "ok"
+  },
+  "grad_rtp_only": {
+    "auc": 0.5346498758563626,
+    "flag": "ok"
+  },
+  "tmi_hg_direct": {
+    "auc": 0.5264022745669954,
+    "flag": "ok"
+  },
+  "tc_direct": {
+    "auc": 0.44673151575681563,
+    "flag": "ok"
+  },
+  "grad_TMIup150": {
+    "auc": 0.5250520225782424,
+    "flag": "ok"
+  },
+  "GMD_discord": {
+    "auc": 0.5045266308045501,
+    "flag": "ok"
+  },
+  "GMD_concord": {
+    "auc": 0.5480716102447231,
+    "flag": "ok"
+  },
+  "grad_grav_only": {
+    "auc": 0.5404542736544897,
+    "flag": "ok"
+  },
+  "iso_grav_hg_direct": {
+    "auc": 0.5331440394932309,
+    "flag": "ok"
+  },
+  "PCD_piedmont": {
+    "auc": 0.5887691848706507,
+    "flag": "ok"
+  },
+  "lap_detelev_only": {
+    "auc": 0.546968885572539,
+    "flag": "ok"
+  },
+  "geod_2ndinv": {
+    "auc": 0.5709198661775701,
+    "flag": "ok"
+  },
+  "ieq_density": {
+    "auc": 0.5681412763177045,
+    "flag": "ok"
+  },
+  "ASB_control_rebuilt": {
+    "auc": 0.5891518065592141,
+    "flag": "ok"
+  },
+  "ASB_A_pair_scarp": {
+    "auc": 0.5724306681921285,
+    "flag": "ok"
+  }
+}

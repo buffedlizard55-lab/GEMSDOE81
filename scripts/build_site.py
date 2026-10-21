@@ -5,7 +5,7 @@ the shared validator + template report passed, and the TIF on disk matches
 the card SHA256. Supersedes the session-1/merged-main negative publisher;
 that decision and its tests' intent (fail-closed, no stale authorization)
 are preserved in evidence/run-card.json and docs/research/session-review.md."""
-import hashlib, json
+import hashlib, json, shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,7 +60,8 @@ def main():
 <tr><td>d28 fixed mask (control)</td><td>{h["same_instrument_controls_shared"]["d28_fixed"]["all"]["dti"]:.4f}</td><td>control</td></tr>
 <tr><td>ASB scarp-pair × basement-step</td><td>{sh["all"]["ASB"]["dti"]:.4f}</td><td>negative</td></tr>
 <tr><td>Radiometric-discordance gate (v81.1 instrument)</td><td>0.0738</td><td>negative</td></tr>
-<tr><td>Edge-consensus × ASB (v81.1 instrument)</td><td>0.0761</td><td>negative</td></tr></tbody></table>
+<tr><td>Edge-consensus × ASB (v81.1 instrument)</td><td>0.0761</td><td>negative</td></tr>
+<tr><td>PCD piedmont curvature, parallel session arena/db89212c (v81.1 instrument; RXF/GMD/PGX also negative there)</td><td>0.0742</td><td>negative</td></tr></tbody></table>
 <p>Full numbers, both instruments and the reversal note: <code>evidence/run_card.json</code>, <code>evidence/run_shared_holdout.json</code>.</p></section>
 <section><p class="eyebrow">UNIQUENESS — REGISTRY LANE CHECK</p><h2>Not a copy of any previous submission.</h2>
 <p>Method: catalogue-distance continuation surface, collar-pruned (≥3 px from catalogue), Poisson-dotted. Duplicate rule: rank-corr ≤ 0.90 and ≤ 70% of dots within 3 px of a registry raster.</p>
@@ -69,7 +70,8 @@ def main():
 <section><p class="eyebrow">OTHER FILES IN downloads/ — DO NOT SUBMIT</p><h2>❌ Negative / superseded rasters</h2>
 <ul><li><code>gems81-asb-…-zeros.tif</code> — session-1 ASB, verdict negative. <b>Do not submit.</b></li>
 <li><code>gems81-radasb-…-zeros.tif</code> — radiometric gate, HOLDOUT-DTI 0.0738 (v81.1), negative. <b>Do not submit.</b></li>
-<li><code>gems81-contasb-…-zeros.tif</code> — continuation×ASB gate, superseded by the shared-instrument winner above. <b>Do not submit.</b></li></ul>
+<li><code>gems81-contasb-…-zeros.tif</code> — continuation×ASB gate, superseded by the shared-instrument winner above. <b>Do not submit.</b></li>
+<li><code>gems81-pcd-…-zeros.tif</code> — PCD piedmont-curvature lane (parallel session), HOLDOUT-DTI 0.0742 (v81.1), verdict negative. Audit page: <a href="pcd-candidate.html">pcd-candidate.html</a>. <b>Do not submit.</b></li></ul>
 <p>Only the green file at the top of this page is the submission.</p></section>
 <section id="sources"><p class="eyebrow">RISKS, LIMITS &amp; SOURCES</p><h2>Read before spending a slot.</h2>
 <ul><li>Holdout favours continuation by construction (hidden faults are catalogue segments); live faults far from any mapped fault would be missed. This is the main residual risk, flagged IR-81-06.</li>
@@ -101,6 +103,12 @@ def main():
         '<!doctype html><html lang="en"><meta charset="utf-8"><title>Superseded</title><body>'
         '<h1>Superseded — do not submit the ASB file</h1><p>The prior ASB candidate is a measured negative. '
         'The current promoted submission is on the <a href="index.html">home page</a>.</p></body></html>')
+    # Parallel-session (PCD lane) audit evidence linked from pcd-candidate.html.
+    ev_out = DOCS / "evidence"; ev_out.mkdir(parents=True, exist_ok=True)
+    for nm in ["run_card_81b.json", "e1_canary_81b.json", "e2_holdout_81b.json", "registry_addendum_81b.json"]:
+        p = ROOT / "evidence" / nm
+        if p.is_file():
+            shutil.copyfile(p, ev_out / nm)
     print(f"Published promoted submission site for {name}")
 
 

@@ -135,6 +135,16 @@ def test_no_false_submission_or_performance_claim():
     assert card['submission_name'] in home and 'Do not submit' in home
     summary=(ROOT/'docs/executive-summary.html').read_text()
     assert 'OK TO DOWNLOAD: YES' in summary and card['submission_name'] in summary
+    # Parallel-session PCD raster (arena/db89212c): present for audit, must stay
+    # honestly labelled negative with a validator-clean receipt and NOT-OK page.
+    pcd=ROOT/'docs/downloads/gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif'
+    assert pcd.exists() and sha256(pcd)=='46c4119a9f112159af874f22df7dfcd8d6508b3d3ef671202ba35b03f62ff39e'
+    rc=json.loads(pcd.with_suffix('.receipt.json').read_text())
+    assert rc['verdict']=='negative' and rc['validator']['checks']['all_passed'] is True
+    assert 'NOT OK TO SUBMIT' in (ROOT/'docs/pcd-candidate.html').read_text()
+    add=json.loads((ROOT/'evidence/registry_addendum_81b.json').read_text())
+    cv=add['gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif']
+    assert abs(cv['surface_rank_corr_sampled'])<=0.90 and cv['pcd_dots_within_3px']<=0.70
 
 
 def test_all_local_website_links_and_html_fragments_resolve():

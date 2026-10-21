@@ -1,0 +1,112 @@
+{
+  "evaluator": "HOLDOUT-DTI v81.1 pooled alpha0.2 beta0.8 300m triangular, 2 draws whole-components, buf2 from visible only",
+  "PGX_piedmont_x_gravmag_poisson44090_buf2": {
+    "holdout_dti_pooled": 0.07045470468346526,
+    "per_draw": [
+      0.06886341691639901,
+      0.07205556210317134
+    ],
+    "ci95_draw_range": [
+      0.06886341691639901,
+      0.07205556210317134
+    ],
+    "n_hidden_total": 25038
+  },
+  "PCD_piedmont_poisson44090_buf2": {
+    "holdout_dti_pooled": 0.07415161849537356,
+    "per_draw": [
+      0.07103491893642094,
+      0.07728593674876955
+    ],
+    "ci95_draw_range": [
+      0.07103491893642094,
+      0.07728593674876955
+    ],
+    "n_hidden_total": 25038
+  },
+  "GMD_concord_poisson44090_buf2": {
+    "holdout_dti_pooled": 0.05490209823968338,
+    "per_draw": [
+      0.053271655284146235,
+      0.05654249608620658
+    ],
+    "ci95_draw_range": [
+      0.053271655284146235,
+      0.05654249608620658
+    ],
+    "n_hidden_total": 25038
+  },
+  "RXF_ratio_front_poisson44090_buf2": {
+    "holdout_dti_pooled": 0.05743847575150193,
+    "per_draw": [
+      0.05723932814416606,
+      0.0576388851835871
+    ],
+    "ci95_draw_range": [
+      0.05723932814416606,
+      0.0576388851835871
+    ],
+    "n_hidden_total": 25038
+  },
+  "ASB_control_rebuilt_poisson44090_buf2": {
+    "holdout_dti_pooled": 0.08312651477439477,
+    "per_draw": [
+      0.08945094605656231,
+      0.07675218725378645
+    ],
+    "ci95_draw_range": [
+      0.07675218725378645,
+      0.08945094605656231
+    ],
+    "n_hidden_total": 25038
+  },
+  "best_44090": "ASB_control_rebuilt_poisson44090_buf2",
+  "ASB_control_rebuilt_poisson37654_buf2": {
+    "holdout_dti_pooled": 0.08047030954832965,
+    "per_draw": [
+      0.08527416705663277,
+      0.07562771494376058
+    ],
+    "ci95_draw_range": [
+      0.07562771494376058,
+      0.08527416705663277
+    ],
+    "n_hidden_total": 25038
+  },
+  "control_d28_as_is": {
+    "holdout_dti_pooled": 0.09922256956705666,
+    "per_draw": [
+      0.09862069383733608,
+      0.09982812055442723
+    ],
+    "ci95_draw_range": [
+      0.09862069383733608,
+      0.09982812055442723
+    ],
+    "n_hidden_total": 25038
+  },
+  "control_winner_h33_as_is": {
+    "holdout_dti_pooled": 0.004309322934951101,
+    "per_draw": [
+      0.004728057465491251,
+      0.0038877697434084933
+    ],
+    "ci95_draw_range": [
+      0.0038877697434084933,
+      0.004728057465491251
+    ],
+    "n_hidden_total": 25038
+  },
+  "control_ASB_shipped_as_is": {
+    "holdout_dti_pooled": 0.008085369170242466,
+    "per_draw": [
+      0.008131886914738602,
+      0.008038562041383887
+    ],
+    "ci95_draw_range": [
+      0.008038562041383887,
+      0.008131886914738602
+    ],
+    "n_hidden_total": 25038
+  }
+}
