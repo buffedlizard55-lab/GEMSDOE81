@@ -1,0 +1,7 @@
+# Keep authorized source datasets and derived caches out of Git.
+/data/raw/
+/data/processed/
+/data/cache/
+/.cache/
+__pycache__/
+*.py[cod]

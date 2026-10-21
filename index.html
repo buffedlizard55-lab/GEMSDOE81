@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GEMSDOE81 is an evidence-gated research workspace for the DOE GEMS Prize. Current submission status is clearly stated before any download.">
+  <title>GEMSDOE81 — GEMS Fault Discovery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="GEMSDOE81 home">GEMS<span>DOE81</span></a>
+      <nav aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Overview</a>
+        <a href="executive-summary.html">How to submit</a>
+        <a href="research.html">Research</a>
+        <a href="sources.html">Sources</a>
+        <a href="irregularities.html">Irregularities</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">DOE GEMS Prize · DrivenData #306</p>
+      <h1>Find hidden faults. Prove the file. Then decide whether to submit.</h1>
+      <p class="lede">A transparent research workspace for fault predictions in the GeoDAWN region. We separate geological hypotheses, holdout evidence, file-format checks, registry uniqueness, and organizer receipts.</p>
+    </section>
+
+    <section class="status-panel" aria-labelledby="status-heading">
+      <h2 id="status-heading">Submission status: not ready</h2>
+      <div class="status-line">
+        <span class="status-pill">OK TO DOWNLOAD: NO FILE</span>
+        <span class="status-pill">OK TO SUBMIT: NO</span>
+      </div>
+      <p><strong>No GeoTIFF has been generated in this repository.</strong> The assigned method lane, shared template, cached features, evaluator/writer, registry, and competition data are not present. A synthetic or copied file would bypass the required checks and could waste a competition slot.</p>
+      <p class="small">This is a deliberate fail-closed decision, not a claim that a candidate failed a holdout. The current run card is <a href="evidence/run_card.json">here</a>.</p>
+      <div class="action-row">
+        <span class="button disabled" aria-disabled="true">No download available</span>
+        <a class="button secondary" href="executive-summary.html">Read the submission guide</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="why-heading">
+      <p class="eyebrow">What we know</p>
+      <h2 id="why-heading">Evidence before leaderboard claims</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>H33-2-B2: provenance first</h3>
+          <p>The project brief attributes 0.2778 to the H33 artifact, but no exact submission-page receipt is included here. The original GEMSDOE32 page calls 0.2747 a model projection and says no organizer score existed for its artifacts at that time.</p>
+          <p><a href="research.html#h33">Read the forensic review →</a></p>
+        </article>
+        <article class="card">
+          <h3>Public board is dynamic</h3>
+          <p>The official leaderboard page was checked on 2026-10-21. It showed a public leader above the 0.3195 value quoted in the brief. This is a dated public-board observation—not a score for GEMSDOE81, not a receipt, and not private-test performance.</p>
+          <p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Open the live official leaderboard →</a></p>
+        </article>
+        <article class="card">
+          <h3>Metric-aware, not score-chasing</h3>
+          <p>The organizer specifies a distance-weighted Tversky metric with a 300 m triangular support. A prediction can get partial credit when close to a true fault; a dense trace can still waste prediction mass.</p>
+          <p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">Review the official metric →</a></p>
+        </article>
+        <article class="card">
+          <h3>Provisional science backlog</h3>
+          <p>Geochemical residual corridors, hydrothermal alteration mapping, and satellite thermal residuals are documented as candidates—not as validated methods. External source links and access limits are recorded.</p>
+          <p><a href="research.html#hypotheses">Review the hypothesis shortlist →</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="callout" aria-labelledby="next-heading">
+      <p class="eyebrow">Next safe step</p>
+      <h2 id="next-heading">Resolve the lane and restore the shared inputs</h2>
+      <ol class="list-tight">
+        <li>Assign the single method paragraph for this parallel run.</li>
+        <li>Pin and use the shared template; restore its authorized feature cache, evaluation tools, registry, and data.</li>
+        <li>Run the surface duplicate screen and individual-feature leakage canary before any dot placement.</li>
+        <li>Run the buffered whole-segment holdout, then validate the written TIFF and re-check final-dot overlap.</li>
+        <li>Only a separate selector may promote a file into a competition slot.</li>
+      </ol>
+      <p><a href="irregularities.html">See the complete blocker log →</a></p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><strong>GEMSDOE81</strong> · Research status is not a submission receipt.</p>
+      <p><a href="PROMPT.md">Standing project brief</a> · <a href="docs/sources.md">Source register</a> · <a href="docs/review.md">Three-pass review</a></p>
+    </div>
+  </footer>
+</body>
+</html>

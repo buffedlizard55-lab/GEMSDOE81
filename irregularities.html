@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Unresolved data, score, lane, and validation issues for GEMSDOE81.">
+  <title>Irregularities — GEMSDOE81</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">GEMS<span>DOE81</span></a>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Overview</a>
+        <a href="executive-summary.html">How to submit</a>
+        <a href="research.html">Research</a>
+        <a href="sources.html">Sources</a>
+        <a href="irregularities.html" aria-current="page">Irregularities</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="breadcrumb"><a href="index.html">Home</a> / Irregularities</p>
+    <section class="hero">
+      <p class="eyebrow">Open issues</p>
+      <h1>Blockers and provenance discrepancies</h1>
+      <p class="lede">Nothing below is hidden behind a download button. The repository is deliberately not presenting an unvalidated TIFF as a competition submission.</p>
+    </section>
+    <section class="status-panel">
+      <h2>Release decision: negative / blocked_not_tested</h2>
+      <p>The current lane is unassigned and the required local inputs are absent. No experiment, raster, score, or submission slot exists for GEMSDOE81.</p>
+    </section>
+    <section class="table-wrap" aria-label="Irregularity log">
+      <table>
+        <thead><tr><th>ID</th><th>Severity</th><th>Issue</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr><td>IR-81-001</td><td>Release blocker</td><td>Only README.md was present at review time; shared template, data/cache, registry, evaluator/writer, and grid are absent.</td><td>No holdout or file can be produced.</td></tr>
+          <tr><td>IR-81-002</td><td>Release blocker</td><td>The supplied prompt references a single method paragraph for the lane but does not identify one.</td><td>Cannot choose a method without violating the parallel-run protocol.</td></tr>
+          <tr><td>IR-81-003</td><td>Score provenance</td><td>The supplied 0.3195 high-score statement differs from the official public leaderboard page read on 2026-10-21, which displayed 0.4413 at rank one.</td><td>Use the live official page and date observations; do not treat the old number as current or as a project score.</td></tr>
+          <tr><td>IR-81-004</td><td>Score attribution</td><td>The user-provided 0.2778 attribution has no receipt here. GEMSDOE32's own page labeled 0.2747 as a model projection and said no organizer score existed for its artifacts at that time.</td><td>Do not label 0.2778 ORGANIZER-CONFIRMED without the exact submission receipt.</td></tr>
+          <tr><td>IR-81-005</td><td>Uniqueness blocker</td><td>No candidate surface/dots or registry rasters are present.</td><td>Correlation and 3-pixel overlap are unmeasured; uniqueness cannot be asserted.</td></tr>
+          <tr><td>IR-81-006</td><td>Evaluation blocker</td><td>No shared evaluator/writer, feature cache, or labels are present.</td><td>No holdout, CI, or leakage canary exists.</td></tr>
+          <tr><td>IR-81-007</td><td>Submission blocker</td><td>No TIFF or validator receipt exists.</td><td>There is no file to download or submit.</td></tr>
+          <tr><td>IR-81-008</td><td>Unresolved error</td><td>The prior portal range error is provided only as text; the rejected TIFF is absent.</td><td>The cause cannot be diagnosed from the message alone.</td></tr>
+          <tr><td>IR-81-010</td><td>Scope / provenance</td><td>The long family score list in the prompt was not audited item-by-item; exact receipt provenance is absent for the list as a whole.</td><td>Do not treat it as a verified score ledger. This review checked the H33 source caveat and the current official board only.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <p><a href="docs/irregularities.md">Open the full blocker log →</a> · <a href="evidence/run_card.json">Open the run card →</a></p>
+  </main>
+  <footer class="site-footer"><div class="site-footer-inner"><p>We report what was observed, what is missing, and what remains unknown.</p></div></footer>
+</body>
+</html>
