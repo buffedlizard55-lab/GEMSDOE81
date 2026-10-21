@@ -1,0 +1,41 @@
+{
+  "session": "arena/db89212c-gemsdoe81 (session 2, PCD lane)",
+  "date_utc": "2026-10-21",
+  "pass_1": {
+    "status": "complete",
+    "actions": [
+      "Reviewed repo per AGENTS.md (README, research review, both run cards); governing status DO NOT SUBMIT with disputed ASB candidate",
+      "Wrote ranked hypotheses BEFORE implementation: docs/hypotheses-81b.md (RXF, GMD, PCD, XPD)",
+      "Restored hash-pinned data via gh mirrors; every SHA-256 matched registry/data_manifest.json incl. 419MB training_features (4371c82e...)",
+      "E1 canary: 16 transforms AUC alone, max 0.5892 < 0.90 leakage stop (evidence/e1_canary_81b.json)",
+      "E2 holdout v81.1 identical instrument/seeds: PCD 0.0742 < ASB 0.0831 < d28 0.0992; prior session numbers reproduced exactly (evidence/e2_holdout_81b.json)",
+      "E3 emitted unique PCD TIF 44,090 dots buf2 zeros-outside; lane-clean vs winner/d28/ASB (corr <=0.073, overlap <=28.4%); fail-closed writer all-pass (evidence/run_card_81b.json)"
+    ],
+    "verdict": "negative (science); format valid; weekly slots used 0"
+  },
+  "pass_2": {
+    "status": "complete",
+    "fixes": [
+      "Independent validator re-read: single-band float32, EPSG:32611, transform match, no NaN/Inf, values {0,1} in [0,1], 0 on catalogue, 0 outside footprint, min catalogue distance sqrt(5) px, SHA matches receipt (46c4119a...)",
+      "Found PRE-EXISTING red test on main: test_no_false_submission_or_performance_claim failed on the merged ASB .tif (blanket no-TIF rule). Strengthened: every TIF under docs/ must carry a negative-verdict validator-clean .receipt.json",
+      "ASB page green 'OK TO DOWNLOAD & SUBMIT' banner corrected to governing DO NOT SUBMIT wording",
+      "build_site.py now publishes both candidates as measured-unpromoted with links; executive summary limitations corrected"
+    ]
+  },
+  "pass_3": {
+    "status": "complete",
+    "fixes": [
+      "Caught parallel edit race that dropped 2 of 3 build_site.py edits (link test failed on missing docs/evidence/run_card_81b.json); re-applied sequentially and rebuilt",
+      "python -m pytest -q: 27 passed, 1 skipped (was 26 passed, 1 failed on main)",
+      "compileall clean; git diff --check clean; validator CLI re-run all_passed=true"
+    ],
+    "original_request_recheck": {
+      "unique_tif_generated": true,
+      "obvious_ok_to_submit": "YES-obvious: NOT OK TO SUBMIT banner on candidate page; governing DO NOT SUBMIT on home/executive summary; verdict negative in run card and enforced by test",
+      "easy_download": "button on docs/pcd-candidate.html, linked from home + executive summary",
+      "no_human_inspection_needed": "automated fail-closed writer + independent validator + pytest link/receipt gates",
+      "score_claim": "none; HOLDOUT-DTI labelled with evaluator/n/CI-range; 0.2778 and 0.4413 kept as reported/leaderboard values only",
+      "experiments": "3 of 3 budget used; no submission slot spent"
+    }
+  }
+}

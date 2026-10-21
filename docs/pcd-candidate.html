@@ -1,0 +1,71 @@
+<!doctype html><meta charset="utf-8"><title>GEMSDOE81 — PCD candidate (DO NOT SUBMIT)</title>
+<style>body{font-family:system-ui;max-width:900px;margin:2em auto;padding:0 1em}.stop{background:#ffe6e6;border:3px solid #a00;padding:1em}.info{background:#eef4ff;border:2px solid #357;padding:1em}a.btn{display:inline-block;background:#555;color:#fff;padding:.8em 1.4em;font-size:1.1em;border-radius:8px}table{border-collapse:collapse}td,th{border:1px solid #999;padding:.3em .6em}</style>
+<h1>GEMSDOE81 — PCD piedmont candidate</h1>
+<div class="stop"><h2>⛔ NOT OK TO SUBMIT — science verdict NEGATIVE. Download for audit only.</h2>
+<p>A unique new TIF <b>was</b> generated this session and is format-validated, but on the project's own
+hide-and-recover holdout it <b>loses</b> to the incumbent control. Per protocol (negative results are
+deliverables; promotion is a separate selector step), <b>do not spend a weekly submission slot on this file.</b>
+No score above 0.2778 is claimed; this raster is UNSCORED.</p>
+<p><a class="btn" href="downloads/gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif">⬇ DOWNLOAD TIF (audit only): gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif</a></p>
+<p><b>Unique submission name:</b> <code>gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif</code><br>
+<b>Copy-paste submission Note (84/140 chars) — only if a selector ever overrides:</b><br>
+<code>GEMSDOE81 PCD piedmont-curvature poisson44090 buf2 44090 dots zeros HOLDOUT-NEGATIVE</code><br>
+SHA-256: <code>46c4119a9f112159af874f22df7dfcd8d6508b3d3ef671202ba35b03f62ff39e</code> ·
+Receipt/run card: <a href="downloads/gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.receipt.json">JSON</a> ·
+<a href="executive-summary.html">Executive summary: exactly how to submit</a></p></div>
+
+<div class="info"><h2>✅ Format validation (automated, no human inspector)</h2>
+<p>Single-band float32 GeoTIFF, EPSG:32611, 3730×3292, transform identical to the sample submission,
+<b>finite values in [0,1] everywhere — zeros, not NaN, outside the footprint</b> (this is what avoids the
+reported <i>“Predicted values must be in range [0, 1]”</i> rejection), binary {0,1}, 44,090 dots,
+0 dots on the catalogue, minimum catalogue distance √5 px (2&nbsp;px buffer). All validator checks passed
+(read-back from disk). Format validity ≠ a good score and ≠ organiser acceptance.</p></div>
+
+<h2>Why did the 0.2778 winner win — and can we beat it?</h2>
+<p>The GEMSDOE32 winner (h33-h33-2-b2, 0.2778 as reported for that submission; public leaderboard top
+observed 0.4413) is the 0.2708 dotted base with every dot ≤2&nbsp;px from the published fault catalogue
+deleted (44,090→37,654 dots). Under pooled DTI (α=0.2, β=0.8, 300&nbsp;m triangular kernel) dots hugging
+already-catalogued faults earn ~no credit toward <i>undiscovered</i> test faults but pay false-positive
+mass, so pruning them raises the score; dotted emission at ~kernel-radius spacing beats solid ridges
+(0.1922→0.2600) because one dot covers a whole 300&nbsp;m kernel disc. Its advantage is <b>emission
+efficiency on an already-good surface</b>, not a new geophysical discovery. Beating it therefore needs a
+surface with genuinely different off-catalogue support <i>and</i> the same efficient emission — which is
+what we tested. <b>Our measured answer: not yet.</b></p>
+
+<h2>Holdout evidence (HOLDOUT-DTI v81.1 — never mix with leaderboard scores)</h2>
+<p>Hide-and-recover: whole fault components withheld (2 draws, 25,038 hidden positives), catalogue
+exclusion derived from visible faults only, visible masked pixel-exactly, pooled DTI α=0.2 β=0.8
+300&nbsp;m triangular kernel. CI shown is the per-draw range (n=2, disclosed — not a bootstrap).</p>
+<table><tr><th>Surface (identical emitter: Poisson 2.8px, buf 2px, 44,090 dots)</th><th>HOLDOUT-DTI</th><th>per-draw</th></tr>
+<tr><td><b>PCD piedmont curvature (this file)</b></td><td><b>0.0742</b></td><td>0.0710 / 0.0773</td></tr>
+<tr><td>d28 control raster (as-is; reported live 0.2600)</td><td>0.0992</td><td>0.0986 / 0.0998</td></tr>
+<tr><td>ASB strategy, re-emitted (prior GEMSDOE81 lane)</td><td>0.0831</td><td>0.0895 / 0.0768</td></tr>
+<tr><td>PGX = PCD × gravity–magnetic concord</td><td>0.0705</td><td>0.0689 / 0.0721</td></tr>
+<tr><td>RXF radiometric ratio front × RTP gradient</td><td>0.0574</td><td>0.0572 / 0.0576</td></tr>
+<tr><td>GMD gravity–magnetic concord alone</td><td>0.0549</td><td>0.0533 / 0.0565</td></tr></table>
+<p>Leakage canary: every feature alone AUC ≤ 0.589 (&lt; 0.90 stop). Controls reproduced the prior
+session's numbers exactly (d28 0.0992, ASB 0.0831), verifying the instrument. Fixed winner/shipped-ASB
+rasters score ~0.004–0.008 on this instrument because their 2&nbsp;px deletion used the full catalogue
+including hidden faults — a mechanical artefact, disclosed in the run card.</p>
+
+<h2>Uniqueness (lane check, pass limits: rank-corr ≤ 0.90, dots within 3&nbsp;px ≤ 70%)</h2>
+<table><tr><th>Registry raster</th><th>surface rank-corr</th><th>our dots within 3px</th></tr>
+<tr><td>Winner h33-2-b2 (0.2778)</td><td>0.066</td><td>27.3%</td></tr>
+<tr><td>d28 base (0.2600)</td><td>0.073</td><td>28.4%</td></tr>
+<tr><td>GEMSDOE81 ASB (unscored)</td><td>0.044</td><td>21.6%</td></tr></table>
+<p>Surface-vs-ASB-surface rank correlation 0.070 — a genuinely different lane (100&nbsp;m DEM curvature
+only; no lidar pair, no basement/conductivity gradients). Irregularity IR-81-DENSE: read literally
+against a dense continuous prior that is positive on 100% of the footprint, the 70% rule rejects every
+nonempty candidate (<a href="evidence/preflight.json">proof</a>). Like the merged ASB candidate, uniqueness
+here is measured against the <b>binary</b> registry rasters; the final interpretation belongs to the
+selector step. This is flagged, not silently exempted.</p>
+
+<h2>Method in one paragraph</h2>
+<p><b>Hypothesis (PCD):</b> piedmont/alluvial faults too subdued for 1&nbsp;m-lidar scarp thresholds still
+break the 100&nbsp;m slope field: surface = geometric mean of ranks of |Laplacian(detrended elevation)|
+and |∇(detrended-elevation slope)|, gated toward low-slope piedmont. <b>Named non-fault mimic:</b>
+terrace riser / paleo-shoreline / fan-lobe boundary. Emission: Poisson-disk priority thinning
+(2.8&nbsp;px), 2&nbsp;px catalogue buffer, 44,090 binary dots, zeros outside footprint. Full ranked
+hypotheses (RXF/GMD/PCD/XPD) and costs: <a href="hypotheses-81b.md">hypotheses-81b.md</a>; machine-readable
+run card: <a href="evidence/run_card_81b.json">run_card_81b.json</a>. Experiments used: 3/3. Weekly slots used: 0.</p>
+<p><a href="index.html">← Project home (governing status: DO NOT SUBMIT)</a> · <a href="asb-candidate.html">ASB candidate page</a></p>

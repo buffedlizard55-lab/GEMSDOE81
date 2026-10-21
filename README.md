@@ -18,6 +18,24 @@ by DrivenData, or a good predictor. No competition submission slot was used.
 ## Parallel-session candidate added by arena/2b6bccb9 (this merge) — STATUS DISPUTED, selector must resolve
 A unique ASB TIF was generated in a parallel session: `docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif` (page: `docs/asb-candidate.html`, run card `evidence/run_card.json`). It is format-validator-clean and, vs the winner/d28 binary registry rasters, rank-corr 0.031 and 31% dots within 3px. **However it conflicts with the DO-NOT-SUBMIT gate above**: that gate reads the registry rule against a dense continuous prior raster (100% overlap), and the candidate's science verdict is in any case **negative** (HOLDOUT-DTI v81.1 0.0831 vs 0.0992 control). Until a selector step reconciles the registry interpretation, **treat the governing status as DO NOT SUBMIT / do not spend a slot**; the file remains as a measured negative deliverable.
 
+## Session-2 candidate added by arena/db89212c (this branch) — PCD lane, verdict NEGATIVE
+A second **unique** TIF was generated and validated this session in a lane disjoint from ASB:
+`docs/downloads/gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif`
+(SHA-256 `46c4119a…ff39e`; page `docs/pcd-candidate.html`; ranked hypotheses
+`docs/hypotheses-81b.md`; run card `evidence/run_card_81b.json`; canary/holdout
+`evidence/e1_canary_81b.json`, `evidence/e2_holdout_81b.json`). Method: 100 m piedmont
+slope-break surface (training_features bands 12/19 only), Poisson 2.8 px, buf 2 px, 44,090 dots,
+zeros outside footprint. It is format-validator-clean and lane-clean vs winner/d28/ASB binary
+rasters (rank-corr ≤0.073, ≤28.4% dots within 3 px), but **HOLDOUT-DTI v81.1 = 0.0742**
+(per-draw 0.0710/0.0773, 25,038 hidden positives) — below the re-measured same-instrument
+d28 control 0.0992 and ASB strategy 0.0831. **Governing status remains DO NOT SUBMIT** (science
+negative + unresolved IR-81-DENSE registry interpretation). Also tested negative: RXF
+radiometric-front 0.0574, GMD concord 0.0549, PGX 0.0705. All canary AUCs ≤0.589 (no leakage).
+No weekly slot used; no score >0.2778 claimed. Pre-existing irregularity found: main's
+`test_no_false_submission_or_performance_claim` was already red because the merged ASB `.tif`
+violated its blanket no-TIF rule; this branch strengthens that test to require a
+negative-verdict, validator-clean receipt for every TIF under `docs/`.
+
 ## Start here every session — user operating brief
 
 This is an **operational transcription with duplicate paragraphs consolidated**,

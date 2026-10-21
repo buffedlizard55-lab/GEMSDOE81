@@ -1,0 +1,108 @@
+{
+  "hypothesis": "PCD: 100 m piedmont slope-break (|Laplacian detrended elevation| x gradmag(det_elev_slope) rank geometric mean, low-slope gated) marks alluvial/piedmont faults below 1 m-lidar scarp thresholds, off-catalogue.",
+  "mechanism": "Label-free rank surface (training_features bands 12 det_elev, 19 det_elev_slope only) -> Poisson-disk priority thinning (min_dist 2.8px) at 44,090 dots, catalogue exclusion buffer 2px, binary {0,1}, zeros outside footprint.",
+  "named_nonfault_mimic": "Terrace riser / paleo-shoreline / alluvial fan-lobe boundary (slope break with no fault offset).",
+  "holdout_DTI": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "HOLDOUT-DTI v81.1 pooled alpha0.2 beta0.8 300m triangular, 2 draws whole-components, buf2 from visible only",
+    "candidate_PCD_poisson44090_buf2": 0.07415161849537356,
+    "per_draw": [
+      0.07103491893642094,
+      0.07728593674876955
+    ],
+    "ci95_draw_range_n2_disclosed_not_bootstrap": [
+      0.07103491893642094,
+      0.07728593674876955
+    ],
+    "n_hidden_positives_total": 25038,
+    "same_instrument_controls": {
+      "d28_as_is_HOLDOUT-DTI": 0.09922256956705666,
+      "ASB_strategy_reemitted_HOLDOUT-DTI": 0.08312651477439477,
+      "PGX_PCDxGMD_HOLDOUT-DTI": 0.07045470468346526,
+      "RXF_HOLDOUT-DTI": 0.05743847575150193,
+      "GMD_concord_HOLDOUT-DTI": 0.05490209823968338,
+      "fixed_raster_caveat": "Winner (0.0043) and shipped-ASB (0.0081) fixed rasters are mechanically depressed: their buf2 deletion used the FULL catalogue incl. hidden components. d28 was not buf2-deleted, hence is the operative same-instrument bar (re-measured identical to ASB session: 0.0992, ASB 0.0831)."
+    },
+    "canary_AUCs_all_below_0.90": {
+      "RXF_ratio_front": 0.5294,
+      "ratio_grad_only": 0.5112,
+      "grad_rtp_only": 0.5346,
+      "tmi_hg_direct": 0.5264,
+      "tc_direct": 0.4467,
+      "grad_TMIup150": 0.5251,
+      "GMD_discord": 0.5045,
+      "GMD_concord": 0.5481,
+      "grad_grav_only": 0.5405,
+      "iso_grav_hg_direct": 0.5331,
+      "PCD_piedmont": 0.5888,
+      "lap_detelev_only": 0.547,
+      "geod_2ndinv": 0.5709,
+      "ieq_density": 0.5681,
+      "ASB_control_rebuilt": 0.5892,
+      "ASB_A_pair_scarp": 0.5724
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "winner_h33-2-b2_ORGANIZER-REPORTED_0.2778": {
+      "surface_rank_corr_sampled": 0.06557909002027802,
+      "dot_overlap_within_3px": 0.27334996597868,
+      "lane_violation": false
+    },
+    "d28_base_REPORTED_0.2600": {
+      "surface_rank_corr_sampled": 0.07296946294325181,
+      "dot_overlap_within_3px": 0.28430483102744386,
+      "lane_violation": false
+    },
+    "gems81_ASB_20261021_UNSCORED": {
+      "surface_rank_corr_sampled": 0.04418262892942732,
+      "dot_overlap_within_3px": 0.21601270129281017,
+      "lane_violation": false
+    },
+    "surface_vs_ASB_surface_rank_corr_sampled": 0.07049538205040941
+  },
+  "registry_irregularity_IR-81-DENSE": "Literal >0 reading vs dense 17GEMSDOE continuous witness rejects every nonempty candidate (evidence/preflight.json). Uniqueness here follows the merged ASB precedent vs BINARY registry rasters; final interpretation is the selector's. Not silently exempted.",
+  "raster_sha256": "46c4119a9f112159af874f22df7dfcd8d6508b3d3ef671202ba35b03f62ff39e",
+  "validator": {
+    "shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "dtype": "float32",
+    "positive_pixels": 44090,
+    "min": 0.0,
+    "max": 1.0,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "shape_match": true,
+      "crs_match": true,
+      "transform_match": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "values_in_0_1_everywhere": true,
+      "binary_values": true,
+      "zero_on_catalogue": true,
+      "zero_outside_footprint": true,
+      "all_passed": true
+    },
+    "sha256": "46c4119a9f112159af874f22df7dfcd8d6508b3d3ef671202ba35b03f62ff39e"
+  },
+  "submission_name": "gems81-pcd-poisson44090-buf2-20261021T233503Z-67d63907-zeros.tif",
+  "submission_note": "GEMSDOE81 PCD piedmont-curvature poisson44090 buf2 44090 dots zeros HOLDOUT-NEGATIVE",
+  "verdict": "negative",
+  "verdict_reason": "FORMAT valid (validator all-pass; finite [0,1] everywhere, zeros not NaN outside footprint - cannot trigger the reported '[0,1]' rejection) but SCIENCE negative: HOLDOUT-DTI 0.0742 < d28 control 0.0992 and < ASB strategy 0.0831 on the identical instrument. DO NOT SUBMIT / do not spend a weekly slot on P(win) grounds. Live score UNSCORED; no claim of beating 0.2778 (organiser-reported for winner) or 0.4413 (leaderboard observation).",
+  "experiments_used": "3 of 3 (E1 canary, E2 holdout, E3 finalize)",
+  "weekly_slots_used": 0
+}

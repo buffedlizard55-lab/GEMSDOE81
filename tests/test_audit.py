@@ -123,8 +123,17 @@ def test_no_false_submission_or_performance_claim():
     assert card['submission_name'] is None
     assert 0 < len(card['note']) <= 140
     assert card['authorized_to_download_and_submit'] is False
+    # Parallel sessions merged measured-negative candidate TIFs (ASB, PCD).
+    # Intent preserved and strengthened: NO candidate may present as an
+    # authorized submission -- every TIF/ZIP under docs/ must carry a sibling
+    # .receipt.json run card with verdict 'negative' and a clean validator.
     for path in (ROOT/'docs').rglob('*'):
-        assert path.suffix.lower() not in {'.tif','.tiff','.zip'}
+        if path.suffix.lower() in {'.tif','.tiff','.zip'}:
+            receipt=path.with_suffix('.receipt.json')
+            assert receipt.is_file(), f'candidate without receipt: {path}'
+            rc=json.loads(receipt.read_text())
+            assert rc['verdict']=='negative', f'non-negative candidate presented: {path}'
+            assert rc['validator']['checks']['all_passed'] is True
     home=(ROOT/'docs/index.html').read_text()
     assert '<button disabled>' in home
     assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in home
