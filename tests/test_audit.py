@@ -127,23 +127,75 @@ def test_no_false_submission_or_performance_claim():
         assert path.suffix.lower() not in {'.tif','.tiff','.zip'}
     home=(ROOT/'docs/index.html').read_text()
     assert '<button disabled>' in home
-    assert 'Do not submit.' in home
+    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in home
+    assert 'OK TO SUBMIT: NO' in home
+    assert 'not a submission file' in home
+    assert 'external-source-screen.md' in home
+    summary=(ROOT/'docs/executive-summary.html').read_text()
+    assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in summary
+    assert 'OK TO SUBMIT: NO' in summary
 
 
-def test_all_local_website_links_resolve():
+def test_all_local_website_links_and_html_fragments_resolve():
     from html.parser import HTMLParser
     from urllib.parse import unquote, urlsplit
+
     class Links(HTMLParser):
-        def __init__(self): super().__init__(); self.urls=[]
+        def __init__(self):
+            super().__init__()
+            self.urls=[]
+            self.anchors=set()
+
         def handle_starttag(self,tag,attrs):
+            values=dict(attrs)
+            if values.get('id'):
+                self.anchors.add(values['id'])
+            if tag == 'a' and values.get('name'):
+                self.anchors.add(values['name'])
             for key,value in attrs:
-                if key in ('href','src') and value: self.urls.append(value)
-    for page in (ROOT/'docs').glob('*.html'):
-        parser=Links(); parser.feed(page.read_text())
+                if key in ('href','src') and value:
+                    self.urls.append(value)
+
+    pages={page.resolve():page for page in (ROOT/'docs').rglob('*.html')}
+    parsed_pages={}
+    for path,page in pages.items():
+        parser=Links()
+        parser.feed(page.read_text())
+        parsed_pages[path]=parser
+
+    for page_path,parser in parsed_pages.items():
         for url in parser.urls:
-            parsed=urlsplit(url)
-            if parsed.scheme or parsed.netloc or not parsed.path: continue
-            assert (page.parent/unquote(parsed.path)).exists(), (page,url)
+            parts=urlsplit(url)
+            if parts.scheme or parts.netloc:
+                continue
+            target=(page_path.parent/unquote(parts.path)).resolve() if parts.path else page_path
+            assert target.exists(), (page_path,url)
+            if parts.fragment and target.suffix.lower() in {'.html','.htm'}:
+                target_parser=parsed_pages.get(target)
+                if target_parser is None:
+                    target_parser=Links()
+                    target_parser.feed(target.read_text())
+                    parsed_pages[target]=target_parser
+                assert unquote(parts.fragment) in target_parser.anchors, (page_path,url)
+
+    # Keep the fragment-only path under test; it used to be skipped as an empty path.
+    assert any(url.startswith('#') for parser in parsed_pages.values() for url in parser.urls)
+
+
+def test_current_markdown_local_links_resolve():
+    import re
+    from urllib.parse import unquote, urlsplit
+
+    pages=[ROOT/'docs/hypotheses.md', ROOT/'docs/evidence-and-blockers.md',
+           ROOT/'docs/research/review.md', ROOT/'docs/research/external-source-screen.md']
+    for page in pages:
+        text=page.read_text()
+        for href in re.findall(r'\[[^\]]+\]\(([^)]+)\)',text):
+            parts=urlsplit(href)
+            if parts.scheme or parts.netloc:
+                continue
+            target=(page.parent/unquote(parts.path)).resolve() if parts.path else page
+            assert target.exists(), (page,href)
 
 
 def fixture_audit_root(tmp_path, *, mismatch=False, nan_catalogue=False):

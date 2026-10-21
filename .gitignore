@@ -4,4 +4,12 @@ __pycache__/
 .pytest_cache/
 data/bridge/
 data/raw/
+data/processed/
+data/external/
+data/official/
+data/scored/
+data/*.tif
+data/*.tiff
+data/*.zip
+data/*.npz
 *.partial

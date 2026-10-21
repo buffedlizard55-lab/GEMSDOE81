@@ -67,9 +67,10 @@ point. The original request arrived on 2026-10-21.
   before spending a slot. If new external data is needed, name the free official
   source and verify obtainability before treating the idea as viable.
 - Study GEMSDOE32 H33-2-B2 and its user-reported 0.2778, not merely copy or rename
-  it. Investigate why sparse/pruned outputs may outperform dense ones. The prompt
-  gives competing leaderboard values 0.3195 and 0.4413: verify the current official
-  page rather than assert both. Review family results as evidence, not guarantees.
+  it. Investigate why sparse/pruned outputs may outperform dense ones. The user-provided
+  0.3195 is USER-REPORTED historical context, not ORGANIZER-CONFIRMED for this project;
+  the 0.4413 value is an OFFICIAL-LEADERBOARD-OBSERVATION from a dated public-board
+  snapshot, not this project's result. Review family results as evidence, not guarantees.
 - GeoTIFF: one float32 band, values [0,1], matching template CRS, shape and
   geotransform. Investigate reported “Predicted values must be in range [0, 1]”.
   No silent clipping of model failures. Give every real artifact a unique name,
@@ -150,7 +151,9 @@ python -m venv .venv
 Shared evaluator and writer are unmodified under `vendor/gems57/`; hash-check
 before use. No feature stack, model, holdout score, AUC or new candidate is claimed.
 The earlier `download_competition_data.sh` / `prepare_data.py` commands do not exist
-in this starting repo and are not represented as working training steps here.
+in this starting repo and are not represented as working training steps here. See the
+[data placement and provenance note](data/README.md) for the three audit-only inputs
+and their owner-mirror limitations.
 
 ## Limitations and next-session work
 
