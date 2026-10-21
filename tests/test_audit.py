@@ -15,7 +15,7 @@ from gems57.submission_writer import write_submission
 from gems57.uniqueness import dot_overlap
 
 
-def test_dense_prior_blocks_any_nonempty_subset():
+def test_dense_positive_support_triggers_literal_stop_for_any_nonempty_subset():
     allowed = np.ones((15,15), bool)
     prior = np.full((15,15), 0.00001)
     proof = domain_proof(allowed, prior)
@@ -85,6 +85,8 @@ def test_real_proof_matches_recorded_result():
         # JSON serializes tuple grid dimensions as lists.
         json.loads(json.dumps(result)) == json.loads((ROOT/'evidence/preflight.json').read_text()))
     assert result['proof']['uncovered_allowed_pixels'] == 0
+    assert result['decision']=='STOP_LITERAL_SUPPORT_OVERLAP'
+    assert result['shared_template_semantic_caveat']
     assert not result['authorized_to_submit']
 
 
@@ -114,26 +116,70 @@ def test_shared_evaluator_max_cover_and_spatial_pooling():
     assert masked['n_truth'] == 1
 
 
+def test_current_hypotheses_registry_is_proposal_only():
+    data=json.loads((ROOT/'registry/hypotheses_sources_irregularities.json').read_text())
+    hypotheses=data['hypotheses']
+    assert [item['rank'] for item in hypotheses]==[1,2,3,4]
+    assert all('PROPOSAL' in item['status'] for item in hypotheses)
+    assert hypotheses[2]['required_external_source'].startswith('USGS 3DEP')
+    assert 'not checked' in hypotheses[2]['data_availability']
+    assert data['legacy_hypotheses']
+
+
 def test_no_false_submission_or_performance_claim():
     card=json.loads((ROOT/'evidence/run-card.json').read_text())
     assert card['verdict']=='negative'
-    assert card['raster_sha256'] is None
-    assert card['holdout']['value'] is None
-    assert card['holdout']['ci95'] is None
+    assert card['holdout_dti']['value'] is None
+    assert card['holdout_dti']['ci95'] is None
     assert card['submission_name'] is None
-    assert 0 < len(card['note']) <= 140
+    assert 0 < len(card['submission_note']) <= 140
     assert card['authorized_to_download_and_submit'] is False
+    legacy=json.loads((ROOT/'evidence/legacy-candidate-audit.json').read_text())
+    assert legacy['candidate']['sha256']==card['raster_sha256']
+    assert legacy['validator']['all_checks_passed'] is True
+    assert legacy['registry']['candidate_dot_overlap_within_3px']==1.0
+    assert legacy['registry']['duplicate_by_literal_overlap'] is True
+    assert legacy['registry']['witness_representation']['kind']=='continuous_surface'
+    assert 'two_phase_summary' in legacy['registry']['shared_template_two_phase_note']
+    assert 'semantic_conflict' in card['registry']
+    assert 'literal finite positive' in card['registry']['overlap_definition']
+    assert legacy['authorized_to_download_and_submit'] is False
+    assert card['prior_session_holdout_receipt']['candidate']['ci95'] is None
     for path in (ROOT/'docs').rglob('*'):
         assert path.suffix.lower() not in {'.tif','.tiff','.zip'}
     home=(ROOT/'docs/index.html').read_text()
     assert '<button disabled>' in home
     assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in home
     assert 'OK TO SUBMIT: NO' in home
+    assert '100%' in home
+    assert 'two_phase_summary' in home
     assert 'not a submission file' in home
     assert 'external-source-screen.md' in home
+    candidate=(ROOT/'docs/asb-candidate.html').read_text()
+    assert 'NOT A SUBMISSION' in candidate
+    assert 'DO NOT DOWNLOAD OR SUBMIT' in candidate
+    assert '.tif\"' not in candidate.lower()
     summary=(ROOT/'docs/executive-summary.html').read_text()
     assert 'OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE' in summary
     assert 'OK TO SUBMIT: NO' in summary
+
+
+def test_finalize_module_import_is_safe():
+    import importlib
+
+    module=importlib.import_module('scripts.finalize_submission')
+    assert callable(module.main)
+    assert not list((ROOT/'docs').rglob('*.tif'))
+
+
+def test_retired_submission_entry_points_are_fail_closed():
+    import subprocess
+    for script in ('build_submission.py','finalize_submission.py'):
+        result=subprocess.run([sys.executable,str(ROOT/'scripts'/script)],
+                              cwd=ROOT,capture_output=True,text=True)
+        assert result.returncode==2
+        assert 'no candidate is authorized' in result.stdout.lower()
+    assert not list((ROOT/'docs').rglob('*.tif'))
 
 
 def test_all_local_website_links_and_html_fragments_resolve():

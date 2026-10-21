@@ -4,19 +4,19 @@
     {
       "name": "Organizer problem and metric",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-      "status": "Retrieved both chunks with page-fetch tool this session",
+      "status": "Retrieved both chunks in the earlier research pass dated 2026-10-21; not re-fetched in the current re-audit",
       "supports": "Task, round distinction, input layers, exact max-cover metric, format requirements"
     },
     {
       "name": "Public leaderboard",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-      "status": "Retrieved leading rows with page-fetch tool this session",
+      "status": "Leading rows retrieved in the earlier research pass dated 2026-10-21; not re-fetched in the current re-audit",
       "supports": "OFFICIAL-LEADERBOARD-OBSERVATION: xiaofanhu 0.4413; not an artifact submission receipt"
     },
     {
       "name": "Official rules PDF",
       "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
-      "status": "First chunk retrieved; full PDF not audited",
+      "status": "First chunk retrieved in the earlier research pass dated 2026-10-21; full PDF not audited and not re-fetched in the current re-audit",
       "supports": "Identity of official rules only; no authenticated remaining weekly cap claimed"
     },
     {

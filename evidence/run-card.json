@@ -1,46 +1,83 @@
 {
-  "hypothesis": "Protocol preflight: no nonempty candidate can satisfy the literal registry overlap rule.",
-  "mechanism": "A hash-verified registered prior is positive across the complete footprint; every candidate dot lies in its 3px halo.",
-  "named_non_fault_mimic": "Dense background probability support (not a geological fault or new discovery).",
-  "lane": "No assigned method paragraph; no geological lane opened.",
-  "holdout": {
+  "schema": "gems81-run-card-v2",
+  "hypothesis": "Audit only of the inherited ASB candidate: antithetic LiDAR scarp-pair coincidence with basement/conductivity gradients. No new geological experiment was authorized or run.",
+  "mechanism": "The prior-session raster was emitted from rank-normalized lapneg/lappos/step and depth-to-base/conductivity-gradient surfaces by Poisson-priority thinning, with a mapped-catalogue exclusion buffer. The un-emitted surface was not retained.",
+  "named_non_fault_mimic": "Paired terrace riser or paleo-shoreline over a sedimentary pinch-out.",
+  "lane": "No assigned method paragraph was present. The inherited ASB method is not authorized for continuation in this turn.",
+  "holdout_dti": {
     "evidence_class": "HOLDOUT-DTI",
     "value": null,
-    "ci95": null,
+    "evaluator_version": "gems57-pooled-hide-v2 (pinned shared evaluator)",
     "withheld_positives": null,
-    "evaluator_version": "gems57-pooled-hide-v2",
-    "status": "NOT RUN: stopped before candidate construction"
+    "ci95": null,
+    "status": "NOT RUN this turn: the literal registry overlap preflight stopped before new surface construction."
+  },
+  "prior_session_holdout_receipt": {
+    "candidate": {
+      "evidence_class": "HOLDOUT-DTI (legacy receipt; not protocol-compliant or independently reproduced)",
+      "value": 0.08312651477439477,
+      "evaluator_version": "v81.1 local/private implementation, two draws; not the pinned shared evaluator",
+      "withheld_positives": 25038,
+      "ci95": null,
+      "ci_note": "The prior receipt's two-draw min/max range is not a 95% confidence interval."
+    },
+    "d28_control": {
+      "evidence_class": "HOLDOUT-DTI (legacy receipt; not protocol-compliant or independently reproduced)",
+      "value": 0.09922256956705666,
+      "evaluator_version": "v81.1 local/private implementation, same-instrument control as reported",
+      "withheld_positives": 25038,
+      "ci95": null,
+      "ci_note": "No valid 95% confidence interval was supplied in the prior receipt."
+    },
+    "status": "Historical receipt values only; do not compare them with organizer scores or use them for promotion."
   },
   "leakage_canary": {
+    "evidence_class": "LEAKAGE-CANARY",
     "auc": null,
-    "status": "NOT RUN: no features tested"
+    "status": "NOT RUN this turn. Prior-session AUCs were not evaluated on the required blocked holdout and are not accepted as canary results."
   },
   "registry": {
-    "evidence_class": "REGISTRY-MEASUREMENT",
-    "rank_correlation": null,
-    "candidate_overlap": null,
-    "universal_overlap_for_every_nonempty_in_footprint_dot_set": 1.0,
+    "evidence_class": "REGISTRY-MEASUREMENT, not a performance score",
     "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
-    "scope": "One sufficient rejection witness; not a complete scan. Applies before placement and to all possible final dots."
+    "final_raster_rank_correlation": 0.03280651109842526,
+    "final_raster_rank_correlation_scope": "Inherited binary candidate raster versus all footprint values of the pinned dense witness; not the un-emitted surface.",
+    "pre_emission_surface_rank_correlation": null,
+    "pre_emission_surface_status": "NOT MEASURED: surface bytes were not retained; no new surface was constructed.",
+    "overlap_definition": "literal finite positive witness support treated as dots; dense-surface semantics remain unresolved",
+    "final_dot_overlap_within_3px": 1.0,
+    "overlap_limit_strictly_greater_than": 0.7,
+    "universal_preplacement_overlap_for_any_nonempty_candidate": 1.0,
+    "verdict": "literal overlap gate fires; stop; uniqueness interpretation unresolved",
+    "semantic_conflict": "The pinned shared two_phase_summary classifies the witness as a continuous surface and says overlap firing is not duplication evidence. The user protocol does not specify whether its positive support counts as registry dots.",
+    "scope": "One hash-verified witness suffices for a stop under the literal positive-support reading; this is not a complete registry scan or a claim that every like-for-like interpretation forbids all nonempty rasters."
   },
-  "raster_sha256": null,
+  "raster_sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
+  "raster_status": "Inherited prior-session negative candidate; withdrawn from the current published tree; not a new or authorized submission.",
+  "historical_candidate_name": "gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
   "validator_output": {
-    "status": "NOT RUN: no candidate TIF exists",
-    "no_nan_inside_footprint": null,
-    "values_in_0_1": null,
-    "crs_shape_transform_match": null,
-    "audit_inputs_grid_match": true
+    "evidence_class": "LOCAL-FORMAT-VALIDATION, not organizer acceptance",
+    "single_band_float32": true,
+    "no_nan_inside_footprint": true,
+    "no_infinity_inside_footprint": true,
+    "values_in_0_1_inside_footprint": true,
+    "crs_shape_transform_match": true,
+    "zero_outside_footprint": true,
+    "zero_on_mapped_catalogue": true,
+    "local_format_checks_passed": true,
+    "registry_uniqueness_passed": false,
+    "authorized_to_download_and_submit": false
   },
   "submission_name": null,
-  "note": "NEGATIVE: literal registry overlap rule rejects every nonempty candidate. No TIF generated; no competition slot used.",
+  "submission_note": "No submission authorized; do not download the legacy ASB candidate.",
   "verdict": "negative",
-  "decision": "STOP_UNIVERSAL_DUPLICATE",
+  "decision": "STOP_LITERAL_SUPPORT_OVERLAP",
   "authorized_to_download_and_submit": false,
-  "experiments_run": 0,
+  "experiments_run_this_turn": 0,
   "weekly_slots_used": 0,
   "incomplete_requirements": [
-    "Unique submission TIF not generated because binding stop rule fires.",
-    "New geological candidate not validated.",
-    "No claim of higher leaderboard score."
+    "No new unique submission TIFF is authorized or generated.",
+    "No valid current HOLDOUT-DTI with a spatial-block-bootstrap 95% CI exists.",
+    "The legacy candidate's pre-emission surface is unavailable, and its final dots fail the literal overlap rule.",
+    "A method lane is unassigned and the organizer-authenticated full feature stack is absent."
   ]
 }

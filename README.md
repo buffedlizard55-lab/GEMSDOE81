@@ -1,22 +1,31 @@
 # GEMSDOE81 — audited fault-prediction research
 
-## Submission status: **DO NOT SUBMIT — no authorized new TIF**
+## Submission status: **DO NOT SUBMIT — no authorized TIF**
 
 [Executive summary and submission instructions](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html)
-· [Research review](docs/research/review.md) · [Machine-readable run card](evidence/run-card.json)
+· [Research review](docs/research/review.md) · [Canonical machine-readable run card](evidence/run-card.json)
 
-**The requested unique submission was NOT generated.** The literal registry rule
-rejects every nonempty in-footprint candidate: a verified registered prior is
-positive throughout the footprint. Overlap would be 100%, exceeding the 70%
-stop limit, regardless of geological method. We obey the stop rule rather than
-copy an old submission, fabricate a success, or quietly exempt dense priors.
-See [the independently recomputed proof](evidence/preflight.json).
-A format-valid TIFF is not necessarily unique, scientifically promoted, accepted
-by DrivenData, or a good predictor. No competition submission slot was used.
+**No new submission TIFF was generated or authorized in this turn.** Under the
+literal positive-pixel support rule, a SHA-verified registered prior covers every
+footprint pixel and any nonempty candidate therefore has 100% forward overlap.
+See [the independently recomputed proof](evidence/preflight.json). The pinned
+shared template also has a two-phase interpretation that treats dense surfaces
+as continuous fields, not dot fields; the user protocol does not settle that
+semantic conflict. We do not silently apply either an exemption or a private
+rewrite. The release remains fail-closed; no lane was assigned, no valid shared
+holdout/95% CI exists, and no weekly slot was used.
 
-
-## Parallel-session candidate added by arena/2b6bccb9 (this merge) — STATUS DISPUTED, selector must resolve
-A unique ASB TIF was generated in a parallel session: `docs/downloads/gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif` (page: `docs/asb-candidate.html`, run card `evidence/run_card.json`). It is format-validator-clean and, vs the winner/d28 binary registry rasters, rank-corr 0.031 and 31% dots within 3px. **However it conflicts with the DO-NOT-SUBMIT gate above**: that gate reads the registry rule against a dense continuous prior raster (100% overlap), and the candidate's science verdict is in any case **negative** (HOLDOUT-DTI v81.1 0.0831 vs 0.0992 control). Until a selector step reconciles the registry interpretation, **treat the governing status as DO NOT SUBMIT / do not spend a slot**; the file remains as a measured negative deliverable.
+A prior parallel session had left an ASB candidate and advertised it as safe to
+submit. Its local format/range checks pass; its final dots have 100% overlap with
+the dense witness under the literal support definition. The template's own
+like-for-like interpretation means this alone is not an unconditional duplicate
+finding for a continuous surface, so uniqueness is **not cleared** rather than
+claimed impossible under every interpretation. The raster was removed from the
+current published download tree; its SHA, local validator output, and registry
+audit remain documented in
+[evidence/legacy-candidate-audit.json](evidence/legacy-candidate-audit.json).
+Its prior holdout values lack a valid shared-evaluator 95% CI and are not accepted
+results. See the [current status page](docs/index.html).
 
 ## Start here every session — user operating brief
 
@@ -44,7 +53,10 @@ point. The original request arrived on 2026-10-21.
   paragraph was supplied here; do not invent permission to reopen a prior lane.
   Rank correlation >0.90 against any registry raster OR >70% of candidate dots
   within 3 px of any prior means duplicate: log and stop. Check the surface before
-  placement AND final dots. Do not silently weaken this rule.
+  placement AND final dots. The pinned template also distinguishes continuous
+  surfaces from dot fields; the prompt does not define whether dense support pixels
+  count as a registry raster's “dots”. Do not silently weaken the rule; keep blocked
+  until the shared protocol resolves the like-for-like interpretation.
 - **Reuse:** use shared template cached features, `evaluate_holdout.py`, and
   `submission_writer.py`. Hide-and-recover: withhold whole fault segments with a
   buffer; derive catalogue features from visible faults only; mask visible faults
@@ -123,10 +135,11 @@ the explicit protocol.
   [features](https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif?rlkey=je8d8fepqfbst9lnwsq9rkplu&dl=0),
   [DEM links](https://www.dropbox.com/scl/fi/ig0mban712ns1atphgphe/Digital-elevation-model-links-JSON.pdf?rlkey=zm77f1vbtt2if8hlruymptnu3&dl=0).
 
-The family results supplied in the prompt are retained as **user reports**, not
-new verified scores, in [the imported family ledger](registry/user-reported-family-results.csv).
-Its provenance is the reviewed GEMSDOE77 ledger plus the original request;
-no comprehensive source-site verification is claimed.
+The family results supplied in the prompt are retained in the
+[family ledger](registry/user-reported-family-results.csv) with the supplied site
+URL and `USER-REPORTED; NOT ORGANIZER-CONFIRMED` evidence class on every row. The
+URLs and values were not independently rechecked in this turn; the ledger is an
+audit index, not a verified leaderboard or submission-receipt feed.
 
 ## Concurrent-session integration
 
@@ -145,19 +158,23 @@ python -m venv .venv
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python scripts/restore_inputs.py
 .venv/bin/python scripts/audit.py
-# Expected exit 2 = verified STOP_UNIVERSAL_DUPLICATE, not a broken audit.
-# Exit 3 = untrusted/missing input; exit 0 = no universal proof, NOT clearance.
+# Expected exit 2 = STOP_LITERAL_SUPPORT_OVERLAP under positive-support reading, not an input error.
+# The shared two-phase interpretation remains a documented semantic conflict.
+# Exit 3 = untrusted/missing input; exit 0 = no literal universal proof, NOT clearance.
 .venv/bin/python scripts/audit_reference.py   # historical bytes: learning only
 .venv/bin/python -m pytest -q
 .venv/bin/python scripts/build_site.py
 ```
 
-Shared evaluator and writer are unmodified under `vendor/gems57/`; hash-check
-before use. No feature stack, model, holdout score, AUC or new candidate is claimed.
-The earlier `download_competition_data.sh` / `prepare_data.py` commands do not exist
-in this starting repo and are not represented as working training steps here. See the
-[data placement and provenance note](data/README.md) for the three audit-only inputs
-and their owner-mirror limitations.
+The shared evaluator, writer, validator, and uniqueness code are unmodified under
+`vendor/gems57/`; `scripts/audit.py` verifies their pinned hashes. No organizer-
+authenticated full feature stack, active model pipeline, or current protocol-
+compliant HOLDOUT-DTI/AUC exists. Legacy ASB surface/emitter code remains for
+learning only; its private metric, holdout, and writer copies were removed. The
+old `download_competition_data.sh` / `prepare_data.py` commands do not exist here.
+`scripts/fetch_data.sh` is an owner-mirror helper, not an authenticated organizer
+training-data download or preparation pipeline. See the
+[data placement and provenance note](data/README.md) for audit inputs and limits.
 
 ## Limitations and next-session work
 

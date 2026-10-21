@@ -1,6 +1,9 @@
-"""Lazy-greedy submodular maximum-coverage emission under the exact 300 m
-triangular kernel: gain(x|S)=sum_q S(q)*max(0,k(|x-q|)-C(q)), C=coverage so far.
-Candidate pool = top-`pool` surface pixels outside the catalogue exclusion zone."""
+"""Legacy exploratory emitters from the inherited ASB experiment.
+
+These are not a pinned shared writer, are not authorized for current use, and
+must not be imported by submission entry points. Re-evaluate any future emitter
+under an assigned lane and the shared holdout protocol before promotion.
+"""
 import heapq, numpy as np
 OFFS=[(dy,dx,max(1-np.hypot(dy,dx)/3,0.)) for dy in range(-3,4) for dx in range(-3,4) if max(1-np.hypot(dy,dx)/3,0.)>0]
 def greedy_cover(S, foot, allowed, n_target, pool=160000):

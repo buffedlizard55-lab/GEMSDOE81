@@ -2,14 +2,27 @@
 
 ## Decision first
 
-**DO NOT SUBMIT. There is no authorized new TIF.** This is a negative deliverable,
-not a successful generation claim. The protocol's literal uniqueness rule is
-unsatisfiable for a nonempty in-footprint prediction against the verified dense
-registry witness. Generating a fake, empty, copied, or relabelled TIF would not
-meet the brief. No new candidate surface was constructed, no experiment was run,
-and no weekly slot was used. The proof applies before placement and to all final
-dot sets. A complete registry scan cannot overturn a single sufficient rejection
-witness; we do not claim such a scan was performed.
+**DO NOT SUBMIT. No new TIF is authorized.** This is a negative deliverable,
+not a successful generation claim. A prior parallel-session ASB candidate existed
+in the inherited tree. The shared local validator passes its format checks; under
+the literal support definition `finite & value > 0`, its exact final-dot overlap
+against the pinned dense witness is 1.0, above the 0.70 stop. The candidate was
+removed from the current Pages download tree. Its pre-emission surface was not
+retained, and its prior two-draw holdout range is not a 95% CI from the pinned
+shared evaluator.
+
+**Important protocol ambiguity:** the pinned template also contains
+`two_phase_summary`, which classifies a full-footprint positive raster as a
+`continuous_surface` and says such an overlap firing is not itself evidence of
+duplication; it reserves dot-overlap comparison for `dot_field` rasters. The user
+protocol does not define whether a dense probability surface counts as a registry
+raster's “dots”. This release does not silently choose the exemption or modify the
+shared template: it logs the literal 100% overlap as a stop, but does not claim
+that every conceivable like-for-like interpretation makes any nonempty prediction
+impossible. The inherited candidate is still not promotable: no lane was assigned,
+its raw surface and valid shared holdout/95% CI are missing, and no full dot-field
+registry scan was performed. No new candidate surface or geological experiment
+was built in this turn, and no weekly slot was used.
 
 ## Scope and prior sessions
 
@@ -19,12 +32,18 @@ There was no previous-session pipeline at the starting commit. During this run,
 concurrent PR #1 merged a research-only site into main. It was integrated without
 discarding its notes: superseded material is retained under
 `docs/archive/first-review/`, with current-status pointers at its old entry paths.
-It added no model or data pipeline and does not change the measured stop.
+It added no model or data pipeline and does not change the measured stop. A later
+parallel-session merge had added an ASB raster and a page incorrectly declaring it
+safe to submit. The current review re-audited that inherited raster, recorded the
+format/overlap results in `evidence/legacy-candidate-audit.json`, removed the
+misleading download from the current site tree, and retired the private evaluator,
+holdout, and writer modules. The source-history file is not treated as a current
+candidate or a valid holdout result.
 Read-only review sources:
 
 - [GEMSDOE32 pinned tree](https://github.com/buffedlizard55-lab/GEMSDOE32/tree/f62038b54dcb7767d4d997f80b033cdc3d42bef9): H33 code, build receipts, research and artifact.
 - [GEMSDOE77 pinned tree](https://github.com/buffedlizard55-lab/GEMSDOE77/tree/6c363745d864f01d47b9d2cba5da8857953e93d0): extensive family lane registry, prior saturation reports and data manifest. Its previous conclusions were treated as leads, not new measurements.
-- [Shared template](https://github.com/buffedlizard55-lab/60GEMSDOE/tree/b99591eede63c6d45c8a896255b8cd34824fa00b/src/gems57): fetched byte-for-byte, SHA-pinned in `registry/template_pin.json`. No private evaluator/writer fork.
+- [Shared template](https://github.com/buffedlizard55-lab/60GEMSDOE/tree/b99591eede63c6d45c8a896255b8cd34824fa00b/src/gems57): fetched byte-for-byte, SHA-pinned in `registry/template_pin.json`; the vendor copy remains unmodified. The inherited `src/gems81` private metric, holdout, and writer copies have been removed; only legacy ASB surface/emission source remains, unused by active submission commands.
 - LEARNGEMSDOE, GEMSDOE73 and GEMSDOE80 GitHub trees inspected for tooling; this is **not** a line-by-line review of every family repository or website.
 
 The assigned method paragraph is absent. H81 is already used for slip-cone
@@ -65,26 +84,28 @@ receipt. Its legacy holdout fields mix summaries and cannot be relabelled as a
 current pooled HOLDOUT-DTI with a confidence interval. We cannot establish causal
 superiority, or promise to exceed that value, from those artifacts.
 
-The public leaderboard retrieved on 2026-10-21 shows 0.4413 for xiaofanhu
-(**OFFICIAL-LEADERBOARD-OBSERVATION**, not a receipt linking our bytes to a score).
+The earlier 2026-10-21 source pass recorded a public-leaderboard value of 0.4413
+for xiaofanhu (**OFFICIAL-LEADERBOARD-OBSERVATION**, not a receipt linking our
+bytes to a score); it was not refreshed during this re-audit.
 The prompt's 0.3195 is not the current leading value in that observation.
 
 ## Ranked hypotheses — proposals only, BEFORE implementation
 
-Ranks are qualitative priority judgments, **not projected scores**. None is claimed
-novel across all family repositories: that requires a complete lane audit. All are
-new relative to this initially empty checkout. No new external data is required in
-principle; cached organizer feature availability has **not** been established in
-this checkout. These are conditional proposals, not viable tested candidates.
-Only the first should be considered after the shared stop condition is resolved
-and a narrow lane is assigned; no experiments are authorized by this document.
+Ranks are qualitative judgements about *possible* holdout-DTI improvement per cost,
+**not projected scores or measured results**. None is claimed novel across all family
+repositories: that requires a complete lane audit. The four proposals are new relative
+to the first-review checkout, but prior-family novelty is unverified. Cached organizer
+feature availability has **not** been established in this checkout; each proposal is
+conditional, not a viable tested candidate. The top-ranked option is only a proposal
+for after the shared stop is resolved and a method lane is assigned; no experiment is
+authorized by this document.
 
-| Rank / qualitative expected value vs cost | Hypothesis, layers and exact signature | Why it might reveal a missing fault | Non-fault mimic / difference from reviewed work |
+| Rank / qualitative expected DTI improvement and implementation cost | Hypothesis, exact layers and targeted signature | Why it might reveal a missing fault rather than a mapped one | Named non-fault mimic / difference from reviewed work |
 |---|---|---|---|
-| First / medium cost; strongest expected value per cost, conditional | **Cross-strike profile displacement:** `rtp`, `iso_grav_anom`, `cond_surf`; estimate lateral profile shifts across a candidate discontinuity by normalized cross-correlation of adjacent parallel profiles, require a consistent signed displacement over several windows. | Buried displacement can survive even when the surface scarp is erased. | Intrusive lithologic contacts and interpolation seams. Targets displacement of profiles, not H33 ridge thinning or the reviewed magnetic gradient-worm amplitude. Family-wide novelty unverified. |
-| Second / medium cost; moderate expected value and implementation burden | **Conductive-base flexure with magnetic continuity break:** `depth_to_base_surf`, `cond_surf`, `rtp`; signed second derivatives of conductive-base depth, gated by a change in magnetic profile phase across the flexure. | A buried barrier/conduit boundary may perturb conductive stratigraphy without a mapped Quaternary scarp. | Saline basin margins and inverted-model regularization. This tests a flexure/phase relation rather than a scalar product of edge magnitudes. Existing template physics lanes need a collision audit. |
-| Third / high cost; plausible value, weaker cost-adjusted priority | **Paired catchment piercing points:** elevation/DEM and slope; flow-routing tributary heads and valley mouths on opposite sides of a proposed line, require consistent signed lateral offsets in multiple independent catchments. | Lateral fault motion can offset drainage without a continuous preserved scarp. | Stream capture, alluvial avulsion and DEM artifacts. Different from GEMSDOE32's collinear valley-chain hypothesis: the observable is repeated displacement, not straightness. Coarse detrended elevation may be insufficient; high-resolution official DEM would need an availability check before upgrading viability. |
-| Fourth / medium cost; lower expected value until novelty is established | **Scale-asymmetric magnetic profile truncation:** `rtp`, `tmi`, `mag_anom`; compare left/right autocorrelation lengths along local strike across candidate boundaries, require truncation stable under smoothing but not aligned with survey seams. | Fault juxtaposition can terminate a magnetic fabric without producing a strong ridge. | Volcanic unit boundaries and survey-leveling errors. Unlike amplitude/edge worms, this tests texture termination; texture lanes already exist and novelty is unresolved. |
+| First / expected holdout-DTI gain: moderate but uncertain; cost: medium | **Cross-strike profile displacement:** `rtp`, `iso_grav_anom`, `cond_surf`; estimate lateral profile shifts across a candidate discontinuity by normalized cross-correlation of adjacent parallel profiles, require a consistent signed displacement over several windows. | Buried displacement can survive even when the surface scarp is erased. | Intrusive lithologic contacts and interpolation seams. Targets displacement of profiles, not H33 ridge thinning or the reviewed magnetic gradient-worm amplitude. Family-wide novelty unverified. |
+| Second / expected holdout-DTI gain: low-to-moderate; cost: medium | **Conductive-base flexure with magnetic continuity break:** `depth_to_base_surf`, `cond_surf`, `rtp`; signed second derivatives of conductive-base depth, gated by a change in magnetic profile phase across the flexure. | A buried barrier/conduit boundary may perturb conductive stratigraphy without a mapped Quaternary scarp. | Saline basin margins and inverted-model regularization. This tests a flexure/phase relation rather than a scalar product of edge magnitudes. Existing template physics lanes need a collision audit. |
+| Third / expected holdout-DTI gain: plausible but high-variance; cost: high | **Paired catchment piercing points:** elevation/DEM and slope; flow-routing tributary heads and valley mouths on opposite sides of a proposed line, require consistent signed lateral offsets in multiple independent catchments. | Lateral fault motion can offset drainage without a continuous preserved scarp. | Stream capture, alluvial avulsion and DEM artifacts. Different from GEMSDOE32's collinear valley-chain hypothesis: the observable is repeated displacement, not straightness. Coarse detrended elevation may be insufficient; high-resolution official DEM would need an availability check before upgrading viability. |
+| Fourth / expected holdout-DTI gain: low/uncertain until novelty is established; cost: medium | **Scale-asymmetric magnetic profile truncation:** `rtp`, `tmi`, `mag_anom`; compare left/right autocorrelation lengths along local strike across candidate boundaries, require truncation stable under smoothing but not aligned with survey seams. | Fault juxtaposition can terminate a magnetic fabric without producing a strong ridge. | Volcanic unit boundaries and survey-leveling errors. Unlike amplitude/edge worms, this tests texture termination; texture lanes already exist and novelty is unresolved. |
 
 The named magnetic/electrical bands are from the organizer-described competition feature stack; the official problem page is public, but the competition data page is login-gated. The local manifest pins owner-supplied mirrors for integrity only, not organizer authentication or redistribution permission. The catchment proposal additionally needs DEM/slope; high-resolution official DEM coverage must be checked before it could be called viable. A separate [external-source/access screen](external-source-screen.md) records geothermal, ASTER, 3DEP, Landsat, and Sentinel-1 leads. Some official landing pages were reachable, while the 3DEP page was only nominated from the owner-supplied manifest; target-area coverage and data bytes were not verified, so none is promoted as an obtainable/viable input.
 
@@ -113,39 +134,94 @@ leaderboard improvement under catalogue-to-new-fault distribution shift.
 
 ## Irregularities and next work
 
-1. **Universal duplicate witness:** pinned prior is positive at every footprint
-   pixel. See `evidence/preflight.json`. The shared upstream uniqueness module
-   contains a like-for-like exemption for dense priors. We do NOT invoke it:
-   doing so contradicts this prompt's literal “any registry raster” rule.
-   Resolve semantics in the shared protocol first, not a private fork.
-2. **No identifiable lane assignment.** Do not open another H81 lane by accident.
-3. **No organizer-authenticated data or submission receipts.** SHA integrity of
-   owner mirrors does not establish official origin, licensing, or acceptance.
-4. **No cached feature stack here.** The three small audit inputs are not a
-   complete training-data restore. GPU is not established as necessary for these
-   CPU hypotheses; the old GPU pipeline claim does not apply to this repo.
-5. **Rule and feedback cap:** PDF source was opened but not fully audited in this
-   session. The authenticated submission-page remaining weekly cap is unknown;
-   no number is invented. No competition submission automation is implemented.
-6. **Historical range error:** the failed file itself was not supplied. NaN,
-   infinity, nodata sentinels, or values outside [0,1] are possible causes, not
-   diagnoses. The inspected H33 zeros file does not exhibit that range error.
-7. **Freshness:** official web observations are dated snapshots, not a live feed.
-   CI reruns mathematical/input checks; it does not claim daily leaderboard
+1. **Universal witness under one support definition / shared semantic conflict:**
+   the pinned prior is positive at every sample-footprint pixel. See
+   `evidence/preflight.json`. If every positive pixel is treated as a dot, it
+   covers every allowed location in its three-pixel halo and blocks every
+   nonempty candidate. However, the same pinned template's `two_phase_summary`
+   treats a dense support as a continuous surface and says its overlap firing is
+   not duplication evidence; only dot fields receive like-for-like dot overlap.
+   The user protocol leaves “registry raster's dots” ambiguous. Keep this release
+   fail-closed and resolve the semantics in the shared protocol/template, not a
+   private fork. The negative is a policy stop, not proof that all interpretations
+   forbid every possible nonempty raster.
+2. **Inherited ASB candidate is not safe to submit:** the previous page said “OK TO
+   DOWNLOAD & SUBMIT”, but only compared its raster with selected H33/d28 examples.
+   Under the literal finite-positive support definition, the exact audit finds
+   final-dot overlap 1.0 against the pinned dense witness, above the 0.70 limit;
+   the candidate is withdrawn from the current Pages tree. Because the pinned
+   template classifies that witness as a continuous surface, this is not an
+   interpretation-independent duplicate finding. Its local format checks pass,
+   but uniqueness and acceptance are not cleared.
+   Its pre-emission surface bytes are absent, so its surface rank correlation cannot
+   be reconstructed; a candidate-independent pre-placement proof already blocks it.
+3. **Legacy model-evaluation record is not protocol-compliant:** the imported
+   receipt's HOLDOUT-DTI values were produced by private v81.1 code with two draws;
+   its two-draw min/max is not a 95% CI. Its AUCs were not produced on the required
+   blocked holdout. A historical H33 comparison also uses a raster pruned against
+   the full catalogue, including hidden labels, so it is not a valid hide-and-recover
+   control. Do not promote or compare these values to organizer scores. The private
+   metric, holdout and writer modules were removed; active evaluation uses pinned
+   `vendor/gems57` only.
+4. **Historical score provenance:** the H33 page's 0.2778 is USER-REPORTED in the
+   supplied context, not ORGANIZER-CONFIRMED by a submission-page receipt; the
+   pinned H33 build receipt says UNSCORED. The prior parallel candidate card's
+   “ORGANIZER-CONFIRMED” label was incorrect and has been removed. The 0.4413
+   public-board number is a dated OFFICIAL-LEADERBOARD-OBSERVATION, not a receipt
+   for a particular raster; the prompt's 0.3195 is user-reported and may be stale.
+5. **No assigned lane.** The method paragraph referenced by the protocol is absent.
+   Do not infer authorization from the repository number or revive ASB, H81, or
+   another prior lane.
+6. **No organizer-authenticated data or submission receipts.** SHA integrity of
+   owner mirrors does not establish official origin, licensing, AOI coverage, or
+   acceptance. The full cached feature stack is absent; data placement alone does
+   not make this checkout's model pipeline ready. GPU need is not established for
+   the proposed CPU transforms.
+7. **Competition rules and cap:** the rules PDF was not fully audited here, and the
+   authenticated submission-page weekly allowance is unknown. No number is
+   invented; no selector or competition submission is automated.
+8. **Range-error diagnosis:** the failed upload itself was not supplied. NaN,
+   infinity, nodata sentinels, or values outside [0,1] are possible causes, not a
+   diagnosis. The inherited ASB candidate passes the shared local range checks;
+   that does not explain the separate rejection or guarantee portal acceptance.
+9. **Freshness:** official web observations are dated snapshots, not a live feed.
+   CI reruns mathematical and input checks; it does not claim daily leaderboard
    retrieval. Future source monitoring must retain timestamps and errors.
 
-### Three passes
+### Three passes in this session
 
-- Pass 1: restore pinned audit inputs, vendor unmodified shared code, recompute
-  the pre-placement rejection proof and H33 byte properties; build docs and CI.
-- Pass 2: test radius boundaries, empty supports, hash/grid mismatch and stale
-  authorization; review the exact DTI marginal algebra and dense-prior exemption.
-- Pass 3: rerun the tests and audits from pinned dependencies; verify website
-  links, fail-closed download state, no generated candidate or unauthorized score
-  claims, and explicit limitations before PR/merge.
+- Pass 1: read the README and current review, restored the three hash-pinned audit
+  inputs, verified the shared-template hashes, reproduced the pre-placement stop,
+  re-audited H33 bytes, and ran the existing tests. This exposed an inherited site
+  page that incorrectly advertised an ASB raster as safe to submit.
+- Pass 2: validated the inherited raster with the shared validator; independently
+  measured final-dot overlap under the literal support definition, documented the
+  shared-template semantic conflict, corrected score provenance; removed the unsafe
+  TIF from the published tree; retired private evaluator/holdout/
+  writer copies and the side-effecting candidate generator; added fail-closed checks.
+- Pass 3: regenerate the status site and run tests, preflight, candidate audit report
+  consistency, source/local-link checks, compile checks, and `git diff --check`. No
+  new candidate, experiment, holdout score, or weekly slot is authorized.
 
 Reproduction commands and results are in README and `evidence/verification.json`.
 
-### Follow-up concurrent integration — 2026-10-21
+### Historical integration and current re-audit — 2026-10-21
 
-After this review was first written, main advanced through PR #2 (`db03f65`) with the pinned shared tools, registry witness and reproducible preflight. This branch integrated that state instead of publishing a second competing site. We restored only the three hash-pinned audit inputs, reran `scripts/audit.py`, and reproduced exit 2 / `STOP_UNIVERSAL_DUPLICATE`; no candidate, geological experiment, leakage canary, or holdout was run. `scripts/audit_reference.py` rechecked the H33 raster bytes for learning only and still provides no performance score. The generated site now states `OK TO DOWNLOAD AS A COMPETITION SUBMISSION: NO FILE` and `OK TO SUBMIT: NO`; all 25 repository tests pass, including checks for in-page HTML fragments and current local Markdown links. A local HTTP smoke check returned the landing page, executive summary, source screen and preflight successfully. The additional official external-source screen is page-level only: no external dataset bytes or target-area coverage were verified.
+The earlier integration brought in the pinned shared tools, one registry witness,
+and a reproducible preflight. At that point the negative page said no candidate
+existed. A later parallel merge added the ASB TIF and a page that incorrectly
+labeled it safe to submit; its receipt did not check the dense witness.
+
+In this re-audit, the three hash-pinned inputs were restored and `scripts/audit.py`
+again returned exit 2 / `STOP_LITERAL_SUPPORT_OVERLAP`. The inherited candidate's local
+format checks pass, but the exact final-dot overlap is 1.0 against the pinned witness
+under the literal positive-support definition; the pinned template's continuous-
+surface reading leaves dot-field semantics unresolved. See
+`evidence/legacy-candidate-audit.json`. Its raw pre-emission surface is absent.
+The TIF and misleading receipt were removed from the current Pages tree; the
+candidate's name and SHA remain in the run card as a historical negative result.
+The prior private metric/holdout/writer modules and unsafe generator entry points
+were retired. `scripts/audit_reference.py` rechecked H33 bytes for learning only;
+its site-reported value remains unconfirmed. No new experiment, current HOLDOUT-DTI,
+submission upload, or slot use occurred. External-source review remains landing-
+page-level only: no external dataset bytes or target-area coverage were verified.

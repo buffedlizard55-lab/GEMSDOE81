@@ -1,52 +1,4 @@
 {
-  "hypotheses": [
-    {
-      "rank": 1,
-      "id": "ASB (SHIPPED, verdict negative)",
-      "layers": "USGS 3DEP 1m LiDAR lapneg/lappos/step (lidar_scarp_features_u8 bands 4/5/3) x training_features depth_to_base_surf(15)+cond_surf(17) gradients",
-      "signature": "geometric mean of antithetic scarp-pair rank and basement-step rank",
-      "why_off_catalogue": "catalogue faults with subdued scarps or buried steps are missed by mappers; a coincident pair+step is unlikely from either process alone",
-      "differs": "not H33 orientation consensus, not catalogue-flank prune of a prior raster, not lidar-only; rank-corr 0.031 vs winner, 31% dots within 3px",
-      "cost": "low (done)",
-      "holdout": "HOLDOUT-DTI 0.0831 < d28 control 0.0992 same instrument -> negative"
-    },
-    {
-      "rank": 2,
-      "id": "Radiometric Th/K discordance lineament",
-      "layers": "GeoDAWN ThK/UK/UTh (DOI 10.5066/P93LGLVQ)",
-      "signature": "ratio-gradient ridge gated by ASB",
-      "why_off_catalogue": "hydrothermal alteration along blind faults changes Th/K without a mapped trace",
-      "differs": "ratios unused by ASB shipped surface",
-      "cost": "low; NOT TESTED (3-experiment budget exhausted)"
-    },
-    {
-      "rank": 3,
-      "id": "Geodetic strain-rate tensor eigen-alignment",
-      "layers": "geod_2ndinv/shear/dilatation bands 4/7/8",
-      "signature": "principal-strain axis alignment over 9px",
-      "why_off_catalogue": "actively straining blind faults need no scarp",
-      "differs": "bands are smooth (100km-scale risk, cf H33-E seismic warning)",
-      "cost": "low; NOT TESTED"
-    },
-    {
-      "rank": 4,
-      "id": "MT conductivity straight-boundary (cond_surf alone, long-window coherence)",
-      "layers": "cond_surf band 17",
-      "signature": "long straight gradient ridge",
-      "why_off_catalogue": "clay-cap breach over blind conduit",
-      "differs": "partially in ASB component B",
-      "cost": "low; NOT TESTED"
-    },
-    {
-      "rank": 5,
-      "id": "Sub-km seismicity lineaments",
-      "layers": "USGS ComCat/FDSN raw catalogue (free, official: https://earthquake.usgs.gov/fdsnws/event/1/)",
-      "signature": "epicentre collinearity + nodal-plane strikes",
-      "why_off_catalogue": "supplied ieq band is 100km-smoothed; raw events add sub-km structure",
-      "differs": "no repo surface uses raw events",
-      "cost": "medium; source obtainable via USGS FDSN (not fetched this session); NOT TESTED"
-    }
-  ],
   "sources": [
     {
       "claim": "Competition, DTI alpha0.2/beta0.8, submission must match CRS/shape/transform, values in [0,1]",
@@ -73,12 +25,16 @@
       "url": "https://en.wikipedia.org/wiki/Tversky_index"
     },
     {
-      "claim": "Winner raster + its audit (0.2778 ORGANIZER-CONFIRMED in prompt)",
+      "claim": "H33 raster + audit: 0.2778 is user-reported, not organizer-confirmed; the pinned build receipt says UNSCORED",
       "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html"
     },
     {
       "claim": "Competition design report NLR 96647",
       "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf"
+    },
+    {
+      "claim": "USGS 3D Elevation Program (3DEP); official page not queried in the current review, AOI coverage and bytes unverified",
+      "url": "https://www.usgs.gov/3d-elevation-program"
     }
   ],
   "data_manifest_sha256": {
@@ -94,11 +50,11 @@
     },
     {
       "id": "IR-81-02",
-      "text": "Prompt states both leaderboard high 0.4413 and 0.3195 at different points, and winner 0.2778; none re-verified live this session (drivendata leaderboard not fetched). Treat all as ORGANIZER-CONFIRMED-as-reported-by-user, UNSCORED for this raster."
+      "text": "The prompt reports 0.2778 from the GEMSDOE32 page and 0.3195 as a leaderboard high; these are USER-REPORTED, not submission-page receipts. An earlier dated public-leaderboard pass recorded 0.4413 as an OFFICIAL-LEADERBOARD-OBSERVATION, not a receipt for any artifact; it was not refreshed in this re-audit. The 0.2778 H33 build receipt says UNSCORED. None is a score for the inherited ASB raster."
     },
     {
       "id": "IR-81-03",
-      "text": "Hide-and-recover holdout mechanically penalises catalogue-flank strategies (winner HOLDOUT-DTI 0.0043 on v81.1); it ranks off-catalogue discovery surfaces, not flank pruning. Do not compare HOLDOUT-DTI to ORGANIZER-CONFIRMED live scores."
+      "text": "The inherited local v81.1 comparison and two-draw min/max were not protocol-compliant: no spatial-block-bootstrap 95% CI was supplied, and the H33 reference raster was created with a full-catalogue exclusion that includes heldout labels, making it an invalid hide-and-recover control. The prior receipt also used a private evaluator/writer rather than the pinned shared tools."
     },
     {
       "id": "IR-81-04",
@@ -106,7 +62,153 @@
     },
     {
       "id": "IR-81-05",
-      "text": "'Predicted values must be in range [0,1]' rejection reported by user is fixed by construction: zeros (not NaN) outside footprint, finite [0,1] everywhere, validator fails closed."
+      "text": "The rejected upload was not supplied, so its range-error cause remains unknown. The inherited candidate passes local finite [0,1] checks, but that does not diagnose the other file or prove organizer acceptance. The shared validator is the current local preflight."
+    },
+    {
+      "id": "IR-81-06",
+      "text": "The pinned registry witness has positive support across the footprint. Under the literal finite-positive support rule this gives every nonempty in-footprint dot candidate 100% forward overlap; the pinned shared two_phase_summary classifies the witness as a continuous surface and says its overlap firing is not dot-field duplicate evidence. The protocol does not resolve this meaning. Keep fail-closed; do not claim an interpretation-independent impossibility or silently exempt the witness."
+    },
+    {
+      "id": "IR-81-07",
+      "text": "No assigned method paragraph/lane, complete dot-field registry scan, current protocol-compliant HOLDOUT-DTI with spatial-block-bootstrap 95% CI, or organizer-authenticated feature stack is established; no candidate is authorized."
+    }
+  ],
+  "legacy_hypotheses_scope": "Preserved pre-review candidates; these are historical records, not the current ranking or authorization to implement.",
+  "legacy_hypotheses": [
+    {
+      "rank": 1,
+      "id": "ASB (INHERITED LEGACY CANDIDATE; WITHDRAWN AND UNAUTHORIZED)",
+      "layers": "USGS 3DEP 1m LiDAR lapneg/lappos/step (lidar_scarp_features_u8 bands 4/5/3) x training_features depth_to_base_surf(15)+cond_surf(17) gradients",
+      "signature": "geometric mean of antithetic scarp-pair rank and basement-step rank",
+      "why_off_catalogue": "catalogue faults with subdued scarps or buried steps are missed by mappers; a coincident pair+step is unlikely from either process alone",
+      "differs": "The earlier receipt reported rank-correlation 0.031 and 31% dot overlap versus selected H33/d28 rasters only; those values do not certify a complete registry scan. Re-audit measured 100% final-dot overlap against the pinned dense witness under the literal positive-support definition. The pinned template classifies that witness as a continuous surface, so the user protocol leaves dot-field semantics unresolved; uniqueness is not cleared, and this is not an interpretation-independent duplicate finding.",
+      "cost": "historical artifact audited and withdrawn; no active experiment",
+      "holdout": "Prior receipt reported HOLDOUT-DTI 0.0831 versus 0.0992 for d28 under a private v81.1 implementation. Its two-draw range is not a 95% CI and the result was not independently reproduced with the pinned shared evaluator; not eligible for promotion.",
+      "status": "LEGACY ONLY; not a current ranked proposal; unauthorized to download or submit"
+    },
+    {
+      "rank": 2,
+      "id": "Radiometric Th/K discordance lineament",
+      "layers": "GeoDAWN ThK/UK/UTh (DOI 10.5066/P93LGLVQ)",
+      "signature": "ratio-gradient ridge gated by ASB",
+      "why_off_catalogue": "hydrothermal alteration along blind faults changes Th/K without a mapped trace",
+      "differs": "ratios unused by ASB shipped surface",
+      "cost": "low; historical proposal; no experiment in the current review",
+      "status": "HISTORICAL PROPOSAL; not tested or ranked in the current review"
+    },
+    {
+      "rank": 3,
+      "id": "Geodetic strain-rate tensor eigen-alignment",
+      "layers": "geod_2ndinv/shear/dilatation bands 4/7/8",
+      "signature": "principal-strain axis alignment over 9px",
+      "why_off_catalogue": "actively straining blind faults need no scarp",
+      "differs": "bands are smooth (100km-scale risk, cf H33-E seismic warning)",
+      "cost": "low; historical proposal; not tested in the current review",
+      "status": "HISTORICAL PROPOSAL; not tested or ranked in the current review"
+    },
+    {
+      "rank": 4,
+      "id": "MT conductivity straight-boundary (cond_surf alone, long-window coherence)",
+      "layers": "cond_surf band 17",
+      "signature": "long straight gradient ridge",
+      "why_off_catalogue": "clay-cap breach over blind conduit",
+      "differs": "partially in ASB component B",
+      "cost": "low; historical proposal; not tested in the current review",
+      "status": "HISTORICAL PROPOSAL; not tested or ranked in the current review"
+    },
+    {
+      "rank": 5,
+      "id": "Sub-km seismicity lineaments",
+      "layers": "USGS ComCat/FDSN raw catalogue (free, official: https://earthquake.usgs.gov/fdsnws/event/1/)",
+      "signature": "epicentre collinearity + nodal-plane strikes",
+      "why_off_catalogue": "supplied ieq band is 100km-smoothed; raw events add sub-km structure",
+      "differs": "no repo surface uses raw events",
+      "cost": "medium; source obtainable via USGS FDSN (not fetched this session); historical proposal; not tested in the current review",
+      "status": "HISTORICAL PROPOSAL; not tested or ranked in the current review"
+    }
+  ],
+  "hypotheses_scope": "Current qualitative ranking before implementation. These are proposals only, not measured scores or evidence of novelty; no implementation, holdout, or promotion is authorized.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "Cross-strike profile displacement",
+      "layers": [
+        "rtp",
+        "iso_grav_anom",
+        "cond_surf"
+      ],
+      "signature": "Normalized cross-correlation estimates a consistent signed lateral shift between adjacent cross-strike profiles across multiple windows.",
+      "why_off_catalogue": "Buried displacement may persist where surface scarps have eroded or are subdued.",
+      "non_fault_mimics": [
+        "intrusive lithologic contacts",
+        "interpolation seams"
+      ],
+      "differs": "Tests coherent profile displacement, not H33 ridge thinning or magnetic gradient-worm amplitude; family-wide novelty is unverified.",
+      "qualitative_expected_holdout_dti_improvement": "moderate but uncertain; not a numeric projection",
+      "implementation_cost": "medium",
+      "data_availability": "Competition feature bands are named in the organizer-described stack, but the full cached stack and organizer-authenticated access are not established in this checkout; proposal only.",
+      "status": "PROPOSAL ONLY; no lane assigned, not implemented, not validated, not eligible for promotion"
+    },
+    {
+      "rank": 2,
+      "id": "Conductive-base flexure with magnetic continuity break",
+      "layers": [
+        "depth_to_base_surf",
+        "cond_surf",
+        "rtp"
+      ],
+      "signature": "Use signed second derivatives of conductive-base depth gated by a magnetic profile-phase change across the flexure.",
+      "why_off_catalogue": "A buried barrier or conduit boundary may perturb conductive stratigraphy without a mapped Quaternary scarp.",
+      "non_fault_mimics": [
+        "saline basin margins",
+        "inverted-model regularization"
+      ],
+      "differs": "Tests flexure/phase relation rather than a scalar product of edge magnitudes; existing physics lanes still need a collision audit.",
+      "qualitative_expected_holdout_dti_improvement": "low-to-moderate; not a numeric projection",
+      "implementation_cost": "medium",
+      "data_availability": "Requires competition feature bands; complete cached stack and organizer provenance are not established in this checkout.",
+      "status": "PROPOSAL ONLY; no lane assigned, not implemented, not validated, not eligible for promotion"
+    },
+    {
+      "rank": 3,
+      "id": "Paired catchment piercing points",
+      "layers": [
+        "official DEM/elevation",
+        "slope"
+      ],
+      "signature": "Flow-route tributary heads and valley mouths on opposite sides of a candidate line; require repeated, consistent signed lateral offsets in independent catchments.",
+      "why_off_catalogue": "Lateral fault motion can offset drainage without preserving a continuous scarp.",
+      "non_fault_mimics": [
+        "stream capture",
+        "alluvial avulsion",
+        "DEM resolution and survey artifacts"
+      ],
+      "differs": "Tests repeated displacement rather than GEMSDOE32 collinear valley-chain straightness.",
+      "qualitative_expected_holdout_dti_improvement": "plausible but high-variance; not a numeric projection",
+      "implementation_cost": "high",
+      "required_external_source": "USGS 3DEP official program: https://www.usgs.gov/3d-elevation-program",
+      "data_availability": "Official tile catalog, competition-AOI coverage, and data bytes were not checked; the owner-supplied manifest is not an authenticated source receipt. Not confirmed obtainable or viable.",
+      "status": "CONDITIONAL PROPOSAL ONLY; external availability and lane must be verified before implementation"
+    },
+    {
+      "rank": 4,
+      "id": "Scale-asymmetric magnetic profile truncation",
+      "layers": [
+        "rtp",
+        "tmi",
+        "mag_anom"
+      ],
+      "signature": "Compare left/right along-strike autocorrelation lengths across candidate boundaries; require truncation stable under smoothing and not aligned with survey seams.",
+      "why_off_catalogue": "Fault juxtaposition may terminate magnetic fabric without producing a strong ridge.",
+      "non_fault_mimics": [
+        "volcanic-unit boundaries",
+        "survey-leveling errors"
+      ],
+      "differs": "Tests texture termination rather than magnetic amplitude/edge worms; novelty against existing texture lanes is unresolved.",
+      "qualitative_expected_holdout_dti_improvement": "low/uncertain until novelty is established; not a numeric projection",
+      "implementation_cost": "medium",
+      "data_availability": "Requires competition feature bands; complete cached stack and organizer provenance are not established in this checkout.",
+      "status": "PROPOSAL ONLY; no lane assigned, not implemented, not validated, not eligible for promotion"
     }
   ]
 }

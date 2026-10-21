@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Reproducible, candidate-independent rejection proof. Never a clearance.
+"""Reproducible, candidate-independent literal-support stop proof. Never a clearance.
 
-Exit 2: scientifically valid negative (universal duplicate witness).
+Exit 2: literal finite-positive support is universally covered by one witness.
+       The pinned template has a competing like-for-like surface interpretation;
+       this code reports the semantic caveat and stays fail-closed.
 Exit 3: untrusted or missing inputs. Exit 0: no universal proof, NOT approval.
 """
 import argparse
@@ -83,16 +85,21 @@ def audit(root=ROOT):
     blocked = proof['universal_overlap_blocker']
     return {
         'schema': 'gems81-preflight-v1', 'evidence_class': 'REGISTRY-MEASUREMENT, not a performance score',
-        'decision': 'STOP_UNIVERSAL_DUPLICATE' if blocked else 'NO_UNIVERSAL_PROOF_NOT_CLEARANCE',
-        'scope': 'One verified witness suffices to reject; this is not a complete registry scan.',
+        'decision': 'STOP_LITERAL_SUPPORT_OVERLAP' if blocked else 'NO_LITERAL_UNIVERSAL_PROOF_NOT_CLEARANCE',
+        'scope': 'One verified witness suffices for a stop under the literal positive-support reading; this is not a resolved like-for-like dot-field finding or a complete registry scan.',
         'input_sha256': {k: v[1] for k,v in inputs.items()}, 'witness_source': source,
         'template_commit': pin['commit'], 'template_hashes_verified': True,
         'grid': {'crs': grids['sample'][0], 'shape': grids['sample'][1], 'transform': grids['sample'][2]},
         'footprint_pixels': int(foot.sum()), 'catalogue_pixels': int(cat.sum()),
         'proof': proof, 'including_catalogue_proof': full_proof,
-        'argument': 'For A contained in the 3px halo W of a prior, every nonempty C subset A has |C intersect W|/|C|=1 > 0.70. This rejects positive surface support before placement and every possible final dot set.',
-        'rank_correlation': None, 'rank_correlation_reason': 'No candidate exists; overlap alone is sufficient to stop.',
-        'candidate_raster_generated': False, 'experiments_run': 0, 'weekly_slots_used': 0,
+        'support_definition': 'finite registry prediction value > 0; literal positive-pixel support, regardless of dense-surface representation',
+        'argument': 'Under this support definition, for A contained in the 3px halo W of a prior, every nonempty C subset A has |C intersect W|/|C|=1 > 0.70. This is a candidate-independent stop under the literal reading.',
+        'shared_template_semantic_caveat': 'Pinned uniqueness.py also provides two_phase_summary: it classifies dense supports as continuous surfaces and says their overlap firing is not duplication evidence. The user protocol does not explicitly resolve whether such positive support counts as registry raster dots; do not silently choose the exemption or claim this is interpretation-independent impossibility.',
+        'rank_correlation': None,
+        'rank_correlation_reason': 'No new pre-emission surface was built. The inherited candidate has a separate final-raster audit in evidence/legacy-candidate-audit.json; the universal overlap proof is sufficient to stop before placement under the literal positive-support reading.',
+        'candidate_generated_by_this_audit': False,
+        'inherited_candidate_audit': 'evidence/legacy-candidate-audit.json',
+        'experiments_run_this_turn': 0, 'weekly_slots_used': 0,
         'authorized_to_submit': False, 'verdict': 'negative'
     }
 

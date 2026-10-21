@@ -1,48 +1,68 @@
 {
   "date_utc": "2026-10-21",
+  "branch": "arena/836dbddb-gemsdoe81",
   "pass_1": {
-    "status": "complete for negative-result scope",
+    "status": "complete",
     "actions": [
-      "Inspected empty starting repository and selected pinned reference trees",
-      "Fetched unmodified shared template",
-      "Restored SHA-pinned rejection-proof inputs",
-      "Recomputed universal overlap proof",
-      "Measured historical H33 bytes for learning only",
-      "Built a fail-closed static site"
+      "Read README.md, AGENTS.md, the current scientific review, and all run-card/evidence files before acting",
+      "Restored and SHA-verified the three audit inputs from pinned owner-supplied GitHub mirrors; this is not organizer authentication",
+      "Verified the pinned shared-template hashes and reproduced STOP_LITERAL_SUPPORT_OVERLAP under the literal support definition",
+      "Re-read the pinned H33 reference bytes for learning only",
+      "Reviewed the inherited ASB raster and discovered a stale page falsely saying it was safe to download and submit",
+      "Baseline tests found that the current site tree contained an unsafe TIFF and conflicting run-card files"
     ]
   },
   "pass_2": {
     "status": "complete",
     "fixes": [
-      "Closed input hash file handles deterministically",
-      "Kept dense-prior exemptions out of the binding decision",
-      "Distinguished marginal truth cover from nearest-truth dot credit in DTI explanation",
-      "Added shifted-grid, corrupt-input, nonfinite-catalogue and stale-approval tests",
-      "Documented missing lane, cached features, organizer receipts and incomplete family audit"
+      "Audited the inherited candidate using the pinned shared validator and literal uniqueness implementation",
+      "Measured final-raster rank correlation 0.0328065 and final-dot overlap 1.0 against the dense witness under the literal positive-support definition",
+      "Identified a semantic conflict: pinned two_phase_summary classifies the witness as a continuous surface and says its overlap firing is not dot-field duplicate evidence; no interpretation was silently selected",
+      "Kept pre-emission surface correlation null because the raw surface was not retained; the pre-placement proof rejects all nonempty supports under the literal reading",
+      "Removed the unsafe candidate TIFF, false receipt, and conflicting duplicate run-card files from the current published tree",
+      "Corrected the false ORGANIZER-CONFIRMED label for the user-reported H33 value; retained prior holdout numbers only as legacy, noncompliant receipt data with CI null",
+      "Retired private metric, holdout, and writer copies and disabled the unsafe, side-effecting candidate generator",
+      "Fixed the retired finalizer's package-import path and added a regression test that verifies import is side-effect free",
+      "Added fail-closed candidate auditing, validator use of the pinned shared package, site guards, source links and tests",
+      "Updated the machine-readable hypothesis registry to separate current qualitative proposals from preserved historical candidates; recorded the dense-surface semantic ambiguity"
     ]
   },
   "pass_3": {
-    "status": "complete locally",
+    "status": "complete",
     "commands": [
-      "python -m pytest -q",
-      "python scripts/audit.py",
-      "python scripts/audit_reference.py",
-      "python scripts/build_site.py",
-      "python -m compileall -q scripts tests vendor/gems57",
+      ".venv/bin/python scripts/audit.py",
+      ".venv/bin/python scripts/audit_reference.py",
+      ".venv/bin/python scripts/build_site.py",
+      ".venv/bin/python -m pytest -q",
+      ".venv/bin/python -m compileall -q scripts tests vendor/gems57 src/gems81",
       "git diff --check"
     ],
-    "tests_passed": 24,
+    "tests_passed": 31,
     "tests_failed": 0,
-    "warnings": "10 PendingDeprecationWarnings from rasterio.transform using affine multiplication in test fixtures; no validation or arithmetic failure",
+    "warnings": "10 PendingDeprecationWarnings from Rasterio test-fixture affine multiplication; no validation or arithmetic failure",
     "preflight_exit_code": 2,
-    "preflight_exit_meaning": "Verified binding negative, not input error",
-    "historical_byte_audit_exit_code": 0,
+    "preflight_exit_meaning": "STOP_LITERAL_SUPPORT_OVERLAP under the literal positive-support definition, not an input error; shared two-phase semantics remain unresolved",
+    "historical_candidate_audit_exit_code": 2,
+    "historical_candidate_audit_meaning": "Shared local format checks pass; literal overlap gate fires, but dense-surface interpretation prevents claiming an unambiguous duplicate finding",
+    "reference_byte_audit_exit_code": 0,
     "compile_exit_code": 0,
     "diff_check_exit_code": 0,
-    "site_local_links_resolve": true,
-    "candidate_tif_exists": false,
-    "original_unique_tif_requirement_satisfied": false,
-    "reason": "Generating a nonempty candidate conflicts with the binding duplicate stop; negative deliverable is explicit."
+    "local_html_links_and_fragments_resolve": true,
+    "candidate_tif_in_current_pages_tree": false,
+    "new_tif_generated_this_turn": false,
+    "new_protocol_compliant_holdout_dti": null,
+    "weekly_submission_slots_used": 0,
+    "authorized_to_download_and_submit": false,
+    "reason": "The literal positive-support reading blocks every nonempty in-footprint candidate and flags the inherited raster at 100% overlap; the pinned template's like-for-like interpretation creates an unresolved semantic conflict. No lane or protocol-compliant holdout justifies a new TIF."
   },
-  "deployment": "Existing Pages API reports legacy main/root, built. Switching to workflow deployment returned HTTP 403: Resource not accessible by integration. Root redirect preserves that existing configuration; audit CI and legacy Pages deploy are separate."
+  "deployment": "Existing Pages configuration is legacy main/root, and the root page redirects to docs/. The audit workflow builds a Pages artifact but deployment remains separate. An earlier Pages API switch attempt returned HTTP 403 (integration permission); no deployment permission change was attempted in this re-audit.",
+  "limitations": [
+    "The protocol's treatment of dense continuous surfaces as registry dot fields is unresolved against the pinned template's two-phase interpretation",
+    "No assigned method paragraph/lane",
+    "No organizer-authenticated full feature stack",
+    "No valid current HOLDOUT-DTI with spatial-block-bootstrap 95% CI",
+    "No full public registry scan; one sufficient witness was audited",
+    "No live source/leaderboard feed or authenticated weekly-cap read",
+    "No organizer submission receipt or acceptance confirmation"
+  ]
 }

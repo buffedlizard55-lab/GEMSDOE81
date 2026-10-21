@@ -12,6 +12,6 @@
 
 ## Decision
 
-These leads do not replace the current review's ranked, competition-feature hypotheses. The GDR, ASTER, Landsat, and Sentinel-1 landing pages were reachable; USGS 3DEP was only nominated from the owner-supplied manifest, and its page was not queried. For none were data bytes and target-area coverage established; therefore none is called obtainable or viable under the user's rule. Even verified coverage would not change the current `STOP_UNIVERSAL_DUPLICATE`: the pinned registry witness rejects every nonempty in-footprint prediction before placement. Do not spend time downloading these datasets until the shared protocol conflict is resolved and an authorized lane is assigned.
+These leads do not replace the current review's ranked, competition-feature hypotheses. The GDR, ASTER, Landsat, and Sentinel-1 landing pages were reachable; USGS 3DEP was only nominated from the owner-supplied manifest, and its page was not queried. For none were data bytes and target-area coverage established; therefore none is called obtainable or viable under the user's rule. New external data would not resolve the current literal-versus-like-for-like uniqueness interpretation or assign a method lane. Do not spend time downloading these datasets until those protocol gates are resolved.
 
 No external data from these sources were downloaded, transformed, rasterized, or used in validation. The source table in [`registry/sources.json`](../../registry/sources.json) is the date-stamped index; this is a point-in-time access screen, not a live feed.

@@ -1,15 +1,16 @@
-"""GEMSDOE81 LANE (unique, preregistered in registry/hypotheses.json):
-Antithetic-scarp-pair x basement-step coincidence (ASB).
-A blind fault is predicted ONLY where (A) a 1 m-LiDAR crest-convexity scarplet
-(lapneg) and base-concavity scarplet (lappos) co-occur in the same 100 m cell
-(geometric mean -- an antithetic pair, the cross-section of a fault scarp), AND
-(B) the subsurface steps there: gradient magnitude of depth_to_basement and of
-conductivity coincide (geometric mean). Final S = sqrt(A_rank * B_rank), each
-rank computed inside footprint only. LABEL-FREE: never reads labels/sample.
-Non-fault mimic: paired terrace riser / paleo-shoreline + sedimentary pinch-out.
-Differs from GEMSDOE32-H33 (orientation-order consensus across physics, dotted
-Poisson on 0.2708 base), H19/H25 (multi-line corroborated ridge surfaces),
-lidar-only scarps (7GEMSDOE/GEMSDOE47) and catalogue-flank pruning (winner)."""
+"""Legacy exploratory ASB surface from the inherited parallel-session candidate.
+
+This hypothesis was documented after the fact; the referenced
+``registry/hypotheses.json`` was not present, so the earlier "preregistered"
+claim was unsupported. The emitted surface bytes were not retained. Do not treat
+this as an assigned lane or a validated fault predictor. Its old evaluator,
+holdout, and writer modules have been removed from the active package in favor
+of the hash-pinned shared template.
+
+The historical method combined rank surfaces from lapneg/lappos/step and
+subsurface depth-to-base/conductivity gradients. A paired terrace riser,
+paleo-shoreline, or sedimentary pinch-out can mimic the same signature.
+"""
 import numpy as np, rasterio
 from scipy.ndimage import gaussian_filter
 def rank_unit(a, foot):

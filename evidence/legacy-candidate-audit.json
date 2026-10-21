@@ -1,0 +1,116 @@
+{
+  "schema": "gems81-candidate-audit-v1",
+  "evidence_class": "LOCAL-FORMAT-VALIDATION and REGISTRY-MEASUREMENT; not a performance score",
+  "candidate": {
+    "name": "gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
+    "sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
+    "bytes": 305125,
+    "positive_pixels_in_footprint": 44090,
+    "grid_matches_sample": true,
+    "pre_emission_surface_retained": false
+  },
+  "template": {
+    "commit": "b99591eede63c6d45c8a896255b8cd34824fa00b",
+    "hashes_verified": true
+  },
+  "input_sha256": {
+    "sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "existing_faults": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "dense_witness": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be"
+  },
+  "validator": {
+    "file": "gems81-asb-poisson44090-buf2-20261021T221522Z-1a12c8f1-zeros.tif",
+    "bytes": 305125,
+    "sha256": "e548bc657c9141f17af11b2c9063894eb0abcb4665504f22e1d3dde3ce504402",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.003590636420994997,
+    "emitted_positive_pixels": 44090,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true,
+      "exact_sample_crs_shape_transform": true,
+      "all_passed": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 44090,
+    "footprint_fraction": 0.00853238192791579
+  },
+  "registry": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "witness": {
+      "repo": "buffedlizard55-lab/17GEMSDOE",
+      "ref": "6fc71d19d49dca4960d5434bd81b6dd06fcc030a",
+      "path": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+      "sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be"
+    },
+    "witness_positive_pixels_in_footprint": 5167373,
+    "witness_representation": {
+      "kind": "continuous_surface",
+      "support_fraction": 1.0,
+      "limit": 0.2
+    },
+    "candidate_dot_overlap_within_3px": 1.0,
+    "overlap_limit_strictly_greater_than": 0.7,
+    "duplicate_by_literal_overlap": true,
+    "shared_template_two_phase_note": "The pinned two_phase_summary classifies this support as a continuous_surface and does not treat its overlap firing as duplication evidence. The user's dot-field semantics are unresolved; this audit reports the literal overlap and keeps the artifact unauthorized.",
+    "final_raster_spearman_vs_witness": 0.03280651109842526,
+    "final_raster_spearman_status": "computed on footprint",
+    "pre_emission_surface_spearman": null,
+    "pre_emission_surface_status": "NOT MEASURED: un-emitted surface bytes were not retained",
+    "preplacement_universal_overlap_proof": {
+      "allowed_pixels": 5106385,
+      "witness_positive_pixels": 5167373,
+      "exact_positive_allowed_pixels": 5106385,
+      "covered_allowed_pixels": 5106385,
+      "uncovered_allowed_pixels": 0,
+      "universal_overlap_blocker": true,
+      "forward_overlap_for_every_nonempty_candidate": 1.0,
+      "stop_threshold_strictly_greater_than": 0.7
+    },
+    "scope": "One hash-verified witness is a candidate-independent stop under the literal finite-positive support definition; this is not a complete registry scan or a resolved like-for-like dot-field finding."
+  },
+  "authorized_to_download_and_submit": false,
+  "verdict": "negative",
+  "verdict_reason": "Under the literal finite-positive support definition the overlap gate fires. The pinned template's two-phase continuous-surface interpretation creates a semantic conflict, and lane assignment, full dot-field registry clearance, and protocol-compliant shared HOLDOUT-DTI are absent. Keep this artifact unauthorized; local format validity is not submission approval."
+}
