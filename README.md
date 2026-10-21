@@ -2,38 +2,44 @@
 
 ## ✅ Submission status: OK TO DOWNLOAD & SUBMIT — one promoted file
 
-**File:** `docs/downloads/gems81-contasb-poisson44090-buf2-20261021T232312Z-04866ff3-zeros.tif`
+**File:** `docs/downloads/gems81-cont-poisson44090-buf2-20261021T233115Z-42223e10-zeros.tif`
 ([download from the site](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/index.html) ·
 [how to submit](https://buffedlizard55-lab.github.io/GEMSDOE81/docs/executive-summary.html) ·
 [run card](evidence/run_card.json))
 
 **Copy-paste submission Note (≤140 chars):**
-`GEMSDOE81 CONT-ASB continuation-gated scarp poisson44090 buf2 44090 dots zeros`
+`GEMSDOE81 CONT catalogue-continuation rings poisson44090 buf2 44090 dots zeros`
 
-- **Format — automated validator all-pass, no human inspection needed:** single-band
-  float32, EPSG:32611, 3730×3292, transform identical to `sample_submission.tif`,
-  finite binary {0,1} values in [0,1] **everywhere** (zeros, not NaN, outside the
-  footprint — this fixes the reported “Predicted values must be in range [0, 1]”
-  rejection), 0 on the published catalogue. SHA256
-  `5d8cd25771a95cd652b99bc13f4cd6c9c0435ce9763f0159609aa7b5033e33d4`.
-  Re-check yourself: `.venv/bin/python scripts/validate_submission.py`
-- **Science — verdict `promote` on holdout evidence only:** HOLDOUT-DTI (v81.1,
-  pooled α=0.2 β=0.8, 300 m triangular kernel, whole-component hide-and-recover,
-  2 draws, 25,038 hidden positives) = **0.1270**, per-draw 0.132/0.122 (CI = draw
-  range), beating same-instrument controls ASB 0.0831 and d28 fixed-mask 0.0992.
-  Three hypotheses were tested (radiometric gate 0.0738, edge-consensus 0.0761 —
-  both negative; continuation gate 0.1270). Canary AUCs all < 0.90.
-- **Unique:** surface rank-corr ≤ 0.087 and ≤ 58% dots within 3 px vs winner
-  (0.2778 file), d28 base, and both previously shipped GEMSDOE81 rasters — inside
-  the 0.90 / 70% lane limits. Those other rasters in `docs/downloads/` are
-  **❌ DO NOT SUBMIT** (negative experiments / already generated).
+- **Format — pinned shared validator all-pass, no human inspection needed:**
+  single-band float32, EPSG:32611, 3730×3292, transform identical to
+  `sample_submission.tif`, finite binary {0,1} values in [0,1] **everywhere**
+  (zeros, not NaN, outside the footprint — fixes the reported “Predicted values
+  must be in range [0, 1]” rejection), 0 on the published catalogue. SHA256
+  `9798fe7f4a68c7b8efbb9f3f03945ab800177b993abe671e4d174282e0675508`.
+  Re-check: `.venv/bin/python scripts/validate_submission.py` (exit 0 = pass).
+- **Science — verdict `promote` on holdout evidence only:** shared authoritative
+  evaluator `gems57-pooled-hide-v2` (quadrant segment folds, 12 px domain buffer,
+  visible masked pixel-exactly, catalogue features from visible only):
+  HOLDOUT-DTI **0.2170** (mode all; 95% spatial-bootstrap CI [0.2086, 0.2248];
+  22,641 withheld positives), 0.2085 detached — beating F_CONT gate 0.1558,
+  d28 fixed-mask control 0.1011 and ASB 0.0632 on the same instrument. The retired
+  private v81.1 instrument ranked the gated variant first (0.1270); the shared
+  instrument reversed that ordering, so the ungated continuation raster is the
+  shipped one and the gated file is demoted (see run card). Canary AUCs < 0.90.
+- **Unique:** surface rank-corr ≤ 0.113 and ≤ 48% dots within 3 px vs winner
+  (0.2778 file), d28 base, and all three previously shipped GEMSDOE81 rasters —
+  inside the 0.90 / 70% lane limits. Those other rasters in `docs/downloads/`
+  are **❌ DO NOT SUBMIT** (negative / superseded).
 - **Not claimed:** this raster is UNSCORED live. No claim of beating 0.2778
   (GEMSDOE32 winner, user-prompt organizer-reported) or the 0.4413 leaderboard
-  observation. Holdout favours continuation by construction — see
-  `registry/session2_irregularities.json` IR-81-06. Promotion to a weekly slot
-  remains the separate selector step. The superseded dense-prior DO-NOT-SUBMIT
-  analysis is retained in `evidence/run-card.json` / `scripts/audit.py` (IR-81-08
-  explains the like-for-like binary-registry reading used here).
+  observation. Main residual risk: holdout favours continuation by construction
+  (IR-81-06, `registry/session2_irregularities.json`). Promotion to a weekly
+  slot remains the separate selector step; check the authenticated cap there.
+- **History preserved:** session-1 dense-prior negative decision
+  (`evidence/run-card.json`, `scripts/audit.py`) and the merged-main corrective
+  review (`docs/research/session-review.md`, `evidence/legacy-asb.json`) are
+  retained, not deleted; IR-81-08 records why lane checks are applied
+  like-for-like against binary scored registry rasters.
 
 ## Start here every session — user operating brief
 
@@ -164,7 +170,8 @@ bash scripts/fetch_data.sh   # hash-pinned mirrors: labels, sample, lidar, radio
 .venv/bin/python scripts/run_rad_experiment.py    # E1 (also reproduces ASB/d28/winner controls)
 .venv/bin/python scripts/run_edge_experiment.py   # E2
 .venv/bin/python scripts/run_cont_experiment.py   # E3 (winner)
-.venv/bin/python scripts/finalize_cont_submission.py  # writes the promoted TIF + evidence/run_card.json
+.venv/bin/python scripts/run_shared_holdout.py     # authoritative shared revalidation (gems57-pooled-hide-v2)
+.venv/bin/python scripts/finalize_shared_submission.py  # writes the promoted CONT TIF + evidence/run_card.json
 .venv/bin/python scripts/validate_submission.py   # independent re-validation, exit 0 = all-pass
 .venv/bin/python -m pytest -q
 .venv/bin/python scripts/build_site.py            # fails closed unless run card says promote

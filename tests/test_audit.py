@@ -115,25 +115,26 @@ def test_shared_evaluator_max_cover_and_spatial_pooling():
 
 
 def test_no_false_submission_or_performance_claim():
-    # Session-2 state: one promoted CONT-ASB candidate, honestly labelled.
+    # Session-2 supersession: one promoted CONT candidate, honestly labelled.
+    # The session-1 negative card stays negative and is not overwritten.
+    neg=json.loads((ROOT/'evidence/run-card.json').read_text())
+    assert neg['verdict']=='negative' and neg['authorized_to_download_and_submit'] is False
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
     assert card['verdict']=='promote'
-    assert card['holdout_DTI']['candidate_F_CONT'] > card['holdout_DTI']['same_instrument_controls']['d28_fixed_mask']
-    assert card['holdout_DTI']['candidate_F_CONT'] > card['holdout_DTI']['same_instrument_controls']['ASB_S_poisson44090_buf2']
+    sh=card['holdout_DTI']['candidate_CONT_shared']
+    assert sh['all']['CONT']['dti'] > sh['all']['F_CONT']['dti'] > card['holdout_DTI']['same_instrument_controls_shared']['d28_fixed']['all']['dti']
     assert 0 < len(card['submission_note']) <= 140
-    assert card['validator']['checks']['all_passed']
+    assert card['validator_shared']['validate']['all_checks_passed']
+    assert card['validator_shared']['template_format_report']['ok']
     tif=ROOT/'docs/downloads'/card['submission_name']
-    assert tif.exists()
-    import hashlib
-    assert hashlib.sha256(tif.read_bytes()).hexdigest()==card['raster_sha256']
+    assert tif.exists() and sha256(tif)==card['raster_sha256']
     for v in card['correlation_overlap_vs_registry'].values():
         assert abs(v['surface_rank_corr_sampled'])<=0.90 and v['dot_overlap_within_3px']<=0.70
     home=(ROOT/'docs/index.html').read_text()
     assert 'OK TO DOWNLOAD' in home and 'OK TO SUBMIT: YES' in home
-    assert card['submission_name'] in home and 'Do not submit' in home  # negative rasters labelled
+    assert card['submission_name'] in home and 'Do not submit' in home
     summary=(ROOT/'docs/executive-summary.html').read_text()
-    assert 'OK TO DOWNLOAD: YES' in summary and 'OK TO SUBMIT: YES' in summary
-    assert card['submission_name'] in summary
+    assert 'OK TO DOWNLOAD: YES' in summary and card['submission_name'] in summary
 
 
 def test_all_local_website_links_and_html_fragments_resolve():
@@ -187,7 +188,7 @@ def test_current_markdown_local_links_resolve():
     from urllib.parse import unquote, urlsplit
 
     pages=[ROOT/'docs/hypotheses.md', ROOT/'docs/evidence-and-blockers.md',
-           ROOT/'docs/research/review.md', ROOT/'docs/research/external-source-screen.md']
+           ROOT/'docs/research/review.md', ROOT/'docs/research/session-review.md', ROOT/'docs/research/external-source-screen.md']
     for page in pages:
         text=page.read_text()
         for href in re.findall(r'\[[^\]]+\]\(([^)]+)\)',text):

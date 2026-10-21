@@ -4,13 +4,13 @@
     {
       "name": "Organizer problem and metric",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-      "status": "Retrieved both chunks with page-fetch tool this session",
+      "status": "Retrieved both chunks with page-fetch tool an earlier session (inherited observation)",
       "supports": "Task, round distinction, input layers, exact max-cover metric, format requirements"
     },
     {
       "name": "Public leaderboard",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-      "status": "Retrieved leading rows with page-fetch tool this session",
+      "status": "Retrieved leading rows with page-fetch tool an earlier session (inherited observation)",
       "supports": "OFFICIAL-LEADERBOARD-OBSERVATION: xiaofanhu 0.4413; not an artifact submission receipt"
     },
     {
@@ -40,7 +40,7 @@
     {
       "name": "Authenticated data page",
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
-      "status": "No authenticated access used or tested this session",
+      "status": "No authenticated access used or tested an earlier session (inherited observation)",
       "supports": "Future official provenance verification"
     },
     {
@@ -82,8 +82,15 @@
     {
       "name": "USGS 3D Elevation Program (3DEP)",
       "url": "https://www.usgs.gov/3d-elevation-program",
-      "status": "Official source nominated from the owner-supplied manifest; page, tile catalog, AOI coverage, and source bytes were not independently queried this session",
+      "status": "Official source nominated from the owner-supplied manifest; page, tile catalog, AOI coverage, and source bytes were not independently queried an earlier session (inherited observation)",
       "supports": "Potential DEM source for the catchment hypothesis only; the manifest's cited derived proxy covers 706 of 716 listed tiles and is not a complete verified input"
+    },
+    {
+      "name": "Official reference README pinned review",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md",
+      "status": "Retrieved through GitHub API during this review",
+      "supports": "CPU-only environment supported; GPU is faster, not mandatory. Requires separately downloaded competition data."
     }
-  ]
+  ],
+  "freshness_note": "Inherited source observations from earlier sessions on the same date, not fresh checks in this review. Outbound access restricted to GitHub and package registries."
 }

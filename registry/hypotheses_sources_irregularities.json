@@ -2,13 +2,13 @@
   "hypotheses": [
     {
       "rank": 1,
-      "id": "ASB (SHIPPED, verdict negative)",
+      "id": "ASB (inherited negative artifact; DUPLICATE, not approved)",
       "layers": "USGS 3DEP 1m LiDAR lapneg/lappos/step (lidar_scarp_features_u8 bands 4/5/3) x training_features depth_to_base_surf(15)+cond_surf(17) gradients",
       "signature": "geometric mean of antithetic scarp-pair rank and basement-step rank",
-      "why_off_catalogue": "catalogue faults with subdued scarps or buried steps are missed by mappers; a coincident pair+step is unlikely from either process alone",
+      "why_off_catalogue": "Conjecture only: buried or subdued steps might evade mapping; no discovery established.",
       "differs": "not H33 orientation consensus, not catalogue-flank prune of a prior raster, not lidar-only; rank-corr 0.031 vs winner, 31% dots within 3px",
       "cost": "low (done)",
-      "holdout": "HOLDOUT-DTI 0.0831 < d28 control 0.0992 same instrument -> negative"
+      "holdout": "Legacy private-evaluator result rejected; see evidence/legacy-asb.json. No accepted HOLDOUT-DTI."
     },
     {
       "rank": 2,
@@ -44,7 +44,7 @@
       "signature": "epicentre collinearity + nodal-plane strikes",
       "why_off_catalogue": "supplied ieq band is 100km-smoothed; raw events add sub-km structure",
       "differs": "no repo surface uses raw events",
-      "cost": "medium; source obtainable via USGS FDSN (not fetched this session); NOT TESTED"
+      "cost": "Unavailable in this sandbox: USGS FDSN host not on outbound allowlist; not verified obtainable here. NOT VIABLE WITHOUT ACCESS CHECK."
     }
   ],
   "sources": [
@@ -73,7 +73,7 @@
       "url": "https://en.wikipedia.org/wiki/Tversky_index"
     },
     {
-      "claim": "Winner raster + its audit (0.2778 ORGANIZER-CONFIRMED in prompt)",
+      "claim": "User-reported historical result; no organizer receipt verified.",
       "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html"
     },
     {
@@ -94,11 +94,11 @@
     },
     {
       "id": "IR-81-02",
-      "text": "Prompt states both leaderboard high 0.4413 and 0.3195 at different points, and winner 0.2778; none re-verified live this session (drivendata leaderboard not fetched). Treat all as ORGANIZER-CONFIRMED-as-reported-by-user, UNSCORED for this raster."
+      "text": "Conflicting USER-REPORTED historical scores; no organizer receipt. Prior-session leaderboard observation is a dated snapshot only."
     },
     {
       "id": "IR-81-03",
-      "text": "Hide-and-recover holdout mechanically penalises catalogue-flank strategies (winner HOLDOUT-DTI 0.0043 on v81.1); it ranks off-catalogue discovery surfaces, not flank pruning. Do not compare HOLDOUT-DTI to ORGANIZER-CONFIRMED live scores."
+      "text": "Frozen full-catalogue-pruned historical controls are not valid hide-and-recover comparators. Legacy evaluator results are not accepted promotion evidence."
     },
     {
       "id": "IR-81-04",
@@ -106,7 +106,9 @@
     },
     {
       "id": "IR-81-05",
-      "text": "'Predicted values must be in range [0,1]' rejection reported by user is fixed by construction: zeros (not NaN) outside footprint, finite [0,1] everywhere, validator fails closed."
+      "text": "Rejected file not provided. Actual cause of portal range error unknown. All-finite exports mitigate a possible cause but do not prove acceptance."
     }
-  ]
+  ],
+  "status": "SUPERSEDED_PROPOSALS_ONLY",
+  "warning": "Legacy proposals and assertions not revalidated. Current hypotheses: docs/research/review.md; current decision: evidence/run-card.json."
 }
